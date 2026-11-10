@@ -1,0 +1,37 @@
+{
+ "duration": 6,
+ "cues": [
+  {
+   "t": 0.4,
+   "name": "whoosh"
+  },
+  {
+   "t": 0.54,
+   "name": "whoosh"
+  },
+  {
+   "t": 1.02,
+   "name": "impact"
+  },
+  {
+   "t": 1.28,
+   "name": "swish"
+  },
+  {
+   "t": 1.6,
+   "name": "ticks"
+  },
+  {
+   "t": 2.05,
+   "name": "whoosh"
+  },
+  {
+   "t": 2.42,
+   "name": "lock"
+  },
+  {
+   "t": 2.8,
+   "name": "shine"
+  }
+ ]
+}

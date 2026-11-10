@@ -1,0 +1,6 @@
+{
+  "club": { "name": "Bangladesh Agricultural University Business Club", "short": "BAUBC" },
+  "colors": { "ink": "#070806", "ink2": "#10130c", "ink3": "#1a1f13", "cream": "#efe9dc", "creamDim": "#9a9788", "lime": "#c6ff1f", "limeDeep": "#7fae00", "danger": "#ff3d2e", "gold": "#ffc83d" },
+  "fonts": { "bnDisplay": "Anek Bangla", "bnBody": "Hind Siliguri", "enDisplay": "Unbounded" },
+  "video": { "width": 1080, "height": 1920, "fps": 60, "safeArea": { "top": 230, "bottom": 1560, "side": 90 } }
+}
