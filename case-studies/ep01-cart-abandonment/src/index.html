@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="bn"><head><meta charset="utf-8">
-<title>BAUBC Case Studies · EP01 · কার্ট রহস্য (৭০%)</title>
+<title>BAUBC Case Studies · EP01 · কার্টুর গল্প</title>
 <link rel="stylesheet" href="../../../_common/brand/brand.css">
 <link rel="stylesheet" href="style.css">
 </head><body>
 <div id="stage">
   <canvas id="bg" width="1080" height="1920"></canvas>
   <div id="world"><div id="scenes"></div></div>
+  <canvas id="fx" width="1080" height="1920" style="position:absolute;inset:0;pointer-events:none"></canvas>
   <div id="hud">
     <div id="segs"></div>
-    <div id="hudL"><b>BAUBC</b><span>CASE STUDIES</span></div>
+    <div id="hudL"><b></b><span>কেস স্টাডি</span></div>
     <div id="hudR"><span id="chapNo">০১</span><i></i><span id="chapName"></span></div>
-    <div id="ticker"><div id="tickerIn"></div></div>
   </div>
   <div id="caps"></div>
   <div id="vig"></div><div id="grain"></div>
@@ -19,9 +19,16 @@
   <div id="flash"></div>
 </div>
 <script src="../../../_common/toolkit/vendor/gsap.min.js"></script>
-<script src="../../../logo-animations/case-studies/src/logo-v1.js"></script>
+<script src="../../../_common/brand/baubc-mark.js"></script>
+<script src="../../../logo-animations/case-studies/src/logo.js"></script>
+<script src="../../../_common/toolkit/stage.js"></script>
 <script src="core.js"></script>
+
+
+<script src="art.js"></script>
+
 <script src="scenes.js"></script>
 <script src="scenes2.js"></script>
+<script src="scenes3.js"></script>
 <script src="boot.js"></script>
 </body></html>

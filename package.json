@@ -1,0 +1,12 @@
+{
+  "name": "baubc-motion-vault",
+  "private": true,
+  "description": "BAUBC reels as code — render any episode locally (see RENDER-LOCALLY.md)",
+  "scripts": {
+    "ep01": "node _common/toolkit/render.mjs --html case-studies/ep01-cart-abandonment/src/index.html --audio case-studies/ep01-cart-abandonment/audio/ep01_mix.m4a --out case-studies/ep01-cart-abandonment/renders/local-render.mp4 --crf 20",
+    "ep02": "node _common/toolkit/render.mjs --html case-studies/ep02-onion-paradox/src/index.html --audio case-studies/ep02-onion-paradox/audio/ep02_mix.m4a --out case-studies/ep02-onion-paradox/renders/local-render.mp4 --crf 20",
+    "logo": "node _common/toolkit/render.mjs --html logo-animations/case-studies/src/index.html --out logo-animations/case-studies/renders/local-render.mp4 --crf 18",
+    "render": "node _common/toolkit/render.mjs"
+  },
+  "dependencies": { "playwright": "^1.48.0" }
+}

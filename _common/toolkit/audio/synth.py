@@ -167,6 +167,10 @@ def _make(name, p, d, soft):
         return reverb(y, .3)
     if name == 'creak': dd = .7; t = tt(dd); return bp(saw(2 * np.pi * np.cumsum(90 + 40 * np.sin(2 * np.pi * 2 * t)) / SR), 300, 2000) * np.sin(np.pi * t / dd) * .35
     if name == 'smoke': dd = 2.2; t = tt(dd); return reverb(lp(noise(dd), 500) * env(dd, .02, .5, 2.2) * 1.6 + svf_bp(noise(dd), 300 + 1500 * np.exp(-t * 2), 1.2) * env(dd, .01, .4, 3) * .7, .4)
+    if name == 'crickets':
+        dd = d or 6; t = tt(dd); y = np.zeros(len(t))
+        for f, r, ph in ((4300, 17, 0), (4750, 21, 1.3), (3900, 14, 2.1)): y += np.sin(2 * np.pi * f * t) * np.clip(np.sin(2 * np.pi * r * t + ph), 0, 1) ** 4 * (.5 + .5 * np.sin(2 * np.pi * .7 * t + ph)) ** 2
+        return y * np.minimum(1, t / .6) * np.minimum(1, (dd - t) / .8) * .07
     if name == 'birds':
         dd = d or 2.5; y = np.zeros(int(dd * SR))
         for i in range(int(dd * 3)):

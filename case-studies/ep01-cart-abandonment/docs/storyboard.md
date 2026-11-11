@@ -1,24 +1,21 @@
-# Storyboard & timing — EP01
+# Storyboard — EP01 · কার্টুর গল্প (story cut)
 
-**Grid:** 100 BPM → 1 bar = 2.4 s. Every chapter cut sits on a bar line, so wipes, drops and hits land with the music.
-**Screen plan (1080×1920):** HUD y 96–190 · main action y 230–1320 · captions y 1352–1580 · below that only depth (perspective floor, ticker) because the Reels UI covers it.
-**Always alive:** drifting light pools, dot matrix, perspective floor, 46 depth-sorted particles, film grain, slow camera push-in on every chapter, ghost outline word behind each scene.
+**Idea:** tell the case study as a story. The hero is a little cart, **কার্টু**; the shopper is **মিতু**. The hook shows the ending first (a cart that has waited 47 days), then the film rewinds to show how it got there. The bookend: the day counter in chapter 02 ticks up to the same 47.
+**Look:** flat 2D vector, night-time green/lime world, 4–6 parallax planes per scene (sky → far hills → mid → hero → foreground grass), fireflies in front of everything, fog between rows. No 3D. All text in Bangla.
+**Camera:** every move is tied to a voice line — lateral track through the bazaar, push-in on hesitation, crane-up/pull-out to reveal the chasm, tilt down into the gap, follow across the bridge.
+**Transitions:** zoom into the cart's eye (flashback), whip pans, zoom-through, iris into the comment button for the logo.
 
-| # | time | bars | chapter | what happens | key sound |
-|---|---|---|---|---|---|
-| 01 | 0:00–0:07.2 | 0–2 | **Hook** | Neon cart, three products drop in (badge 1-2-3), "অর্ডার কনফার্ম" button + cursor… headline flips to red **"কিন্তু কিনলেন না!"**, cart goes grey, button falls away → giant **"আপনার সাথেও হয়েছে?"** with floating question marks | pops, error buzz, ding |
-| 02 | 0:07.2–0:16.8 | 3–6 | **The moment** | 3D phone cart: জামা / হেডফোন / গ্যাজেট get added, total counts up, CTA pulses, cursor trembles (heartbeat) → lime thought bubble **"থাক, পরে কিনব!"** → calendar flips কাল → পরশু → … → ???, clock spins up, **"‘পরে’ আর আসে না"** | clicks, heartbeat, bubble, wind-up |
-| 03 | 0:16.8–0:26.4 | 7–10 | **The mystery** | Giant outlined "?" in rotating rings → cards **পছন্দ ≠ কেনা** (stamp) → two cliffs rise, carts roll off the edge into the red **মনস্তাত্ত্বিক ফাঁক**, only one jumps across | drone, stamp, rumble, falling whistles, riser |
-| 04 | 0:26.4–0:38.4 | 11–15 | **The number** | Beat drop: ring chart + count-up to **৭০%** → shrinks; 10 shoppers pop in, **7 turn red and fade**, 3 glow → **"কিন্তু কেন?"** zooms into camera | impact, counter, deny blips, snare roll |
-| 05 | 0:38.4–0:52.8 | 16–21 | **The real reason** | "পণ্যের দাম?" tag gets stamped **"না!"** → calm checkout (step 3/3, ৳2,700, "সব ঠিকঠাক") → music cuts → **red ডেলিভারি চার্জ +৳১৫০ slams in**, total jumps red, screen shakes, warnings swarm, world turns red → **কেনার আগ্রহ** meter drains 100→6% → **"সারপ্রাইজ খরচ = আগ্রহ শেষ"** | tape-stop, impact + alarm + glitch, drain |
-| 06 | 0:52.8–1:02.4 | 22–25 | **Reviews** | Gold mood; tilted wall of scrolling review cards; **৯৯%** count-up, five stars ring up the scale → spotlight review card with live "read by" counter | counter, star bells |
-| 07 | 1:02.4–1:12.0 | 26–29 | **3 factors** | দাম · ডেলিভারি চার্জ · রিভিউ cards land → dashed beams feed a giant switch **"কিনব ✓"** → 3-2-1-0 timer → switch flips red **"কিনব না ✕"** | zaps, clock ticks, switch + boom |
-| 08 | 1:12.0–1:21.6 | 30–33 | **The lesson** | Shiny product shelf, **"শুধু পণ্য সাজালেই বিক্রি হয় না"**, "আজকের বিক্রি: ৳০" → the fix: **সহজ → দ্রুত → স্বচ্ছ** nodes light along a path → **"অর্ডার কনফার্মড"** + confetti = প্রতিযোগিতামূলক সুবিধা | stamp, rising bells, success arpeggio |
-| 09 | 1:21.6–1:31.2 | 34–37 | **Your turn** | **"এবার আপনার পালা!"**, poll cards ক/খ/গ with a hopping highlight → **"কমেন্টে জানান"** slab + arrows | ticks, bubble, ding, riser |
-| 10 | 1:31.2–1:37.2 | 38–40 | **Logo** | Three arrows converge → impact → Λ → **CASE STUDIES** assembles; "A BAUBC SERIES" | whooshes, impact, lock, major-chord shimmer |
+| # | video time | chapter | what happens (voice line → picture) |
+|---|---|---|---|
+| 01 | 0:00–0:08.6 | হারানো কার্টের মাঠ | Moonlit field of forgotten carts in fog. কার্টু, cobwebbed, a spider dangling, plaque "অপেক্ষা: ৪৭ দিন", sighs and sheds a tear → "আপনার সাথেও হয়েছে?": it looks straight at the viewer, camera pushes in, "?" |
+| 02 | 0:08.6–0:23.6 | সেই মুহূর্ত | "কিছুদিন আগে…" Mitu pushes কার্টু past জামা ঘর, হেডফোন হাট, গ্যাজেট গলি; one item hops in per stall; "এক ক্লিকেই কার্টে!" badge ৩ → she stops before the চেকআউট gate, sweats, clock ticks → thought bubble **‘থাক, পরে কিনব!’**, she walks away → days fly (sun/moon wheel), counter 0→47, cobwebs grow, কার্টু falls asleep |
+| 03 | 0:23.6–0:40.1 | রহস্য | Crane up: a queue of forgotten carts at a cliff edge, the "অর্ডার কনফার্ম" gate glowing across a chasm → constellation "পছন্দ → কেনা" that we imagine → the line snaps ("বাস্তবতা ভিন্ন!") → tilt into the fog, whispers rise ("পরে…", "দামটা…"), **মনস্তাত্ত্বিক ফাঁক** |
+| 04 | 0:40.1–0:55.4 | সংখ্যা | A rope bridge unrolls; 10 carts try, 7 fall; **৭০%** counts up → 10 shoppers, 7 turn back, tally turns red → "কেন?" — Mitu returns, কার্টু wakes, the "আগ্রহ" heart balloon inflates |
+| 05 | 0:55.4–1:13.9 | আসল কারণ | They cross. Price tag "৳২,৭০০" gets a ✓ (not the price) → the last plank glows, held breath → a toll troll bursts from the chasm: **ডেলিভারি চার্জ +৳১৫০**, red world → "সারপ্রাইজ খরচ", the balloon deflates, she turns back |
+| 06 | 1:13.9–1:22.7 | রিভিউ | A banyan hung with hundreds of review tags and lanterns; **৯৯%**; a 5-star tag swings down: "ছবির মতোই পেয়েছি!" |
+| 07 | 1:22.7–1:33.0 | ৩ ফ্যাক্টর | A দাঁড়িপাল্লা: weights দাম and রিভিউ drop on "কিনব ✓", then ডেলিভারি চার্জ slams "কিনব না ✕"; ৩-২-১-০ seconds; কার্টু watches |
+| 08 | 1:33.0–1:45.6 | লেসন | ঝলমলে স্টোর: gorgeous window, shoppers walk past, the cash box holds a moth, "আজকের বিক্রি: ৳০" → the bridge rebuilt solid with an honest price board ("মোট ৳২,৮৫০ · ডেলিভারিসহ"); lanterns সহজ · দ্রুত · স্বচ্ছ light as they cross → **অর্ডার কনফার্মড**, fireworks |
+| 09 | 1:45.6–1:57.9 | আপনার পালা | কার্টু rolls up to the viewer; signpost boards flip in: ডেলিভারি চার্জ / রিভিউ / ‘পরে কিনব’; "কমেন্টে জানান" |
+| 10 | 1:57.9–2:05.1 | লোগো | CASE STUDIES logo v2 with Bangla credit lines |
 
-## Why the hook works
-
-1. **Frame 1 is already moving** and names a thing the viewer has done (cart → no purchase) — recognition before explanation.
-2. **A broken promise at 2.9 s** (green CTA → red "কিনলেন না!") creates the open loop.
-3. **Direct address at 4.2 s** ("আপনার সাথেও হয়েছে?") converts recognition into a personal stake; the answer is withheld until the 70% drop at 26 s and the real reason at 45 s.
+**Sound:** crickets and a lonely pad in the hook, a bright bazaar groove that stalls on the hesitation, a drone for the mystery, a full drop on 70%, tension and a held breath before the troll, a lift for reviews, a build on the scale, a triumphant C major from the checkout win through the CTA. Music ducks ~10 dB under the voice.

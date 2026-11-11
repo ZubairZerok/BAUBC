@@ -11,7 +11,8 @@ BAUBC/
 │   └── templates/               starter project for a new episode
 │
 ├── case-studies/             ← SERIES · business case studies (rules & workflow: case-studies/CLAUDE.md)
-│   ├── ep01-cart-abandonment/   ✅ finished — "কার্ট রহস্য: ৭০% কেন ফিরে যায়?"
+│   ├── skill/                   cinematic-vector-explainer.md — the method for all Case Studies videos
+│   ├── ep01-cart-abandonment/   ✅ finished — "কার্টুর গল্প" (2D story cut + voice-over; v1 in archive-v1/)
 │   ├── ep02-onion-paradox/      ✅ finished — "পেঁয়াজের ধাঁধা" (flat explainer style)
 │   ├── ep03/                    🟡 slot, brief pending
 │
@@ -33,6 +34,10 @@ BAUBC/
 | `src/` | the composition — `index.html`, scenes, styles |
 | `audio/` | `build_audio.py` (music + SFX, generated from the animation's cue list), final `.m4a` mix |
 | `renders/` | delivered MP4 (+ poster frame) |
+
+## Render on your own PC
+
+See [`RENDER-LOCALLY.md`](RENDER-LOCALLY.md): one-time setup, then `npm run ep01`.
 
 ## Render anything
 

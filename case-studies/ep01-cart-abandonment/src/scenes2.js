@@ -1,194 +1,169 @@
-/* EP01 scenes, second half — reviews · three factors · the lesson · CTA · logo outro */
+/* EP01 story, part 2 — the chasm between "পছন্দ" and "অর্ডার কনফার্ম" (রহস্য → ৭০% → আসল কারণ), 23.6 → 73.9 */
 
-/* ═════════ 06 · REVIEWS  52.8 → 62.4 ═════════ */
-{
-  const c = scene('s5', T.s5, T.s6), t = T.s5;
-  tl.to(mood, { gold: 0.75, duration: 0.5 }, t).to(mood, { gold: 0, duration: 0.5 }, T.s6 - 0.3);
-  const NAMES = ['তানভীর', 'নুসরাত', 'রাফি', 'মীম', 'সাকিব', 'অর্পা', 'ইমন', 'তৃষা'];
-  const TXT = ['দারুণ প্রোডাক্ট!', 'ডেলিভারি দেরি হয়েছে', 'দামে ঠিকঠাক', 'একদম ছবির মতো', 'প্যাকেজিং ভালো', 'আবার কিনব', 'সাইজ মেলেনি', 'কোয়ালিটি সেরা'];
-  const stars = (n, s = 34) => Array.from({ length: 5 }, (_, i) => ico('star', s, '#ffc83d', 2, i < n ? '#ffc83d' : 'none')).join('');
-  const rcard = (i) => `<div class="card" style="width:480px;height:216px;margin-bottom:26px;padding:26px 30px;border-radius:32px"><div style="display:flex;gap:18px;align-items:center"><div style="width:64px;height:64px;border-radius:50%;background:${ITEMS[i % 3][3]};display:grid;place-items:center;font:800 34px/1 var(--font-bn-display);color:#0a0c06">${NAMES[i % 8][0]}</div><div><div style="font:700 32px/1.1 var(--font-bn-body)">${NAMES[i % 8]}</div><div style="display:flex;gap:3px;margin-top:6px">${stars(5 - (i * 3) % 4 % 3)}</div></div></div><div style="font:600 34px/1.2 var(--font-bn-body);color:var(--cream-dim);margin-top:20px">${TXT[i % 8]}</div></div>`;
-  const wall = E(c, 'a', '', { left: -60, top: 60, width: 1200, height: 1500, transform: 'rotate(-7deg)', opacity: .4 });
-  const colA = E(wall, 'a', Array.from({ length: 9 }, (_, i) => rcard(i)).join(''), { left: 70, top: 0 });
-  const colB = E(wall, 'a', Array.from({ length: 9 }, (_, i) => rcard(i + 4)).join(''), { left: 600, top: -500 });
-  tl.fromTo(colA, { y: 0 }, { y: -720, duration: 9.6, ease: 'none' }, t).fromTo(colB, { y: 0 }, { y: 640, duration: 9.6, ease: 'none' }, t);
-  const shade = E(c, 'a', '', { inset: 0, background: 'radial-gradient(ellipse 62% 36% at 50% 41%,rgba(7,8,6,.96) 40%,rgba(7,8,6,.2) 100%)' });
-  const top = E(c, 'a', `<span class="pill" style="border-color:var(--gold);color:var(--gold);background:rgba(20,16,4,.85);font-size:44px;padding:16px 40px 12px">${ico('bolt', 40, '#ffc83d', 2.4)} আরেকটি অবাক করা তথ্য</span>`, { left: 0, width: 1080, top: 250, textAlign: 'center' });
-  const hero = E(c, 'a', `<div class="num" style="text-align:center;font:800 400px/1 var(--font-bn-display);color:var(--gold);letter-spacing:-.03em;text-shadow:0 0 100px rgba(255,200,61,.55)"><span class="v">০</span><span style="font-size:190px;color:var(--cream)">%</span></div>
-    <div class="h" style="font-size:92px;margin-top:-26px">ক্রেতা আগে <span style="color:var(--gold)">রিভিউ</span> পড়েন</div>
-    <div class="st" style="display:flex;justify-content:center;gap:22px;margin-top:40px">${Array.from({ length: 5 }, () => `<div>${ico('star', 132, '#ffc83d', 1.6, '#ffc83d')}</div>`).join('')}</div>`, { left: 0, width: 1080, top: 390 });
-  const n = { v: 0 }, nv = $('.v', hero); binds.push(() => { nv.textContent = bn(Math.round(n.v)); });
-  pop(top, t + 0.25); sfx(t + 0.25, 'swish');
-  tl.fromTo($('.num', hero), { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(1.6)' }, t + 1.9)
-    .to(n, { v: 99, duration: 1.3, ease: 'power2.out' }, t + 2.0)
-    .fromTo($('.num', hero), { scale: 1 }, { scale: 1.1, duration: 0.12, yoyo: true, repeat: 1, immediateRender: false }, t + 3.3);
-  sfx(t + 1.9, 'impact', { soft: 1 }); sfx(t + 2.0, 'count', { d: 1.3 }); sfx(t + 3.3, 'boom');
-  hIn($('.h', hero), t + 3.5);
-  [...$('.st', hero).children].forEach((s, i) => { tl.fromTo(s, { opacity: 0, scale: 0, rotation: -140 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(2.6)' }, t + 4.3 + i * 0.2); sfx(t + 4.3 + i * 0.2, 'star', { p: i }); });
-  // spotlight review
-  tl.to(hero, { scale: 0.62, y: -150, duration: 0.6, ease: 'power3.inOut', transformOrigin: '50% 0%' }, t + 5.9).to(top, { opacity: 0, y: -60, duration: 0.3 }, t + 5.9);
-  const spot = E(c, 'a card', `<div style="display:flex;gap:26px;align-items:center"><div style="width:120px;height:120px;border-radius:50%;background:#8f7dff;display:grid;place-items:center;font:800 64px/1 var(--font-bn-display);color:#0a0c06">ন</div><div><div style="font:700 50px/1.1 var(--font-bn-body)">নুসরাত <span style="font-size:30px;color:var(--lime)">✓ ভেরিফায়েড ক্রেতা</span></div><div style="display:flex;gap:6px;margin-top:10px">${stars(5, 56)}</div></div></div>
-    <div style="font:700 58px/1.3 var(--font-bn-body);margin-top:30px">“ছবির মতোই পেয়েছি, ডেলিভারিও দ্রুত!”</div>
-    <div style="display:flex;gap:14px;align-items:center;margin-top:26px;font:600 36px/1 var(--font-bn-body);color:var(--cream-dim)">${ico('eye', 46, '#ffc83d', 2.2)} <span>কেনার আগে পড়েছেন <b class="rd" style="color:var(--gold)">০</b> জন</span></div>`, { left: 70, top: 830, width: 940, height: 440, padding: '44px 48px', borderColor: 'rgba(255,200,61,.6)', boxShadow: '0 50px 120px rgba(0,0,0,.7),0 0 90px rgba(255,200,61,.25)' });
-  const rd = { v: 0 }, rdE = $('.rd', spot); binds.push(() => { rdE.textContent = bn(Math.round(rd.v).toLocaleString('en-US')); });
-  tl.fromTo(spot, { opacity: 0, y: 500, rotationX: -40, rotation: 6 }, { opacity: 1, y: 0, rotationX: 0, rotation: -2, duration: 0.6, ease: 'back.out(1.4)' }, t + 6.1)
-    .to(rd, { v: 1284, duration: 2.6, ease: 'power1.out' }, t + 6.5).to(spot, { rotation: 1.5, duration: 2.6, ease: 'sine.inOut' }, t + 6.7);
-  sfx(t + 6.1, 'whoosh'); sfx(t + 6.5, 'count', { d: 2.2, soft: 1 });
-  cap(52.95, 54.6, 'সাথে আছে আরেকটি *অবাক করা* তথ্য…');
-  cap(54.75, 58.6, 'প্রায় *৯৯ শতাংশ* অনলাইন ক্রেতা যেকোনো কিছু কেনার আগে…');
-  cap(58.75, 62.3, '…অন্যদের *রিভিউ* পড়েন!');
-  wipe(T.s6, 'up');
+/** the chasm world: two cliffs, a gate on the far side, a bridge. v2 = the rebuilt, honest bridge (chapter 08) */
+function chasm(c, v2) {
+  const W = world(c), sky = nightSky(W, { moon: [46, 610, 120] });
+  const far = W.plane(.12); hills(far, 810, [N.h1, N.h2, N.h3]);
+  [[20, 690, 140], [880, 660, 170], [640, 730, 100]].forEach(([x, y, w]) => E(far, 'a', palm(w), { left: x, top: y }));
+  const mid = W.plane(.55);
+  E(mid, 'a', '', { left: 180, top: 900, width: 720, height: 1300, background: 'linear-gradient(#0a3024,#03100b 55%,#020806)' });
+  for (let i = 0; i < 7; i++) E(mid, 'a', '', { left: 180, top: 980 + i * 120, width: 720, height: 3, background: 'rgba(239,233,220,.05)' });
+  E(mid, 'a', '', { left: 240, top: 1250, width: 600, height: 700, borderRadius: '50%', background: `radial-gradient(ellipse,rgba(${v2 ? '198,255,31' : '255,74,61'},.17),rgba(0,0,0,0) 65%)` });
+  fog(mid, 6, 150, 930, 1020, 1560, '170,215,190', .2, 3);
+  const hero = W.plane(1);
+  const cliff = `<svg width="540" height="1100" viewBox="0 0 540 1100" style="display:block;overflow:visible"><defs><linearGradient id="gCl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c6048"/><stop offset=".35" stop-color="#0f3d2e"/><stop offset="1" stop-color="#05150f"/></linearGradient></defs>
+    <path d="M0 0 H520 L498 70 L512 150 L484 250 L500 400 L466 600 L490 1100 H0Z" fill="url(#gCl)"/><path d="M0 -12 H524 Q530 6 516 22 H0Z" fill="#3aa35d"/><path d="M0 -12 H524 L522 -4 H0Z" fill="#7fe08a" opacity=".6"/>
+    <path d="M0 150 H506 M0 320 H490 M0 520 H472 M0 760 H476" stroke="rgba(0,0,0,.25)" stroke-width="5"/>${Array.from({ length: 9 }, (_, i) => `<path d="M${30 + i * 56} -10 l-8 -22 l12 16 l4 -24 l6 24 l10 -14 l-6 20Z" fill="#3aa35d"/>`).join('')}</svg>`;
+  E(hero, 'a', cliff, { left: -200, top: 920 }); E(hero, 'a', cliff, { left: 740, top: 920, transform: 'scaleX(-1)' });
+  const gt = E(hero, 'a', gate(240), { left: 812, top: 920 - 360 });
+  E(hero, 'a', `<div style="position:absolute;left:46%;top:40px;width:10px;height:90px;background:#5a3a1e"></div><div class="sgn" style="position:relative;font-size:26px;padding:6px 14px 2px;border-width:4px">চেকআউট →</div>`, { left: 172, top: 800 });
+  // bridge
+  const br = E(hero, 'a', '', { left: 0, top: 0, width: 1080, height: 1920 });
+  const planks = Array.from({ length: 11 }, (_, i) => E(br, 'a', '', v2 ? { left: 320 + i * 40, top: 908, width: 41, height: 30, background: 'linear-gradient(#e2ad6a,#a8693a)', boxShadow: 'inset 0 4px 0 rgba(255,255,255,.25)' }
+    : { left: 321 + i * 40, top: 912 + (rnd(i + 3) - .5) * 8, width: 35, height: 15, borderRadius: 4, background: i % 4 === 2 ? '#7d4b26' : '#b07a48', transform: `rotate(${(rnd(i) - .5) * 14}deg)` }));
+  const ropes = E(br, 'a', v2
+    ? `<svg width="1080" height="200" viewBox="0 0 1080 200">${[320, 430, 540, 650, 760].map(x => `<path d="M${x} 140 V40" stroke="#7d4b26" stroke-width="10" stroke-linecap="round"/>`).join('')}<path d="M320 52 H760 M320 92 H760" stroke="#c48450" stroke-width="8"/><path d="M320 170 Q540 250 760 170" stroke="#5a3a1e" stroke-width="14" fill="none"/></svg>`
+    : `<svg width="1080" height="200" viewBox="0 0 1080 200"><path d="M316 60 Q540 150 764 60 M316 128 Q540 172 764 128" stroke="#c9a06a" stroke-width="5" fill="none"/>${[360, 420, 480, 540, 600, 660, 720].map(x => `<path d="M${x} ${60 + 90 * (1 - Math.pow((x - 540) / 224, 2)) * .5 + 2} V${128 + 44 * (1 - Math.pow((x - 540) / 224, 2)) * .5}" stroke="#c9a06a" stroke-width="3"/>`).join('')}<path d="M316 140 V50 M764 140 V50" stroke="#7d4b26" stroke-width="12" stroke-linecap="round"/></svg>`, { left: 0, top: 780 });
+  const fg = W.plane(1.4); E(fg, 'a', grassFG(620), { left: -200, top: 1620 }); E(fg, 'a', grassFG(620, '#05170f'), { left: 660, top: 1640, transform: 'scaleX(-1)' });
+  return { W, sky, mid, hero, gt, br, planks, ropes };
 }
 
-/* ═════════ 07 · THREE FACTORS  62.4 → 72 ═════════ */
 {
-  const c = scene('s6', T.s6, T.s7), t = T.s6;
-  E(c, 'a ghost', '3 SEC', { left: -40, top: 1080, fontSize: 330 });
-  const F = [['tag', 'দাম', '#c6ff1f'], ['truck', 'ডেলিভারি<br>চার্জ', '#ff3d2e'], ['star', 'রিভিউ', '#ffc83d']];
-  const cards = F.map((f, i) => E(c, 'a card', `<div style="position:absolute;left:24px;top:18px;font:900 44px/1 var(--font-en-display);color:${f[2]}">0${i + 1}</div><div style="display:grid;place-items:center;height:100%;padding-top:30px"><div style="filter:drop-shadow(0 0 26px ${f[2]})">${ico(f[0], 150, f[2], 1.8)}</div><div style="font:800 62px/1.05 var(--font-bn-display);text-align:center;margin-top:-34px;height:130px;display:grid;place-items:center">${f[1]}</div></div>`, { left: 36 + i * 342, top: 262, width: 324, height: 400, borderColor: f[2] }));
-  cards.forEach((cd, i) => {
-    const at = t + 0.2 + i * 0.75;
-    tl.fromTo(cd, { opacity: 0, x: (1 - i) * 342, y: 330, scale: 2.2, rotation: (i - 1) * 14 + 8 }, { opacity: 1, scale: 2.2, rotation: 0, duration: 0.3, ease: 'back.out(1.6)' }, at)
-      .to(cd, { x: 0, y: 0, scale: 1, duration: 0.45, ease: 'power3.inOut' }, at + 0.42);
-    sfx(at, 'pop', { p: i }); sfx(at + 0.45, 'swish');
-  });
-  // beams → decision switch
-  const beams = E(c, 'a', `<svg width="1080" height="400" viewBox="0 0 1080 400">${[198, 540, 882].map((x, i) => `<path class="bm" d="M${x} 0 C ${x} 150, 540 110, 540 300" fill="none" stroke="${F[i][2]}" stroke-width="7" stroke-linecap="round" stroke-dasharray="12 16" pathLength="100"/>`).join('')}</svg>`, { left: 0, top: 668 });
-  const sw = E(c, 'a', `<div class="trk" style="width:640px;height:230px;border-radius:120px;background:#16240a;border:6px solid var(--lime);box-shadow:0 0 90px rgba(198,255,31,.35),inset 0 10px 30px rgba(0,0,0,.6);position:relative">
-      <div class="lb" style="position:absolute;left:0;right:210px;top:0;bottom:0;display:grid;place-items:center;font:800 92px/1 var(--font-bn-display);color:var(--lime)">কিনব ✓</div>
-      <div class="lr" style="position:absolute;left:210px;right:0;top:0;bottom:0;display:grid;place-items:center;font:800 84px/1 var(--font-bn-display);color:var(--danger);opacity:0">কিনব না ✕</div>
-      <div class="kn" style="position:absolute;left:426px;top:14px;width:190px;height:190px;border-radius:50%;background:var(--lime);box-shadow:0 10px 30px rgba(0,0,0,.6)"></div></div>`, { left: 220, top: 950 });
-  const lblS = E(c, 'a', '<span class="pill" style="font-size:38px">আপনার সিদ্ধান্ত</span>', { left: 0, width: 1080, top: 858, textAlign: 'center' });
-  const timer = E(c, 'a', `<div style="display:flex;align-items:center;justify-content:center;gap:24px;font:800 104px/1 var(--font-bn-display)">${ico('clock', 96, '#efe9dc', 2)}<span class="tm">০৩</span><span style="font-size:60px;color:var(--cream-dim)">সেকেন্ড</span></div>`, { left: 0, width: 1080, top: 1210 });
-  const tm = $('.tm', timer), kn = $('.kn', sw), trk = $('.trk', sw);
-  tl.set(beams.querySelectorAll('.bm'), { opacity: 0 }, 0);
-  pop(lblS, t + 2.5); pop(sw, t + 2.6, { ease: 'back.out(1.5)' }); sfx(t + 2.6, 'whoosh');
-  [...beams.querySelectorAll('.bm')].forEach((b, i) => {
-    const at = t + 4.2 + i * 0.4;
-    tl.set(b, { opacity: 1 }, at).fromTo(b, { strokeDashoffset: 0 }, { strokeDashoffset: -300, duration: 5.4 - i * 0.4, ease: 'none' }, at)
-      .to(cards[i], { y: 18, duration: 0.1, yoyo: true, repeat: 1 }, at).to(kn, { x: -40 - i * 20, duration: 0.14, yoyo: true, repeat: 1, ease: 'power2.out' }, at + 0.1);
-    sfx(at, 'zap', { p: i });
-  });
-  pop(timer, t + 3.2);
-  [3, 2, 1, 0].forEach((v, i) => { const at = t + 5.6 + i * 0.65; tl.set(tm, { innerHTML: '০' + bn(v), color: v ? '#efe9dc' : '#ff3d2e' }, at).fromTo(tm, { scale: 1.5 }, { scale: 1, duration: 0.3, ease: 'power2.out', immediateRender: false }, at); sfx(at, v ? 'clock' : 'alarm', { p: i }); });
-  const X = t + 5.6 + 3 * 0.65;      // flip!
-  tl.to(kn, { x: -412, background: '#ff3d2e', duration: 0.3, ease: 'back.out(1.6)' }, X)
-    .to(trk, { background: '#2a0c08', borderColor: '#ff3d2e', boxShadow: '0 0 110px rgba(255,61,46,.55),inset 0 10px 30px rgba(0,0,0,.6)', duration: 0.2 }, X)
-    .to($('.lb', sw), { opacity: 0, duration: 0.12 }, X).to($('.lr', sw), { opacity: 1, duration: 0.12 }, X + 0.1)
-    .to(mood, { red: 0.8, duration: 0.2 }, X).to(mood, { red: 0, duration: 0.6 }, T.s7 - 0.6);
-  shake(X + 0.05, 24, 0.5); flash(X + 0.05, '#ff3d2e', 0.45, 0.5); sfx(X, 'switch'); sfx(X + 0.05, 'boom');
-  cap(62.55, 66.4, '*পণ্যের দাম, ডেলিভারি চার্জ* আর ক্রেতাদের *রিভিউ* — এই তিনটি ফ্যাক্টর…');
-  cap(66.55, 71.9, '…মাত্র *কয়েক সেকেন্ডের* মধ্যে আপনার কেনার সিদ্ধান্ত পুরোপুরি বদলে দিতে পারে!');
-  wipe(T.s7, 'left');
-}
+  const c = CH = scene('ch', T.s2, T.s5, { pre: .25, post: .3, push: 1 }), t = T.s2, { W, hero, gt, planks, ropes } = chasm(c);
+  whip(t, S1, c, 'left');
+  const cam = (a, at, d, ease = 'power2.inOut') => tl.to(W.cam, Object.assign(a, { duration: d, ease }), at);
+  // the queue of forgotten carts — ours is the one at the edge
+  [[-150, '#3a6a56'], [-70, '#4a7c64'], [10, '#3a6a56'], [86, '#557f6a']].forEach(([x, col], i) => { const k = E(hero, 'a', cartSVG(84, { col, dark: '#1a3a2e', frame: '#7d9a8c', face: false }), { left: x, top: 920 - 78, transform: `rotate(${(rnd(i) - .5) * 8}deg)` }); E(k, 'a', cobweb(44), { left: 8, top: 10, opacity: .7 }); });
+  const mitu = actor(hero, 130, MITU, MV, { left: -200, top: 920 - 363 }); gsap.set(mitu.el, { opacity: 0 });
+  const ct = mkCart(hero, 150, { left: 150, top: 920 - 137 }); [0, 1, 2].forEach(i => ct.add(i, i));
+  const wb = E(ct, 'a', cobweb(80), { left: -6, top: 8 }); cMood(ct, 'sleepy', t - .2); gsap.set($('.pu', ct), { x: -3, y: 6 });
+  tl.set([planks, ropes], { opacity: 0 }, 0);
 
-/* ═════════ 08 · THE LESSON  72 → 81.6 ═════════ */
-{
-  const c = scene('s7', T.s7, T.s8), t = T.s7;
-  E(c, 'a ghost', 'LESSON', { left: -40, top: 1090, fontSize: 280 });
-  const top = E(c, 'a', `<span class="pill" style="font-size:46px;padding:16px 42px 12px">${ico('bolt', 42, '#c6ff1f', 2.4)} সবচেয়ে বড় লেসন</span>`, { left: 0, width: 1080, top: 250, textAlign: 'center' });
-  const shelf = E(c, 'a', `<div style="position:absolute;left:0;right:0;bottom:0;height:16px;border-radius:8px;background:linear-gradient(90deg,transparent,#efe9dc 15%,#efe9dc 85%,transparent)"></div>`, { left: 110, top: 420, width: 860, height: 330 });
-  const prods = [0, 1, 2].map(i => chip(shelf, i, 230, { left: 40 + i * 275, top: 66 }));
-  const spark = [[60, 20], [330, -20], [560, 30], [800, 0], [230, 190], [720, 200]].map(([x, y], i) => E(shelf, 'a en', '✦', { left: x, top: y, fontSize: 50 + (i % 3) * 22, color: '#fff' }));
-  const price0 = E(c, 'a', `<span class="pill" style="border-color:var(--danger);color:var(--danger);background:rgba(40,8,4,.9);font-size:56px;padding:18px 44px 12px">আজকের বিক্রি: <b>&nbsp;৳০</b></span>`, { left: 0, width: 1080, top: 700, textAlign: 'center' });
-  const l1 = E(c, 'a h', 'শুধু পণ্য সাজালেই', { left: 0, width: 1080, top: 850, fontSize: 122 });
-  const l2 = E(c, 'a h', '<span class="red">বিক্রি হয় না</span>', { left: 0, width: 1080, top: 1010, fontSize: 190 });
-  pop(top, t + 0.2);
-  tl.fromTo(shelf, { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.4 }, t + 0.3);
-  prods.forEach((p, i) => { tl.fromTo(p, { y: -500, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'bounce.out' }, t + 0.4 + i * 0.16); sfx(t + 0.62 + i * 0.16, 'pop', { p: i }); });
-  spark.forEach((s, i) => tl.fromTo(s, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, rotation: 90, duration: 0.45, yoyo: true, repeat: 5, ease: 'sine.inOut' }, t + 0.9 + i * 0.13));
-  sfx(t + 0.95, 'shine');
-  hIn(l1, t + 1.2); hIn(l2, t + 1.9, { d: 0.4 }); sfx(t + 2.05, 'stamp'); shake(t + 2.1, 16, 0.35);
-  tl.fromTo(price0, { opacity: 0, scale: 2.4, rotation: -10 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.25, ease: 'power3.in' }, t + 2.5); sfx(t + 2.72, 'deny');
-  tl.to(prods, { filter: 'grayscale(1) brightness(.6)', duration: 0.4 }, t + 2.1);
-  out([shelf, price0, l1, l2], t + 3.75, { stagger: 0.04 });
-  // the fix — easy · fast · transparent
-  const hh = E(c, 'a h', 'জিতবে <span class="lime">চেকআউট অভিজ্ঞতা</span>', { left: 0, width: 1080, top: 366, fontSize: 78 });
-  const N = [['check', 'সহজ'], ['bolt', 'দ্রুত'], ['eye', 'স্বচ্ছ']];
-  const path = E(c, 'a', `<svg width="1080" height="60"><path d="M170 30H910" stroke="rgba(239,233,220,.18)" stroke-width="10" stroke-linecap="round"/><path class="pl" d="M170 30H910" stroke="#c6ff1f" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" style="filter:drop-shadow(0 0 14px #c6ff1f)"/></svg>`, { left: 0, top: 620 });
-  const nodes = N.map((nd, i) => E(c, 'a', `<div class="nc" style="width:230px;height:230px;border-radius:50%;background:#12160b;border:6px solid #3a442a;display:grid;place-items:center;color:#5c6a44">${ico(nd[0], 120, 'currentColor', 2.2)}</div><div class="h" style="font-size:88px;margin-top:22px;width:230px;color:#5c6a44">${nd[1]}</div>`, { left: 55 + i * 370, top: 535 }));
-  const win = E(c, 'a', `<div style="height:100%;border-radius:50px;background:var(--lime);color:#0a0c06;display:flex;align-items:center;justify-content:center;gap:26px;font:800 96px/1 var(--font-bn-display);box-shadow:0 0 130px rgba(198,255,31,.6)">${ico('check', 110, '#0a0c06', 3.4)}অর্ডার কনফার্মড</div>`, { left: 80, top: 950, width: 920, height: 190 });
-  const adv = E(c, 'a h', '= সবচেয়ে বড় <span class="lime">প্রতিযোগিতামূলক সুবিধা</span>', { left: 0, width: 1080, top: 1184, fontSize: 57 });
-  hIn(hh, t + 4.0); sfx(t + 4.0, 'whoosh');
-  tl.fromTo([path, ...nodes], { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.07 }, t + 4.1);
-  tl.to($('.pl', path), { strokeDashoffset: 0, duration: 1.5, ease: 'none' }, t + 4.5);
-  nodes.forEach((nd, i) => {
-    const at = t + 4.55 + i * 0.7;
-    tl.to($('.nc', nd), { borderColor: '#c6ff1f', color: '#0a0c06', background: '#c6ff1f', boxShadow: '0 0 80px rgba(198,255,31,.6)', duration: 0.15 }, at)
-      .to($('.h', nd), { color: '#efe9dc', duration: 0.15 }, at).fromTo(nd, { scale: 1 }, { scale: 1.22, duration: 0.14, yoyo: true, repeat: 1, immediateRender: false }, at);
-    sfx(at, 'star', { p: i + 1 });
-  });
-  const W = t + 6.75;
-  tl.fromTo(win, { opacity: 0, scale: 0.3, rotation: -6 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)' }, W);
-  flash(W + 0.05, '#c6ff1f', 0.5, 0.6); sfx(W, 'success');
-  for (let i = 0; i < 26; i++) {
-    const k = E(c, 'a', '', { left: 540, top: 1040, width: 14 + (i % 3) * 8, height: 14 + (i % 4) * 6, background: ['#c6ff1f', '#efe9dc', '#ffc83d', '#29c7ff'][i % 4], borderRadius: i % 2 ? '50%' : '3px' });
-    const a = rnd(i + 40) * 6.283, d = 300 + rnd(i + 80) * 520;
-    tl.fromTo(k, { opacity: 0, x: 0, y: 0 }, { opacity: 1, x: Math.cos(a) * d, y: Math.sin(a) * d * 0.7 - 120, rotation: rnd(i) * 720, duration: 0.9, ease: 'power3.out' }, W + 0.05)
-      .to(k, { y: '+=420', opacity: 0, duration: 1.4, ease: 'power1.in' }, W + 0.95);
+  /* 03 · রহস্য */
+  tl.fromTo(W.cam, W.aim(140, 850, 2.0, 540, 1000), Object.assign(W.aim(540, 960, 1), { duration: 4.2, ease: 'power2.inOut', immediateRender: true }), t - .2);
+  const h1 = H(c, 'ই-কমার্সের<br><span class="lime">সবচেয়ে বড় রহস্য</span>', 250, 92);
+  hIn(h1, V(25.06)); out(h1, V(29.1)); sfx(t + .2, 'mystery'); sfx(V(25.06), 'whoosh');
+  const qm = E(hero, 'a h lime glowtxt', '?', { left: 440, width: 200, top: 960, fontSize: 260 });
+  tl.fromTo(qm, { opacity: 0, y: 200, scale: .4 }, { opacity: 1, y: 0, scale: 1, duration: .8, ease: 'back.out(1.6)' }, V(27.34)).to(qm, { opacity: 0, y: -80, duration: .4 }, V(29.2));
+  sfx(V(27.34), 'sub'); sfx(V(27.6), 'ding');
+  // "আমরা ভাবি…" — the straight line we imagine, drawn in the stars
+  const I1 = V(29.32), node = (x, ic, col, name) => E(c, 'a', `<div style="width:130px;height:130px;border-radius:50%;background:${col};display:grid;place-items:center;box-shadow:0 0 60px ${col}99">${ico(ic, 80, '#0a0c06', 3)}</div><div class="lbl" style="left:-60px;width:250px;top:-62px;color:${col}">${name}</div>`, { left: x - 65, top: 400 });
+  const nL = node(170, 'heart', '#ff7aa8', 'পছন্দ'), nR = node(910, 'check', '#c6ff1f', 'কেনা');
+  const ln = k => E(c, 'a', '', { left: k ? 540 : 245, top: 461, width: 295, height: 0, borderTop: '9px dashed #c6ff1f', transformOrigin: k ? '100% 50%' : '0 50%', filter: 'drop-shadow(0 0 10px rgba(198,255,31,.8))' });
+  const lA = ln(0), lB = ln(1), gh = E(c, 'a', cartSVG(120, { col: 'rgba(198,255,31,.4)', dark: 'rgba(198,255,31,.6)', frame: 'rgba(239,233,220,.5)', face: false }), { left: 190, top: 355 });
+  const th = chip(c, 'আমরা ভাবি…', { left: 0, width: 1080, top: 226, textAlign: 'center' }), gl = gt.lastElementChild;
+  tl.to(gl, { opacity: 0, duration: .2 }, I1).to(gl, { opacity: 1, duration: .3 }, V(33.94));
+  pop(th, I1); pop(nL, I1 + .25, { ease: 'back.out(2.5)' }); pop(nR, I1 + 1.3, { ease: 'back.out(2.5)' });
+  tl.fromTo([lA, lB], { clipPath: 'inset(-20px 100% -20px 0)' }, { clipPath: 'inset(-20px 0% -20px 0)', duration: .5, ease: 'none', stagger: .5 }, I1 + .4)
+    .fromTo(gh, { opacity: 0, x: 0 }, { opacity: 1, x: 300, duration: 1.7, ease: 'power1.inOut' }, I1 + .9);
+  sfx(I1, 'pop', { p: 2 }); sfx(I1 + .4, 'riser', { d: 1 }); sfx(I1 + 1.3, 'star', { p: 3 });
+  // "বাস্তবতা ভিন্ন!" — the line snaps
+  const J1 = V(32.36), real = H(c, 'বাস্তবতা <span class="red">ভিন্ন!</span>', 250, 120);
+  out(th, J1 - .2); hIn(real, J1, { d: .35 });
+  tl.to(lA, { rotation: 46, duration: .5, ease: 'bounce.out' }, J1).to(lB, { rotation: -46, duration: .5, ease: 'bounce.out' }, J1)
+    .to(gh, { y: 1300, rotation: 150, opacity: 0, duration: 1.1, ease: 'power2.in' }, J1).to(nR, { filter: 'grayscale(1) brightness(.6)', duration: .3 }, J1);
+  shake(J1, 20, .4); flash(J1, '#ff3d2e', .3, .4); sfx(J1, 'stamp'); sfx(J1 + .1, 'fall'); sfx(J1, 'glitch');
+  // "…বিশাল এক মনস্তাত্ত্বিক ফাঁক" — look down
+  const K1 = V(33.94);
+  out([real, nL, nR, lA, lB], K1 - .1, { stagger: .03 });
+  cam(W.aim(540, 1090, 1.28, 540, 960), K1 + .2, 2.2);
+  const cL = chip(hero, 'পছন্দ ♥', { left: 14, top: 790 }, '#ff7aa8'); pop(cL, K1 + .1); out(cL, T.s3);
+  tl.fromTo(gt, { scale: 1 }, { scale: 1.12, duration: .25, yoyo: true, repeat: 3, transformOrigin: '50% 100%', ease: 'sine.inOut' }, V(34.98));
+  sfx(K1 + .1, 'pop', { p: 1 }); sfx(V(34.98), 'star', { p: 4 }); sfx(K1 + .3, 'rumble');
+  const ms = E(hero, 'a', `<svg width="440" height="50" viewBox="0 0 440 50"><path d="M10 25H430M10 25l20-14M10 25l20 14M430 25l-20-14M430 25l-20 14" fill="none" stroke="#efe9dc" stroke-width="5" stroke-linecap="round"/></svg>`, { left: 320, top: 960 });
+  tl.fromTo(ms, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: .5, ease: 'expo.out' }, V(36.34));
+  ['পরে…', 'দরকার আছে?', 'দামটা…', 'আরেকটু ভাবি', 'থাক…'].forEach((w, i) => { const e = E(hero, 'a', w, { left: 340 + (i % 3) * 120 + (i > 2 ? 40 : 0), top: 1420, font: '600 34px/1 var(--font-bn-body)', color: 'rgba(239,233,220,.75)', whiteSpace: 'nowrap', opacity: 0 });
+    tl.fromTo(e, { y: 0, opacity: 0 }, { keyframes: [{ y: -130, opacity: .9, duration: 1 }, { y: -330, opacity: 0, duration: 1.4 }], ease: 'none' }, V(35.2) + i * .55); });
+  const gapT = E(hero, 'a h', 'মনস্তাত্ত্বিক<br><span class="red">ফাঁক</span>', { left: 300, width: 480, top: 1040, fontSize: 70, lineHeight: 1.1 });
+  hIn(gapT, V(38.24), { d: .4 }); sfx(V(36.34), 'swish'); sfx(V(38.24), 'boom'); sfx(V(35.2), 'wobble', { d: 2.6 });
+
+  /* 04 · সংখ্যা — ৭০% */
+  const t3 = T.s3;
+  out([gapT, ms], t3, { duration: .3 }); cam(W.aim(610, 900, 1.2, 540, 1000), t3, .9);
+  tl.to(ropes, { opacity: 1, duration: .4 }, t3 + .1).fromTo(planks, { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: .25, ease: 'bounce.out', stagger: .05 }, t3 + .15);
+  sfx(t3 + .1, 'creak'); sfx(t3 + .2, 'ticks'); sfx(t3 + .5, 'ticks');
+  const COL = ['#c6ff1f', '#2fd3b5', '#ffc83d', '#efe9dc', '#ff7aa8'], SAFE = [2, 5, 9];
+  for (let i = 0; i < 10; i++) {
+    const k = mkCart(hero, 86, { left: -130, top: 920 - 79 }, { col: COL[i % 5], dark: '#0a3024', face: false }), s = t3 + .65 + i * .4; k.add(i % 3, 1);
+    tl.set(k, { opacity: 0 }, 0).set(k, { opacity: 1 }, s);
+    if (SAFE.includes(i)) { cRoll(k, 1000, s, 2.2); tl.to(k, { opacity: 0, scale: .4, duration: .2 }, s + 2.1); sfx(s + 2.15, 'ding'); }
+    else { const xf = 480 + rnd(i + 4) * 240; cRoll(k, xf, s, xf / 460); tl.to(k, { y: 1100, rotation: (i % 2 ? 1 : -1) * 170, duration: 1, ease: 'power2.in' }, s + xf / 460 - .05).set(k, { opacity: 0 }, s + xf / 460 + 1); sfx(s + xf / 460, 'fall', { p: i }); }
   }
-  hIn(adv, W + 0.6, { st: 0.07 });
-  tl.to(win, { scale: 1.04, duration: 0.5, yoyo: true, repeat: 3, ease: 'sine.inOut' }, W + 0.6);
-  cap(72.15, 75.75, 'তাই সবচেয়ে বড় লেসন: শুধু আকর্ষণীয় পণ্য সাজিয়ে রাখলেই *বিক্রি হয় না।*');
-  cap(75.9, 81.5, 'চেকআউটের অভিজ্ঞতা *সহজ, দ্রুত* আর *স্বচ্ছ* করাই হয়ে ওঠে সবচেয়ে বড় প্রতিযোগিতামূলক সুবিধা।');
-  wipe(T.s8, 'down');
-}
-
-/* ═════════ 09 · YOUR TURN  81.6 → 91.2 ═════════ */
-{
-  const c = scene('s8', T.s8, T.s9), t = T.s8;
-  E(c, 'a ghost', 'YOU?', { left: -30, top: 1090, fontSize: 380 });
-  const h1 = E(c, 'a h', '<span class="lime">এবার আপনার পালা!</span>', { left: 0, width: 1080, top: 250, fontSize: 106 });
-  const h2 = E(c, 'a h', 'সবচেয়ে বেশি কোথায় আটকে যান?', { left: 0, width: 1080, top: 408, fontSize: 66 });
-  const O = [['truck', 'ডেলিভারি চার্জ', '#ff3d2e', 'ক'], ['star', 'রিভিউ', '#ffc83d', 'খ'], ['clock', '‘পরে কিনব’ ভেবে ভুলে যাওয়া', '#c6ff1f', 'গ']];
-  const opts = O.map((o, i) => E(c, 'a card', `<div class="fill" style="position:absolute;inset:0;border-radius:34px;background:${o[2]};opacity:0"></div><div style="position:relative;display:flex;align-items:center;gap:28px;height:100%;padding:0 34px"><div style="width:110px;height:110px;border-radius:30px;background:${o[2]};color:#0a0c06;display:grid;place-items:center;font:800 76px/1 var(--font-bn-display);flex:none">${o[3]}</div><div class="tx" style="font:800 ${i === 2 ? 52 : 70}px/1.1 var(--font-bn-display);flex:1">${o[1]}</div><div class="ic" style="color:${o[2]}">${ico(o[0], 96, 'currentColor', 2)}</div></div>`, { left: 70, top: 530 + i * 186, width: 940, height: 164, borderColor: o[2] }));
-  hIn(h1, t + 0.15, { d: 0.45 }); sfx(t + 0.15, 'success', { soft: 1 });
-  hIn(h2, t + 1.0, { st: 0.07 });
-  opts.forEach((o, i) => { const at = t + 1.7 + i * 0.5; tl.fromTo(o, { opacity: 0, x: (i % 2 ? 1 : -1) * 700, rotation: (i % 2 ? 8 : -8) }, { opacity: 1, x: 0, rotation: 0, duration: 0.5, ease: 'back.out(1.5)' }, at); sfx(at, 'swish'); sfx(at + 0.3, 'pop', { p: i }); });
-  // poll selector hopping
-  const hop = [0, 1, 2, 1, 0, 2, 1, 0, 2, 0, 1, 2, 1, 2];
-  hop.forEach((idx, j) => {
-    const at = t + 3.6 + j * 0.48, o = opts[idx];
-    tl.to($('.fill', o), { opacity: 1, duration: 0.08 }, at).to($('.fill', o), { opacity: 0, duration: 0.2 }, at + 0.4)
-      .to([$('.tx', o), $('.ic', o)], { color: '#0a0c06', duration: 0.08 }, at).to($('.tx', o), { color: '#efe9dc', duration: 0.2 }, at + 0.4).to($('.ic', o), { color: O[idx][2], duration: 0.2 }, at + 0.4)
-      .fromTo(o, { scale: 1 }, { scale: 1.06, duration: 0.12, yoyo: true, repeat: 1, immediateRender: false }, at);
-    sfx(at, 'tick', { p: idx * 2 });
+  const N70 = V(42.48), big = E(c, 'a h lime glowtxt', '<span class="v">০</span>%', { left: 0, width: 1080, top: 250, fontSize: 300, lineHeight: 1 });
+  pop(big, N70, { from: .4, ease: 'back.out(1.6)' }); counter($('.v', big), 0, 70, N70 + .05, 1.3);
+  const sub = chip(c, 'কার্টেই পড়ে থাকে — কেনা হয় না', { left: 0, width: 1080, top: 580, textAlign: 'center' }); pop(sub, V(43.98));
+  sfx(N70, 'impact', { soft: 1 }); sfx(N70 + .05, 'count', { d: 1.3 }); sfx(N70 + 1.35, 'boom'); sfx(V(43.98), 'swish');
+  // 10 shoppers: 7 turn back mid-bridge
+  const P1 = V(45.98);
+  out([big, sub], P1 - .15);
+  const tal = Array.from({ length: 10 }, (_, i) => E(c, 'a', `<div class="tc" style="width:84px;height:84px;border-radius:50%;background:#0a2a20;border:4px solid #efe9dc;display:grid;place-items:center;color:#efe9dc">${ico('user', 52, 'currentColor', 2.4)}</div>`, { left: 58 + i * 97, top: 270 }));
+  tl.fromTo(tal, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: .3, ease: 'back.out(2)', stagger: .04 }, P1);
+  const say = H(c, 'প্রতি ১০ জনে <span class="red">৭ জনই</span> ফিরে যান', 390, 72); hIn(say, V(48.38), { st: .06 });
+  const LV = [1, 1, 0, 1, 1, 1, 0, 1, 1, 0], SH = ['#8fd14f', '#ff7a59', '#29c7ff', '#efe9dc', '#ffc83d', '#8f7dff', '#2fd3b5'];
+  LV.forEach((lv, i) => {
+    const s = P1 + .5 + i * .36, a = actor(hero, 60, i % 3 === 1 ? { shirt: SH[i % 7], long: true, hair: '#2a1a12', orna: '#efe9dc' } : { shirt: SH[i % 7], hat: i % 4 === 0 ? 'cap' : null, capc: '#efe9dc' }, { a: { expr: lv ? 'think' : 'happy', pose: 'hold' } }, { left: -170, top: 920 - 168 });
+    const k = mkCart(a.el, 74, { left: 52, top: 100 }, { col: COL[i % 5], dark: '#0a3024', face: false }); k.add(i % 3, 1);
+    const xm = 560 + rnd(i + 11) * 200, tc = $('.tc', tal[i]);
+    a.walk(xm, s, 1.3);
+    if (lv) { tl.to(k, { y: 900, rotation: 150, opacity: 0, duration: .8, ease: 'power2.in' }, s + 1.3); a.face(-1, s + 1.4); a.walk(-80, s + 1.45, 1.25);
+      tl.to(tc, { background: '#ff3d2e', borderColor: '#ff3d2e', duration: .15 }, s + 1.3).set(tc, { innerHTML: ico('x', 46, '#fff', 3.6) }, s + 1.3); sfx(s + 1.3, 'deny', { p: i % 5 }); }
+    else { a.walk(1060, s + 1.3, 1.0); tl.to(a.el, { opacity: 0, duration: .2 }, s + 2.2).to(tc, { background: '#c6ff1f', borderColor: '#c6ff1f', duration: .15 }, s + 2.2).set(tc, { innerHTML: ico('check', 46, '#0a0c06', 3.6) }, s + 2.2); sfx(s + 2.2, 'ding'); }
   });
-  const cm = E(c, 'a', `<div style="display:flex;align-items:center;justify-content:center;gap:26px;height:100%;border-radius:50px;background:var(--lime);color:#0a0c06;font:800 96px/1 var(--font-bn-display);box-shadow:0 0 120px rgba(198,255,31,.55)">${ico('chat', 110, '#0a0c06', 2.4)}কমেন্টে জানান</div>`, { left: 110, top: 1112, width: 860, height: 164 });
-  const arrows = [0, 1, 2].map(i => E(c, 'a', `<svg width="90" height="60" viewBox="0 0 90 60"><path d="M8 8l37 40L82 8" fill="none" stroke="#c6ff1f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg>`, { left: 495, top: 1560 + i * 56, opacity: 0 }));
-  tl.fromTo(cm, { opacity: 0, scale: 0.2, y: 200 }, { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: 'back.out(2)' }, t + 6.9);
-  sfx(t + 6.9, 'bubble'); sfx(t + 7.2, 'ding');
-  tl.to(cm, { scale: 1.05, rotation: -1.5, duration: 0.4, yoyo: true, repeat: 4, ease: 'sine.inOut' }, t + 7.5);
-  arrows.forEach((a, i) => tl.fromTo(a, { opacity: 0, y: -30 }, { opacity: 1 - i * 0.28, y: 0, duration: 0.3, yoyo: true, repeat: 5, ease: 'sine.inOut' }, t + 7.3 + i * 0.12));
-  cap(81.75, 84.4, '*এবার আপনার পালা!* অনলাইনে শপিং করতে গিয়ে আপনি সবচেয়ে বেশি কোনটায় আটকে যান?');
-  cap(84.55, 88.4, 'ডেলিভারি চার্জ, রিভিউ, নাকি শুধু *‘পরে কিনব’* ভেবে ভুলে যাওয়া?');
-  cap(88.55, 91.0, '*কমেন্টে* আপনার অভিজ্ঞতা জানান!');
-  sfx(T.s9 - 1.2, 'riser', { d: 1.2 });
-  wipe(T.s9, 'up');
-}
+  // "…কেন সিদ্ধান্ত বদলে যায়?" — she comes back for her cart
+  const Q1 = V(51.94), why = H(c, '<span class="lime glowtxt">কেন?</span>', 250, 270);
+  out([say, ...tal], Q1, { stagger: .015 }); hIn(why, V(53.28), { d: .45 }); sfx(V(53.28), 'whoosh'); sfx(V(53.28) + .25, 'thud');
+  tl.set(mitu.el, { opacity: 1 }, Q1 + .1); mitu.walk(240, Q1 + .2, 1.6); cam(W.aim(250, 840, 1.5, 540, 1000), Q1 + .2, 2.6);
+  const heart = E(ct, 'a', `<div style="position:absolute;left:53px;top:118px;width:3px;height:120px;background:rgba(239,233,220,.7)"></div><svg class="hb" width="110" height="120" viewBox="0 0 110 120" style="display:block;overflow:visible"><path d="M55 108 C10 70 0 44 8 26 C18 2 46 4 55 26 C64 4 92 2 102 26 C110 44 100 70 55 108Z" fill="#c6ff1f"/><path d="M55 108 C10 70 0 44 8 26 C18 2 46 4 55 26Z" fill="#fff" opacity=".22"/><text x="55" y="60" text-anchor="middle" font-family="Anek Bangla" font-weight="800" font-size="26" fill="#0a0c06">আগ্রহ</text></svg>`, { left: 40, top: -232, transformOrigin: '50% 100%' });
+  const W1 = Q1 + 1.9;
+  cMood(ct, 'happy', W1); cLook(ct, -5, -3, W1); cHop(ct, W1, 30);
+  tl.to(wb, { y: 160, rotation: 60, opacity: 0, duration: .6, ease: 'power2.in' }, W1).fromTo(heart, { scale: 0 }, { scale: 1, duration: .7, ease: 'elastic.out(1,.5)' }, W1 + .3)
+    .to(heart, { rotation: 6, duration: 1.1, yoyo: true, repeat: 13, ease: 'sine.inOut' }, W1 + 1);
+  sfx(W1, 'pop', { p: 5 }); sfx(W1 + .3, 'bubble'); mitu.show('happy', W1);
 
-/* ═════════ 10 · LOGO OUTRO  91.2 → 97.2  (built after fonts load: the logo measures glyphs) ═════════ */
-window.__afterFonts = () => {
-  const c = scene('s9', T.s9, T.end + 1), t = T.s9;
-  tl.to(['#segs', '#hudL', '#hudR'], { opacity: 0, duration: 0.2 }, t - 0.2).to(mood, { dim: 0.3, energy: 0.6, duration: 0.3 }, t);
-  const Y0 = 640;
-  const rings = [0, 1, 2].map(i => E(c, 'a', '', { left: 540 - 430 - i * 110, top: Y0 + 170 - 430 - i * 110, width: 860 + i * 220, height: 860 + i * 220, borderRadius: '50%', border: `2px dashed rgba(239,233,220,${0.16 - i * 0.04})` }));
-  rings.forEach((r, i) => tl.fromTo(r, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1, ease: 'expo.out' }, t + 1.1 + i * 0.1).to(r, { rotation: (i % 2 ? -1 : 1) * 40, duration: 6, ease: 'none' }, t));
-  const corners = [[70, 236, 0], [1010, 236, 90], [1010, 1600, 180], [70, 1600, 270]].map(([x, y, r]) => E(c, 'a', '', { left: x, top: y, width: 0, height: 0, transform: `rotate(${r}deg)` })).map(k => E(k, 'a', '', { left: 0, top: 0, width: 90, height: 90, borderLeft: '5px solid var(--lime)', borderTop: '5px solid var(--lime)', opacity: .7 }));
-  tl.fromTo(corners, { scale: 0, opacity: 0, transformOrigin: '0 0' }, { scale: 1, opacity: .7, duration: 0.5, ease: 'back.out(2)', stagger: 0.06 }, t + 2.6);
-  const holder = E(c, 'a', '', { left: 90, top: Y0 });
-  const logo = buildCaseStudiesLogo(holder, { width: 900 });
-  tl.add(logo.timeline, t + 0.35);
-  logo.cues.forEach(q => sfx(t + 0.35 + q.t, 'logo_' + q.name));
-  const y = Y0 + logo.height;
-  const rule = E(c, 'a', '', { left: 340, top: y + 70, width: 400, height: 4, background: 'var(--lime)', borderRadius: 4 });
-  const by = E(c, 'a en', 'A BAUBC SERIES', { left: 0, width: 1080, top: y + 104, textAlign: 'center', fontWeight: 700, fontSize: 34, letterSpacing: '.5em', color: 'var(--lime)', textIndent: '.5em' });
-  const full = E(c, 'a en', 'BANGLADESH AGRICULTURAL UNIVERSITY BUSINESS CLUB', { left: 0, width: 1080, top: y + 170, textAlign: 'center', fontWeight: 500, fontSize: 19, letterSpacing: '.24em', color: 'var(--cream-dim)' });
-  const ep = E(c, 'a', '<span class="pill" style="font-size:36px">এপিসোড ০১ · কার্ট রহস্য</span>', { left: 0, width: 1080, top: Y0 - 190, textAlign: 'center' });
-  const fol = E(c, 'a h', 'ফলো করুন — পরের কেস স্টাডি আসছে', { left: 0, width: 1080, top: y + 290, fontSize: 52, fontWeight: 700, color: 'var(--cream)' });
-  tl.fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, t + 2.9)
-    .fromTo(by, { opacity: 0, letterSpacing: '1.5em' }, { opacity: 1, letterSpacing: '.5em', duration: 0.8, ease: 'expo.out' }, t + 3.0)
-    .fromTo(full, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 }, t + 3.3)
-    .fromTo(ep, { opacity: 0, y: -40 }, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(1.6)' }, t + 3.2);
-  hIn(fol, t + 3.8, { st: 0.06, d: 0.4 });
-};
+  /* 05 · আসল কারণ */
+  const t4 = V(55.06), go = (d, at, dur, ease = 'sine.inOut') => { mitu.walk(240 + d, at, dur, ease); cRoll(ct, d, at, dur, ease); cam(W.aim(250 + d, 840, 1.5, 540, 1000), at, dur, ease); };
+  out(why, t4 - .15);
+  const big2 = chip(c, 'সবচেয়ে বড় কারণ?', { left: 0, width: 1080, top: 262, textAlign: 'center' }); pop(big2, t4); out(big2, V(58.5));
+  go(170, t4 + .4, 3.2); sfx(t4, 'swish'); sfx(t4 + .4, 'riser', { d: 3.0 });
+  const tag = E(ct, 'a ptag', 'দাম ৳২,৭০০', { left: 162, top: 24, fontSize: 32 }), ok = E(ct, 'a', `<div style="width:70px;height:70px;border-radius:50%;background:#c6ff1f;display:grid;place-items:center;box-shadow:0 0 40px #c6ff1f">${ico('check', 46, '#0a0c06', 3.6)}</div>`, { left: 262, top: -62 });
+  pop(tag, V(58.66), { from: 2 }); pop(ok, V(59.86), { ease: 'back.out(3)' }); sfx(V(58.66), 'stamp'); sfx(V(59.86), 'success', { soft: 1 });
+  mitu.show('talk', V(59.86)); mitu.show('happy', V(61.0)); out([tag, ok], V(61.4));
+  go(320, V(59.3), 2.4);
+  go(420, V(61.62), 1.7, 'power1.out'); mitu.show('think', V(63.5));
+  const last = chip(hero, 'শেষ ধাপ', { left: 640, top: 990 }, '#ffc83d'); pop(last, V(64.32));
+  tl.to(planks[10], { background: '#ffc83d', boxShadow: '0 0 40px #ffc83d', duration: .25, yoyo: true, repeat: 5 }, V(64.2));
+  cam(W.aim(680, 820, 1.55, 540, 1000), V(63.6), 1.6);
+  sfx(V(63.7), 'heart'); sfx(V(64.4), 'heart'); sfx(V(65.0), 'stop');
+  // the surprise: a toll troll pops out of the chasm
+  const X0 = V(65.44);
+  const troll = E(hero, 'a', `<svg width="300" height="700" viewBox="0 0 300 700" style="display:block;overflow:visible;-webkit-mask-image:linear-gradient(#000 52%,transparent 80%);mask-image:linear-gradient(#000 52%,transparent 80%)"><defs><linearGradient id="gTr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff5a48"/><stop offset="1" stop-color="#8a1810"/></linearGradient></defs>
+      <path d="M52 132 L28 20 L86 96Z M248 132 L272 20 L214 96Z" fill="#ffc83d"/><path d="M40 -60 V150 M260 -60 V150" stroke="url(#gTr)" stroke-width="38" stroke-linecap="round"/>
+      <rect x="30" y="80" width="240" height="640" rx="110" fill="url(#gTr)"/><rect x="30" y="80" width="240" height="640" rx="110" fill="url(#gHi)" opacity=".6"/>
+      <circle cx="110" cy="200" r="34" fill="#fff"/><circle cx="190" cy="200" r="34" fill="#fff"/><circle cx="116" cy="206" r="13" fill="#10130c"/><circle cx="184" cy="206" r="13" fill="#10130c"/>
+      <path d="M70 160 L140 184 M230 160 L160 184" stroke="#5a0e08" stroke-width="12" stroke-linecap="round"/>
+      <path d="M84 270 H216 Q216 340 150 340 Q84 340 84 270Z" fill="#3a0806"/><path d="M92 270 l14 22 l14 -22 l14 22 l14 -22 l14 22 l14 -22 l14 22 l14 -22" fill="none" stroke="#fff" stroke-width="9" stroke-linejoin="round"/></svg>
+    <div style="position:absolute;left:-90px;top:-250px;width:480px;padding:18px 0 12px;border-radius:26px;background:#ff3d2e;border:10px solid #fff;outline:10px solid #ff3d2e;text-align:center;color:#fff;box-shadow:0 0 90px rgba(255,61,46,.8);transform:rotate(-3deg)"><div style="font:800 58px/1.1 var(--font-bn-display)">ডেলিভারি চার্জ</div><div style="font:800 118px/1 var(--font-bn-display)">+৳১৫০</div></div>`, { left: 690, top: 760, opacity: 0 });
+  tl.set(troll, { opacity: 1 }, X0 - .12).fromTo(troll, { y: 1000 }, { y: 0, duration: .4, ease: 'back.out(1.5)' }, X0 - .12).to(troll, { y: 16, duration: .7, yoyo: true, repeat: 11, ease: 'sine.inOut' }, X0 + .4);
+  cam(W.aim(700, 760, 1.22, 540, 960), X0 - .1, .5, 'power3.out');
+  shake(X0, 40, .7); flash(X0, '#ff3d2e', .55, .6); sfx(X0, 'impact'); sfx(X0 + .02, 'alarm'); sfx(X0 + .15, 'glitch');
+  tl.to(mood, { red: 1, duration: .15 }, X0).to(mood, { red: .35, duration: 1.5 }, X0 + 1).to(mood, { red: 0, duration: .6 }, T.s5 - .7);
+  mitu.show('shock', X0); cMood(ct, 'shock', X0); cLook(ct, 6, -5, X0, .1); out(last, X0, { duration: .15 });
+  tl.to(mitu.el, { x: 240 + 420 - 46, duration: .25, ease: 'power3.out' }, X0).to(ct, { x: 420 - 46, duration: .25, ease: 'power3.out' }, X0);
+  // "সারপ্রাইজ খরচ" → interest deflates
+  const sp = H(c, '<span class="red">‘সারপ্রাইজ খরচ’</span>', 250, 100); hIn(sp, V(69.56), { d: .35 }); sfx(V(69.56), 'stamp'); shake(V(69.56) + .1, 12, .3);
+  cMood(ct, 'sad', V(70.6)); cLook(ct, -4, 6, V(70.6));
+  tl.to(heart, { scale: .34, y: 150, x: -50, rotation: 110, filter: 'grayscale(1) brightness(.7)', duration: 1.5, ease: 'power1.inOut' }, V(71.5));
+  sfx(V(71.5), 'drain', { d: 1.5 }); mitu.show('sad', V(72.2)); mitu.face(-1, V(72.2)); mitu.walk(120, V(72.25), 1.6);
+  vcap(23.3, 29.2, 'শুনতে সাধারণ, কিন্তু ই-কমার্সের *সবচেয়ে বড় রহস্য* লুকিয়ে ঠিক এখানেই।');
+  vcap(29.32, 32.3, 'আমরা ভাবি, পছন্দ হলেই ক্রেতা কিনে ফেলে।');
+  vcap(32.36, 33.85, '*বাস্তবতা ভিন্ন!*');
+  vcap(33.94, 39.7, '‘পছন্দ’ আর ‘অর্ডার কনফার্ম’-এর মাঝে লুকিয়ে আছে বিশাল এক *মনস্তাত্ত্বিক ফাঁক।*');
+  vcap(39.8, 45.9, 'গবেষণা বলছে, কার্টে তোলা পণ্যের প্রায় *৭০ শতাংশই* শেষ পর্যন্ত আর কেনা হয় না!');
+  vcap(45.98, 51.85, 'অর্থাৎ প্রতি ১০ জন ক্রেতার *৭ জনই* কার্ট ভর্তি করে মাঝপথ থেকে ফিরে যান।');
+  vcap(51.94, 55.0, 'পছন্দ হওয়ার পরও *কেন* সিদ্ধান্ত বদলে যায়?');
+  vcap(55.06, 58.5, 'সবচেয়ে বড় কারণটা চমকে দেওয়ার মতো —');
+  vcap(58.66, 61.5, 'ক্রেতা পণ্যের *দামের কারণে* পিছিয়ে যান না!');
+  vcap(61.62, 65.3, 'তাঁরা থমকে যান চেকআউটের একদম *শেষ ধাপে*…');
+  vcap(65.44, 68.0, 'হঠাৎ ভেসে ওঠা *ডেলিভারি চার্জ* দেখে!');
+  vcap(68.08, 73.5, 'মনস্তত্ত্ব বলছে: *‘সারপ্রাইজ খরচ’* দেখলেই মানুষ কেনার আগ্রহ হারিয়ে ফেলে।');
+}

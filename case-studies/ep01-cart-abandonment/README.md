@@ -1,28 +1,31 @@
-# Case Studies · EP01 — কার্ট রহস্য: ৭০% কেন ফিরে যায়?
+# Case Studies · EP01 — কার্টুর গল্প: ৭০% কার্ট কেন পড়ে থাকে?
 
-> Why do shoppers fill the cart and leave? ~70% of carts are abandoned — and the #1 trigger isn't the price, it's the **surprise delivery charge** at the last step.
+> A little shopping cart, **কার্টু**, has been waiting 47 days at checkout for a shopper who said "থাক, পরে কিনব". Through its story: ~70% of carts are abandoned, the real reason is the **surprise delivery charge** at the last step (not the price), ~99% of shoppers read reviews, and an easy, fast, transparent checkout is the biggest competitive advantage.
 
 | | |
 |---|---|
-| Deliverable | [`renders/BAUBC_CaseStudies_EP01_CartAbandonment_1080x1920_60fps.mp4`](renders/) |
-| Format | 1080×1920 portrait · 60 fps · 97.2 s (5,832 frames) · H.264 + AAC |
-| Language | Bangla on-screen captions — **no voice-over** |
-| Sound | original BGM (100 BPM, A minor) + 160-odd synced SFX, all synthesized in-repo |
-| Outro | CASE STUDIES logo animation (`/logo-animations/case-studies`) |
-
-## Folder
+| Deliverable (final) | [`renders/BAUBC_CaseStudies_EP01_CartStory_VO_1080x1920_60fps.mp4`](renders/) — story cut with ElevenLabs voice-over, 125.1 s |
+| Earlier cut | `renders/BAUBC_CaseStudies_EP01_CartAbandonment_1080x1920_60fps.mp4` — neon UI explainer, captions only, 97.2 s (source in `archive-v1/`) |
+| Format | 1080×1920 · 60 fps · H.264 + AAC |
+| Style | **2D vector only** (no 3D), multiplane parallax depth, story-led, night-time green/lime world, everything on screen in Bangla |
+| Sound | ElevenLabs VO (`audio/vo/`, tagged script in `docs/vo-script-elevenlabs.md`) + storybook score ducked under the voice + ~170 synced SFX |
+| Sync | the timeline is authored directly on the voice clock: `V(t)` in `src/core.js` maps a time in the VO file to video time |
+| Skill used | [`../skill/cinematic-vector-explainer.md`](../skill/cinematic-vector-explainer.md) |
 
 | path | |
 |---|---|
-| [`docs/script.md`](docs/script.md) | final Bangla caption script with timings + the original concept text |
-| [`docs/storyboard.md`](docs/storyboard.md) | chapter-by-chapter animation plan, hook logic, sound map |
-| `src/index.html` | stage shell (layers: bg canvas → scenes → HUD → captions → grain/vignette → wipes) |
-| `src/core.js` | master timeline, bar grid, background renderer, HUD, caption engine, helpers, icon set |
-| `src/scenes.js` / `scenes2.js` | the ten chapters |
-| `audio/build_audio.py` | music arrangement + SFX placement (reads `audio/cues.json`) |
-| `audio/ep01_mix.m4a` | final mix |
+| `docs/script.md` · `docs/storyboard.md` · `docs/claims-ledger.md` | captions with voice timings, shot plan, every claim and its status |
+| `src/core.js` | voice clock, chapter grid, fireflies, HUD, `world()` multiplane camera (`W.plane(parallax)`, `W.aim(X, Y, zoom)`) |
+| `src/art.js` | 2D kit: কার্টু (cart with face, moods, rolling wheels), full-body characters with walk cycle, stalls, gate, cobwebs, fog, trees, fireworks |
+| `src/scenes.js` | 01 হারানো কার্টের মাঠ (hook) · 02 বাজার → ‘পরে কিনব’ |
+| `src/scenes2.js` | 03 রহস্য · 04 ৭০% · 05 the delivery-charge troll (one continuous chasm world) |
+| `src/scenes3.js` | 06 রিভিউ গাছ · 07 দাঁড়িপাল্লা · 08 লেসন + নতুন সেতু · 09 আপনার পালা · logo |
 
-## Rebuild
+## Render
+
+On your own PC: see [`/RENDER-LOCALLY.md`](../../RENDER-LOCALLY.md) (`npm run ep01`).
+
+Full rebuild including sound:
 
 ```bash
 node ../../_common/toolkit/render.mjs --html src/index.html --cues audio/cues.json
@@ -33,13 +36,5 @@ python3 audio/build_audio.py
 ```
 
 ```bash
-node ../../_common/toolkit/render.mjs --html src/index.html --audio audio/build/ep01_mix.wav --out renders/BAUBC_CaseStudies_EP01_CartAbandonment_1080x1920_60fps.mp4 --fps 60
+node ../../_common/toolkit/render.mjs --html src/index.html --audio audio/build/ep01_mix.wav --out renders/BAUBC_CaseStudies_EP01_CartStory_VO_1080x1920_60fps.mp4
 ```
-
-## Facts used
-
-- ~70% average online cart abandonment rate (Baymard Institute's long-running aggregate ≈ 70%).
-- Unexpected extra costs (shipping, fees) are the most-cited reason for abandoning at checkout.
-- ~99% of online shoppers read reviews before buying (as given in the brief; commonly cited from PowerReviews research).
-
-The example prices in the mock checkout (৳850 / ৳1,200 / ৳650, delivery ৳150) are illustrative.
