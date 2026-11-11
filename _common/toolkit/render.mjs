@@ -31,11 +31,12 @@ async function open(browser) {
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
   page.on('pageerror', e => console.error('[page error]', e.message));
   page.on('console', m => { if (m.type() === 'error') console.error('[console]', m.text()); });
-  await page.goto(url);
+  await page.goto(url, { timeout: 180000 });
   await page.evaluate(() => window.__ready);
+  page.setDefaultTimeout(120000);
   return page;
 }
-const browser = await chromium.launch({ args: ['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb'] });
+const browser = await chromium.launch({ args: ['--font-render-hinting=none', '--disable-lcd-text', '--force-color-profile=srgb', '--enable-unsafe-swiftshader'] });
 const p0 = await open(browser);
 const duration = await p0.evaluate(() => window.__duration);
 

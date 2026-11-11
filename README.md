@@ -7,10 +7,10 @@ kept as *source code*: each video is an HTML/GSAP composition that renders, fram
 BAUBC/
 ├── _common/                  ← universal: brand, fonts, render engine, audio kit, templates
 │   ├── brand/                   colours · fonts · club info · BAUBC logo (official PNG + traced vector)
-│   ├── toolkit/                 render.mjs (HTML → MP4) · stage.js (timeline/captions/transitions) · audio/ (synth + arranger) · vendor/gsap
+│   ├── toolkit/                 render.mjs (HTML → MP4) · stage.js · m3d.js (3D models) · audio/ (synth + arranger) · vendor/gsap, three
 │   └── templates/               starter project for a new episode
 │
-├── case-studies/             ← SERIES · business case studies told in ~90 s
+├── case-studies/             ← SERIES · business case studies (rules & workflow: case-studies/CLAUDE.md)
 │   ├── ep01-cart-abandonment/   ✅ finished — "কার্ট রহস্য: ৭০% কেন ফিরে যায়?"
 │   ├── ep02-onion-paradox/      ✅ finished — "পেঁয়াজের ধাঁধা" (flat explainer style)
 │   ├── ep03/                    🟡 slot, brief pending

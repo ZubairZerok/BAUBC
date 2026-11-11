@@ -29,6 +29,10 @@ node render.mjs --html <index.html> --cues audio/cues.json
 
 Timeline helpers used by every episode: `E` (element factory), `scene(name, t0, t1, {pre, post, push})`, `hIn` (word-by-word Bangla-safe headline), `pop`, `out`, `shake`, `flash`, `counter`, the caption engine (`cap(t0, t1, 'text with *lime* words')` / `drawCaps`), the 24px icon set (`ico`), and transitions: `wipe`, `whip(t, A, B, dir)`, `zoomThru(t, A, B, x, y)`, `iris(t, B, x, y)`. An episode adds its own bar grid `T`, background and HUD, then calls `stageInit(duration, ...frameFns)`. EP02 is the reference.
 
+## `m3d.js` — 3D model kit (three.js r149, `vendor/three.min.js`)
+
+Procedural, stylised-realistic models: `M3.onion({rot})`, `M3.human({skin, top, bottom, lungiC, hat, gamcha, female, expr, pose, bend, glow})` with Bangladeshi wardrobe (lungi, gamcha, vest, mathal, tupi, kameez + dupatta), `basket`, `crate`, `ship`, `shed` (mud walls + corrugated tin roof), `land({field})` (terrain, grass blades, areca palms, bushes, hut) and `crop()` (onion rows). Render with `M3.sprite(obj, w, h, frame)` → PNG, `M3.plate(w, h, build)` → still scene, `M3.draw(scene, cam, ctx)` → live scene into a 2D canvas. Headless WebGL can't be screenshotted directly, so it's always drawn into a 2D canvas.
+
 ## `audio/synth.py` — procedural sound kit
 
 Drums, bass, pads, plucks, bells and ~35 named SFX (`whoosh`, `pop`, `impact`, `riser`, `alarm`, `success`, …), all synthesized with numpy/scipy — original and royalty-free. `audio/arrange.py` turns a per-bar chord/drum chart into a full score (`arrange(BARS, CH, DUR, arp_inst='pluck'|'mallet')`) and places SFX from `cues.json` (`place_cues`). An episode's `audio/build_audio.py` is then about 40 lines (see EP02).

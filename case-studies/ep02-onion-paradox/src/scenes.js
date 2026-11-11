@@ -14,7 +14,7 @@ let C0, C1, C2, C3, C4, C5, C6;   // scene cams, needed for transitions
   const clouds = [[-60, 300, 300, .5], [760, 520, 260, .4], [80, 760, 200, .3], [700, 980, 340, .45], [-40, 1180, 280, .35], [820, 200, 180, .3]]
     .map(([x, y, w, o]) => E(sky, 'a', cloud(w, '#2a7a5c'), { left: x, top: y, opacity: o }));
   const ground = E(c, 'a', '', { left: 0, top: 0, width: 1080, height: 1920 });
-  hills(ground, 1150, ['#0d4433', '#115a42', '#167152']);
+  E(ground, 'a', `<img src="${PLATES.hookLand()}" style="width:1080px;height:960px;display:block">`, { left: 0, top: 1000 });
   const glow = E(c, 'a', '', { left: 90, top: 250, width: 900, height: 900, borderRadius: '50%', background: 'radial-gradient(circle,rgba(198,255,31,.32),rgba(198,255,31,0) 62%)' });
   const mound = pile(ground, 540, 1330, 5, 112, 0);
   const hero = E(c, 'a', onion(360), { left: 360, top: 470 });
@@ -33,15 +33,16 @@ let C0, C1, C2, C3, C4, C5, C6;   // scene cams, needed for transitions
   hIn(h2, t + 3.3, { st: 0.1 });
   const tag = E(c, 'a ptag', '৳<span class="v">৬০</span>', { left: 690, top: 640 });
   pop(tag, t + 3.45, { from: 2 }); sfx(t + 3.45, 'stamp');
-  const flame = E(c, 'a', '<div style="width:110px;height:200px;border-radius:50% 50% 50% 50%/30% 30% 70% 70%;background:radial-gradient(ellipse at 50% 25%,#fff6c0,#ffc83d 40%,rgba(255,74,61,.8) 70%,transparent 72%)"></div>', { left: 485, top: 860, opacity: 0, transformOrigin: '50% 0%' });
-  const puffs = Array.from({ length: 22 }, (_, i) => E(c, 'a', '', { left: 470 + (rnd(i) - 0.5) * 60, top: 900, width: 140, height: 140, borderRadius: '50%', background: 'radial-gradient(circle,rgba(239,233,220,.75),rgba(239,233,220,0) 68%)', opacity: 0 }));
+  const flame = E(c, 'a', '<canvas width="460" height="820"></canvas>', { left: 310, top: 900, opacity: 0 }); c.insertBefore(flame, hero);
+  const fk = { k: 0 }, fctx = flame.firstChild.getContext('2d');
+  binds.push(T2 => { if (fk.k > 0.001) drawFlame(fctx, T2, fk.k); });
+  const puffs = Array.from({ length: 22 }, (_, i) => E(c, 'a', '', { left: 470 + (rnd(i) - 0.5) * 60, top: 900, width: 140, height: 140, borderRadius: '50%', background: i % 3 ? 'radial-gradient(circle,rgba(200,200,190,.7),rgba(160,160,150,0) 68%)' : 'radial-gradient(circle,rgba(255,170,90,.6),rgba(255,120,60,0) 68%)', opacity: 0 }));
   const lines = Array.from({ length: 10 }, (_, i) => E(c, 'a', '', { left: 60 + rnd(i + 30) * 960, top: -400, width: 4, height: 260 + rnd(i) * 200, borderRadius: 4, background: 'linear-gradient(transparent,rgba(239,233,220,.5))' }));
   const L = t + 3.8;
   tl.to(hero, { y: 120, duration: 0.5, ease: 'power2.inOut' }, L - 0.3).to(tag, { y: 120, duration: 0.5, ease: 'power2.inOut' }, L - 0.3)
     .to(ground, { y: 1300, duration: 3.2, ease: 'power2.in' }, L).to(glow, { opacity: 0.5, duration: 1 }, L)
     .to(sky, { y: 1500, duration: 3.4, ease: 'power1.in' }, L)
-    .fromTo(flame, { opacity: 0, scaleY: 0.3 }, { opacity: 1, scaleY: 1, duration: 0.25 }, L)
-    .to(flame, { scaleY: 0.75, duration: 0.07, yoyo: true, repeat: 40, ease: 'none' }, L + 0.25)
+    .set(flame, { opacity: 1 }, L).fromTo(fk, { k: 0 }, { k: 1, duration: 0.35, ease: 'power2.out' }, L)
     .to([hero, tag, flame], { x: 6, duration: 0.05, yoyo: true, repeat: 50, ease: 'none' }, L);
   puffs.forEach((p, i) => tl.fromTo(p, { opacity: 0.85, y: 0, scale: 0.35 }, { opacity: 0, y: 900, scale: 2.6, duration: 1.3, ease: 'power1.out', immediateRender: false }, L + i * 0.15));
   lines.forEach((l, i) => tl.fromTo(l, { y: 0 }, { y: 2600, duration: 0.6, ease: 'none', repeat: 4, delay: rnd(i) * 0.5 }, L + 0.6));
@@ -63,28 +64,15 @@ let C0, C1, C2, C3, C4, C5, C6;   // scene cams, needed for transitions
   const c = C1 = scene('s1', T.s1, T.s2, { pre: 0.25 }), t = T.s1;
   whip(t, C0, c, 'down');
   base(c, { background: 'linear-gradient(#2b8a66,#145a42 55%,#0c3d2d)' });
-  const sun = E(c, 'a', '', { left: 720, top: 300, width: 190, height: 190, borderRadius: '50%', background: 'radial-gradient(circle,#fff6b0,#ffd84a 55%,#ffb800)', boxShadow: '0 0 140px 50px rgba(255,216,74,.4)' });
-  const cl = [[60, 360, 240], [420, 250, 200], [820, 520, 220]].map(([x, y, w], i) => E(c, 'a', cloud(w, '#4fb088'), { left: x, top: y, opacity: 0.7 }));
-  cl.forEach((e, i) => tl.to(e, { x: 60 - i * 30, duration: 9.6, ease: 'none' }, t));
-  const field = E(c, 'a', '', { left: 0, top: 0, width: 1080, height: 1920 });
-  hills(field, 760, ['#1f7a55', '#289262', '#33a86d']);
-  const workers = [[600, 830], [750, 810], [890, 840]].map(([x, y]) => E(field, 'a', person(64, { hat: 'straw', shirt: '#efe9dc', expr: 'happy' }), { left: x, top: y }));
-  workers.forEach((w, i) => tl.to(w, { y: -10, duration: 0.4, yoyo: true, repeat: 9, ease: 'sine.inOut' }, t + i * 0.2));
-  const plants = [];
-  for (let r = 0; r < 5; r++) for (let i = 0; i < 7 - (r % 2); i++) {
-    const s = 60 + r * 22, x = 60 + i * 160 + (r % 2) * 80 + (rnd(r * 9 + i) - 0.5) * 30, y = 1060 + r * 140;
-    const p = E(field, 'a', `<div style="position:absolute;left:${s * 0.22}px;top:${s * 0.9}px">${onion(s * 0.55)}</div>` + sprout(s), { left: x, top: y - s });
-    plants.push(p);
-  }
-  const farmer = E(field, 'a', person(360, { shirt: '#efe9dc', hat: 'straw', expr: 'happy', pose: 'hold', apron: true }), { left: 60, top: 640 });
-  const basket = E(farmer, 'a', `<div style="position:absolute;left:30px;top:-46px">${[0, 1, 2, 3].map(i => `<div style="position:absolute;left:${i * 44}px;top:${(i % 2) * -12}px">${onion(64)}</div>`).join('')}</div><svg width="240" height="110" viewBox="0 0 240 110"><path d="M6 6 H234 L210 104 H30Z" fill="#c48450"/><path d="M20 30 H222 M26 56 H216 M30 80 H210" stroke="#7d4b26" stroke-width="5"/><path d="M6 6 H234" stroke="#e2ad3f" stroke-width="10" stroke-linecap="round"/></svg>`, { left: 60, top: 500 });
-  plants.forEach((p, i) => tl.fromTo(p, { scale: 0, transformOrigin: '50% 100%' }, { scale: 1, duration: 0.4, ease: 'back.out(2.4)' }, t + 0.3 + (i % 9) * 0.06 + Math.floor(i / 9) * 0.1));
-  [0.35, 0.55, 0.75, 0.95].forEach((d, i) => sfx(t + d, 'plop', { p: i + 2 }));
-  tl.fromTo(farmer, { x: -500 }, { x: 0, duration: 0.6, ease: 'back.out(1.2)' }, t + 0.2).to(farmer, { y: -14, duration: 0.3, yoyo: true, repeat: 3 }, t + 0.8);
+  const fcv = E(c, 'a', '<canvas width="1080" height="1920"></canvas>', { left: 0, top: 0 }).firstChild, F = FIELD3D(), fctx = fcv.getContext('2d');
+  let fkey = '';
+  binds.push(T2 => { if (T2 < t - 0.35 || T2 > T.s2 + 0.2) return; const u = T2 - t, k = F.pose(u); if (k !== fkey) { fkey = k; M3.draw(F.S, F.cam, fctx, 720, 1280, { shadow: 1 }); } });
+  const ttl = chip(c, 'মাঠে এখন পেঁয়াজ তোলার মৌসুম', { left: 0, width: 1080, top: 250, textAlign: 'center' });
+  pop(ttl, t + 0.3); out(ttl, t + 1.5);
+  sfx(t, 'birds', { d: 2.6 }); sfx(t + 0.2, 'whoosh');
   // the camera lifts: field drops, two glass tanks rise
   const U = t + 1.6;
-  tl.to(field, { y: 640, duration: 0.9, ease: 'power3.inOut' }, U).to(farmer, { x: -520, duration: 0.6, ease: 'power2.in' }, U)
-    .to(sun, { y: -420, scale: 0.6, duration: 0.9, ease: 'power3.inOut' }, U);
+  sfx(U, 'sweep');
   const PX = 19, TB = 1180, TH = 760;
   const tank = (x, col, tint, name) => {
     const k = E(c, 'tank', `<div class="fill" style="background-image:${onionURI};background-color:${tint}"></div><div class="gl"></div>`, { left: x, top: TB - TH, width: 340, height: TH, borderColor: col });
@@ -125,31 +113,26 @@ let C0, C1, C2, C3, C4, C5, C6;   // scene cams, needed for transitions
   zoomThru(t, C1, c, 760, 540);
   base(c, { background: 'linear-gradient(#123d2f,#0a2a20 55%,#06180f)' });
   const world = E(c, 'a', '', { left: 0, top: 0, width: 1080, height: 1920 });
-  hills(world, 900, ['#0e3a2b', '#103f2f', '#0f3a2b']);
-  E(world, 'a', '', { left: 0, top: 1150, width: 1080, height: 800, background: 'linear-gradient(#33452a,#141c10)' });
-  const sh = E(world, 'a', shed(900), { left: 90, top: 420 });
-  const lamp = E(world, 'a', '', { left: 340, top: 760, width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,224,138,.35),rgba(255,224,138,0) 65%)' });
-  const stock = pile(world, 540, 1150, 4, 86, 3);
-  const ROT = [1, 4, 7, 9, 12, 15];
+  const SH = PLATES.store();
+  E(world, 'a', `<img src="${SH.fresh}" style="width:1080px;height:1920px;display:block">`, { left: 0, top: 0 });
+  const rotImg = E(world, 'a', `<img src="${SH.rot}" style="width:1080px;height:1920px;display:block">`, { left: 0, top: 0, opacity: 0 });
+  const lamp = E(world, 'a', '', { left: SH.door[0] - 260, top: SH.door[1] - 300, width: 520, height: 520, borderRadius: '50%', background: 'radial-gradient(circle,rgba(255,214,120,.38),rgba(255,214,120,0) 65%)', mixBlendMode: 'screen' });
   const no = chip(c, `${ico('x', 40, '#ff4a3d', 3.4)} আধুনিক সংরক্ষণাগার নেই`, { left: 0, width: 1080, top: 280, textAlign: 'center' }, '#ff4a3d');
   tl.fromTo(world, { y: 60 }, { y: 0, duration: 1.2, ease: 'power2.out' }, t);
   pop(no, t + 0.5); sfx(t + 0.5, 'deny');
   tl.to(lamp, { opacity: 0.2, duration: 0.06, yoyo: true, repeat: 7, ease: 'none' }, t + 1.2);
   sfx(t + 1.2, 'flicker');
   // humidity & heat: drops fall, onions sweat… then rot
-  const drops = Array.from({ length: 8 }, (_, i) => E(world, 'a', '<div style="width:16px;height:24px;border-radius:50% 50% 50% 50%/40% 40% 60% 60%;background:#7fe0ff;opacity:.8"></div>', { left: 320 + i * 60, top: 820 }));
+  const drops = Array.from({ length: 8 }, (_, i) => E(world, 'a', '<div style="width:16px;height:24px;border-radius:50% 50% 50% 50%/40% 40% 60% 60%;background:#7fe0ff;opacity:.8"></div>', { left: SH.pile[0] - 230 + i * 60, top: SH.door[1] - 140 }));
   drops.forEach((d, i) => tl.fromTo(d, { y: 0, opacity: 0 }, { y: 260, opacity: 0.8, duration: 0.6, ease: 'power2.in', repeat: 2 }, t + 1.6 + i * 0.13));
   out(no, t + 3.15);
-  ROT.forEach((k, i) => {
-    const o = stock[k], at = t + 3.3 + i * 0.22;
-    tl.to($('.rt', o), { opacity: 1, duration: 0.6, ease: 'power1.in' }, at).to(o, { scaleY: 0.86, scaleX: 1.06, duration: 0.6, transformOrigin: '50% 100%' }, at);
-    sfx(at, 'squish', { p: i });
-  });
-  const haze = E(world, 'a', '', { left: 250, top: 860, width: 580, height: 360, borderRadius: '50%', background: 'radial-gradient(ellipse,rgba(160,170,60,.35),rgba(160,170,60,0) 65%)', opacity: 0 });
+  tl.to(rotImg, { opacity: 1, duration: 1.6, ease: 'power1.in' }, t + 3.3);
+  [0, 1, 2, 3, 4, 5].forEach(i => sfx(t + 3.3 + i * 0.25, 'squish', { p: i }));
+  const haze = E(world, 'a', '', { left: SH.pile[0] - 300, top: SH.pile[1] - 200, width: 600, height: 380, borderRadius: '50%', background: 'radial-gradient(ellipse,rgba(160,170,60,.35),rgba(160,170,60,0) 65%)', opacity: 0 });
   tl.to(haze, { opacity: 1, duration: 1 }, t + 3.6);
   const flies = Array.from({ length: 6 }, (_, i) => E(world, 'a', fly(34), { left: 0, top: 0, opacity: 0 }));
   tl.to(flies, { opacity: 1, duration: 0.3, stagger: 0.1 }, t + 3.9);
-  binds.push(T2 => { const k = T2 - t; flies.forEach((f, i) => { const a = k * (2.2 + i * 0.3) + i * 1.7; f.style.transform = `translate(${540 + Math.cos(a) * (130 + i * 25) - 17}px,${980 + Math.sin(a * 1.6) * (60 + i * 10)}px) scaleX(${Math.cos(a) > 0 ? -1 : 1})`; }); });
+  binds.push(T2 => { const k = T2 - t; flies.forEach((f, i) => { const a = k * (2.2 + i * 0.3) + i * 1.7; f.style.transform = `translate(${SH.pile[0] + Math.cos(a) * (130 + i * 25) - 17}px,${SH.pile[1] - 40 + Math.sin(a * 1.6) * (60 + i * 10)}px) scaleX(${Math.cos(a) > 0 ? -1 : 1})`; }); });
   sfx(t + 3.9, 'buzz', { d: 4.2 });
   // 30% ring + ≈10 lakh tonnes
   const ring = E(c, 'a', `<svg width="300" height="300" viewBox="0 0 300 300" style="transform:rotate(-90deg)"><circle cx="150" cy="150" r="118" fill="rgba(5,33,26,.85)" stroke="rgba(239,233,220,.15)" stroke-width="34"/><circle class="arc" cx="150" cy="150" r="118" fill="none" stroke="#b8c45a" stroke-width="34" stroke-linecap="round" stroke-dasharray="741" stroke-dashoffset="741"/></svg><div style="position:absolute;inset:0;display:grid;place-items:center;font:800 92px/1 var(--font-bn-display);color:#d8e36a"><span><span class="v">০</span>%</span></div>`, { left: 80, top: 250, width: 300, height: 300 });
@@ -159,24 +142,31 @@ let C0, C1, C2, C3, C4, C5, C6;   // scene cams, needed for transitions
   pop(ring, t + 3.3); hIn(ten, t + 4.5); sfx(t + 3.5, 'count', { d: 1.2, soft: 1 }); sfx(t + 4.6, 'thud');
   // the math: 36 − 10 < 28
   const M = t + 6.5;
-  tl.to(world, { y: -1500, duration: 0.7, ease: 'power3.in' }, M).to([ring, ten], { y: -900, opacity: 0, duration: 0.5, ease: 'power3.in' }, M);
+  tl.to(world, { filter: 'blur(9px) brightness(.4)', scale: 1.08, duration: 0.8, ease: 'power2.inOut' }, M).to([ring, ten], { y: -900, opacity: 0, duration: 0.5, ease: 'power3.in' }, M);
   sfx(M, 'whoosh');
-  const B0 = 90, PXL = 25, BY = 720;
-  const tit = H(c, 'মোট উৎপাদন: <span class="lime">৩৬ লাখ টন</span>', 560, 70);
-  const keep = E(c, 'a', '', { left: B0, top: BY, width: 26 * PXL, height: 150, borderRadius: '30px 0 0 30px', backgroundImage: onionURI, backgroundColor: 'rgba(198,255,31,.35)', backgroundSize: '70px 76px', border: '5px solid #c6ff1f', borderRight: 0 });
-  const lost = E(c, 'a', '', { left: B0 + 26 * PXL, top: BY, width: 10 * PXL, height: 150, borderRadius: '0 30px 30px 0', backgroundImage: onionURI, backgroundColor: 'rgba(198,255,31,.35)', backgroundSize: '70px 76px', border: '5px solid #c6ff1f', borderLeft: '4px dashed #c6ff1f' });
-  const dem = E(c, 'a', '<div style="width:0;height:300px;border-left:7px dashed #2fd3b5"></div>', { left: B0 + 28 * PXL - 3, top: BY - 70 });
-  const demL = chip(c, 'চাহিদা ২৮', { left: B0 + 28 * PXL - 125, top: BY + 245 }, '#2fd3b5');
-  const gap = E(c, 'a', '', { left: B0 + 26 * PXL, top: BY, width: 2 * PXL, height: 150, background: 'repeating-linear-gradient(45deg,rgba(255,74,61,.9) 0 12px,rgba(255,74,61,.35) 12px 24px)', opacity: 0 });
-  const short = H(c, '<span class="red">ঘাটতি!</span>', 1040, 170);
-  hIn(tit, M + 0.4, { d: 0.4 });
-  tl.fromTo([keep, lost], { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, duration: 0.6, ease: 'expo.out', stagger: 0.25 }, M + 0.5);
-  tl.fromTo([dem, demL], { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(2)' }, M + 1.1);
-  tl.to(lost, { backgroundColor: 'rgba(110,90,30,.9)', borderColor: '#8a7a2a', duration: 0.4 }, M + 1.4)
-    .to(lost, { rotation: 28, y: 900, x: 120, opacity: 0, duration: 0.8, ease: 'power2.in', transformOrigin: '0 0' }, M + 1.9);
-  sfx(M + 1.4, 'squish', { p: 3 }); sfx(M + 1.95, 'fall');
-  tl.to(gap, { opacity: 1, duration: 0.15, yoyo: true, repeat: 5 }, M + 2.6);
-  hIn(short, M + 2.6, { d: 0.35 }); shake(M + 2.75, 22, 0.4); sfx(M + 2.7, 'stamp'); sfx(M + 2.72, 'alarm');
+  // same two tanks as chapter 02: the rotten 10 lakh tonnes fall out of the production tank, the level drops BELOW the demand line
+  const PX = 19, TB = 1180, TH = 760, LN = TB - 28 * PX;
+  const tit = H(c, '৩৬ <span class="red">− ১০</span> = <span class="red">২৬</span> লাখ টন', 250, 84);
+  const mkT = (x, col, tint, name, lakh) => {
+    const k = E(c, 'tank', `<div class="fill" style="height:${lakh * PX}px;background-image:${onionURI};background-color:${tint}"></div><div class="gl"></div>`, { left: x, top: TB - TH, width: 340, height: TH, borderColor: col });
+    const lab = E(c, 'a lbl', name, { left: x, width: 340, top: TB + 18, color: col });
+    return { k, lab, f: $('.fill', k) };
+  };
+  const D2 = mkT(150, '#2fd3b5', 'rgba(47,211,181,.3)', 'চাহিদা ২৮', 28), P2 = mkT(590, '#c6ff1f', 'rgba(198,255,31,.28)', 'উৎপাদন', 36);
+  const rotBand = E(P2.k, 'a', '<div style="position:absolute;inset:0;background:rgba(92,74,24,.92)"></div><div style="position:absolute;inset:0;display:grid;place-items:center;font:800 54px/1 var(--font-bn-display);color:#efe9dc;text-shadow:0 3px 10px #000">পচা ১০</div>', { left: 0, width: 330, bottom: 26 * PX, height: 10 * PX, opacity: 0 });
+  const line = E(c, 'a', '', { left: 120, width: 870, top: LN, height: 0, borderTop: '7px dashed #2fd3b5', transformOrigin: '0 50%' });
+  const lineL = chip(c, 'চাহিদার সীমা', { left: 118, top: LN - 82 }, '#2fd3b5');
+  const gap = E(c, 'a', '<div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,74,61,.95) 0 12px,rgba(255,74,61,.4) 12px 24px)"></div>', { left: 595, width: 330, top: LN, height: 2 * PX + 4, opacity: 0 });
+  const short = E(c, 'a', '<span class="chip" style="font-size:56px;border-color:#ff4a3d;color:#fff;background:#ff4a3d">ঘাটতি!</span>', { left: 610, top: LN + 70 });
+  tl.fromTo([D2.k, P2.k, D2.lab, P2.lab], { y: 900, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'back.out(1.2)', stagger: 0.06 }, M + 0.3);
+  tl.fromTo(line, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, M + 0.9); pop(lineL, M + 1.0);
+  hIn(tit, M + 0.5, { d: 0.4 });
+  tl.to(rotBand, { opacity: 1, duration: 0.4 }, M + 1.4)
+    .to(rotBand, { y: -900, rotation: -12, opacity: 0, duration: 0.9, ease: 'power2.in' }, M + 2.0)
+    .to(P2.f, { height: 26 * PX, duration: 0.6, ease: 'power2.inOut' }, M + 2.05);
+  sfx(M + 1.4, 'squish', { p: 3 }); sfx(M + 2.0, 'whoosh');
+  tl.to(gap, { opacity: 1, duration: 0.15, yoyo: true, repeat: 5 }, M + 2.6).set(gap, { opacity: 1 }, M + 3.5);
+  pop(short, M + 2.65, { from: 2.5, ease: 'back.out(3)' }); shake(M + 2.75, 22, 0.4); sfx(M + 2.7, 'stamp'); sfx(M + 2.72, 'alarm');
   tl.to(mood, { red: 0.7, duration: 0.2 }, M + 2.7).to(mood, { red: 0, duration: 0.5 }, T.s3 - 0.4);
   cap(16.95, 19.8, 'কিন্তু আধুনিক *সংরক্ষণাগারের অভাবে*…');
   cap(19.95, 23.2, 'উৎপাদনের প্রায় *৩০%* — প্রায় *১০ লাখ টন* — রান্নাঘরে পৌঁছানোর আগেই পচে নষ্ট হয়!');

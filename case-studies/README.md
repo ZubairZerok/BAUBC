@@ -1,11 +1,13 @@
 # Case Studies — series
 
+> **Making a new episode? Read [`CLAUDE.md`](CLAUDE.md) first**: the owner's rules, preferences and the production workflow.
+
 One sharp business insight per reel, told in ~90 seconds: **hook → the puzzle → the number → the real reason → the lesson → your turn → logo.**
 
 | ep | title | topic | status |
 |---|---|---|---|
 | [01](ep01-cart-abandonment/) | কার্ট রহস্য — ৭০% কেন ফিরে যায়? | e-commerce cart abandonment, surprise delivery fees, reviews | ✅ delivered |
-| [02](ep02-onion-paradox/) | পেঁয়াজের ধাঁধা — বাড়তি ফলিয়েও কেন দাম আকাশছোঁয়া? | onion surplus vs. rot, imports, syndicates, middlemen | ✅ delivered |
+| [02](ep02-onion-paradox/) | পেঁয়াজের ধাঁধা — বাড়তি ফলিয়েও কেন দাম আকাশছোঁয়া? | onion surplus vs. rot, imports, syndicates, middlemen | ✅ delivered (3D + ElevenLabs VO) |
 | [03](ep03/) | — | — | 🟡 brief pending |
 
 ## Series format

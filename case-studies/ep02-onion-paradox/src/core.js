@@ -41,3 +41,16 @@ function drawHud(t) {
 }
 const onionURI = "url('data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="84" height="92" viewBox="0 0 84 92"><defs><radialGradient id="a" cx=".36" cy=".42" r=".8"><stop offset="0" stop-color="#ffa3d0"/><stop offset=".4" stop-color="#d4418f"/><stop offset="1" stop-color="#5e1642"/></radialGradient></defs><path d="M42 12 C24 20 6 36 8 58 C10 78 26 88 42 88 C58 88 74 78 76 58 C78 36 60 20 42 12Z" fill="url(#a)"/><ellipse cx="27" cy="46" rx="6" ry="12" fill="#fff" opacity=".3" transform="rotate(22 27 46)"/></svg>`) + "')";
 stageInit(T.end, drawBg, drawHud, drawCaps);
+
+/* ───── voice-over sync: piecewise-linear time-warp (video time → composition time) ─────
+ * VO_ON = onsets of the 19 voice lines in the ElevenLabs file (measured by ASR + silence detection).
+ * The VO plays from VO_OFF s into the file at video t=0; each caption's start is pinned 0.1 s before its line. */
+const VO_OFF = 1.2, VO_END = 99.51, VO_ON = [1.42, 5.67, 9.32, 13.52, 16.66, 21.21, 24.0, 31.11, 36.53, 41.32, 48.49, 55.08, 62.25, 68.63, 74.73, 78.90, 84.78, 89.62, 93.55];
+const LOGO_AT = VO_END - VO_OFF + 0.25, DURATION = LOGO_AT + (T.end - T.s7);
+let WARP = null;
+const warpBuild = () => { WARP = [[0, 0], ...VO_ON.map((v, i) => [v - VO_OFF - 0.1, CAPS[i].t0]), [LOGO_AT, T.s7], [DURATION, T.end]]; };
+const pw = (x, A, a, b) => { if (!WARP) warpBuild(); for (let i = 1; i < WARP.length; i++) if (x <= WARP[i][a] || i === WARP.length - 1) { const [p, q] = [WARP[i - 1], WARP[i]]; return p[b] + (q[b] - p[b]) * (x - p[a]) / (q[a] - p[a]); } };
+const warp = n => pw(n, 0, 0, 1), unwarp = o => pw(o, 0, 1, 0);
+Object.keys(T).forEach((k, i) => { if (k !== 'end') sfx(T[k], 'mark', { p: i }); });
+{ const seek0 = window.__seek; window.__seek = n => seek0(warp(n)); window.__duration = DURATION;
+  Object.defineProperty(window, '__cues', { configurable: true, get: () => cues.map(c => Object.assign({}, c, { t: +unwarp(c.t).toFixed(3) }, c.d ? { d: +(unwarp(c.t + c.d) - unwarp(c.t)).toFixed(3) } : {})) }); }

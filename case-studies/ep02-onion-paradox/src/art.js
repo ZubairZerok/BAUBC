@@ -53,7 +53,7 @@ function person(w, o = {}) {
     <circle cx="68" cy="154" r="9" fill="#ff7d7d" opacity=".35"/><circle cx="132" cy="154" r="9" fill="#ff7d7d" opacity=".35"/>${mouth}${hat}</g>
     ${arm(A[3], A[4], A[5], 'armR')}`, o.css);
 }
-const shed = w => svg(w, '0 0 320 260', `<rect x="30" y="100" width="260" height="160" fill="#2c4a3c"/>
+let shed = w => svg(w, '0 0 320 260', `<rect x="30" y="100" width="260" height="160" fill="#2c4a3c"/>
   ${[56, 82, 108, 212, 238, 264].map(x => `<path d="M${x} 104 V260" stroke="#203a2e" stroke-width="3"/>`).join('')}
   <rect x="72" y="134" width="176" height="126" fill="#0b1712"/><path d="M72 134 h176 v16 h-176Z" fill="#000" opacity=".35"/>
   <polygon points="6,104 160,10 314,104 300,114 160,30 20,114" fill="#5b8068"/><polygon points="20,114 160,30 300,114" fill="#3e6150"/>
@@ -64,7 +64,7 @@ function ship(w) {
   return svg(w, '0 0 380 230', `${ct}<rect x="302" y="92" width="52" height="56" rx="4" fill="${K.cream}"/><rect x="310" y="102" width="36" height="10" rx="3" fill="#2a6f7a"/>
     <rect x="318" y="62" width="18" height="30" fill="${K.red}"/><path d="M6 146 L374 146 L346 210 L34 210Z" fill="#164a58"/><path d="M14 166 H364" stroke="${K.cream}" stroke-width="7"/><path d="M6 146 L374 146 L370 156 L10 156Z" fill="url(#gHi)"/>`);
 }
-const crate = w => svg(w, '0 0 220 130', `<rect x="0" y="18" width="220" height="112" rx="8" fill="url(#gWood)"/><path d="M8 58 H212 M8 94 H212" stroke="${K.woodD}" stroke-width="5"/><path d="M14 22 V126 M206 22 V126" stroke="${K.woodD}" stroke-width="6"/><rect x="0" y="12" width="220" height="14" rx="5" fill="#dca06a"/>`);
+let crate = w => svg(w, '0 0 220 130', `<rect x="0" y="18" width="220" height="112" rx="8" fill="url(#gWood)"/><path d="M8 58 H212 M8 94 H212" stroke="${K.woodD}" stroke-width="5"/><path d="M14 22 V126 M206 22 V126" stroke="${K.woodD}" stroke-width="6"/><rect x="0" y="12" width="220" height="14" rx="5" fill="#dca06a"/>`);
 const cloud = (w, c = '#1c5e47') => svg(w, '0 0 200 90', `<path d="M30 80 C0 80 0 46 30 46 C30 14 76 6 92 30 C104 8 150 10 152 44 C186 40 196 80 166 80Z" fill="${c}"/>`);
 const sprout = w => svg(w, '0 0 80 100', `<path d="M40 100 C36 60 28 30 18 0 C36 30 44 62 44 100Z M42 100 C44 64 52 36 66 8 C56 40 50 70 48 100Z M38 100 C30 74 18 56 2 44 C22 56 34 72 42 100Z M44 100 C54 78 64 66 80 58 C66 70 56 84 50 100Z" fill="url(#gLeaf)"/>`);
 const fly = w => svg(w, '0 0 30 24', `<ellipse cx="9" cy="7" rx="7" ry="5" fill="#dff" opacity=".7"/><ellipse cx="20" cy="6" rx="7" ry="5" fill="#dff" opacity=".7"/><ellipse cx="15" cy="15" rx="7" ry="6" fill="#141a10"/><circle cx="21" cy="13" r="3" fill="#7a1d1d"/>`);
@@ -81,4 +81,31 @@ function pile(parent, cx, baseY, rows, size, seed = 0, o = {}) {
     for (let i = 0; i < n; i++) { const k = seed + r * 17 + i, x = cx + (i - (n - 1) / 2) * size * 0.74 + (rnd(k) - 0.5) * size * 0.2, y = baseY - size * 1.05 - r * size * 0.72 + (rnd(k + 5) - 0.5) * 8;
       out.push(E(parent, 'a', onion(size, o), { left: x - size / 2, top: y, transform: `rotate(${(rnd(k + 9) - 0.5) * 40}deg)` })); } }
   return out;
+}
+
+/* ───── 3D upgrade: the same functions, now returning 3D-rendered models (Zack D-style film look) ─────
+ * Falls back to the flat SVG versions above if WebGL is unavailable. */
+if (typeof M3 !== 'undefined') {
+  const SPR = {}, once = (k, f) => SPR[k] || (SPR[k] = f());
+  const ON = () => once('on', () => M3.sprite(M3.onion(), 300, 336, { y0: -.12, y1: 1.3, lights: { ki: 2.6 } }));
+  const OR = () => once('or', () => M3.sprite(M3.onion({ rot: 1 }), 300, 336, { y0: -.12, y1: 1.3, lights: { ki: 2.2 } }));
+  onion = (s, o = {}) => `<div class="ob" style="position:relative;width:${s}px;height:${s * 1.12}px;${o.css || ''}"><img src="${ON()}" style="position:absolute;inset:0;width:100%;height:100%;filter:drop-shadow(0 ${s * .05}px ${s * .06}px rgba(0,0,0,.45))"><img class="rt" src="${OR()}" style="position:absolute;inset:0;width:100%;height:100%;opacity:${o.rot || 0}"></div>`;
+  const HUM = o => {
+    const syn = o.shirt === '#06100b', far = o.hat === 'straw';
+    return { skin: syn ? '#1c1714' : far ? '#5e3520' : o.long ? '#9a6440' : o.skin3 || '#7a4a2c', top: syn ? 'suit' : far ? 'vest' : o.long ? 'kameez' : 'shirt', topC: syn ? '#0b0f0c' : o.shirt,
+      bottom: far ? 'lungi' : o.long ? 'none' : (o.lungi ? 'lungi' : 'pants'), lungiC: o.lungiC, hat: far ? 'mathal' : o.hat === 'cap' ? 'cap' : o.hat3, capC: o.capc, gamcha: far ? 'shoulder' : o.gamcha,
+      female: !!o.long, expr: o.expr || 'happy', pose: o.pose || 'down', glow: syn, hairC: syn ? '#050505' : o.long ? '#2a1a12' : o.hairC, beard: o.beard, pantC: o.pantC };
+  };
+  const pimg = (w, h) => `position:absolute;left:0;top:0;width:${w}px;height:${h}px`;
+  person = (w, o = {}) => {
+    if (o.bust) { const q = HUM(o), k = 'b' + JSON.stringify(q), r = Math.min(2, 500 / w);
+      return `<img src="${once(k, () => M3.sprite(M3.human(q), Math.round(w * r), Math.round(w * r), { y0: 1.18, y1: 2.2, lights: { ki: 2.5, ri: 2.2 } }))}" style="display:block;width:${w}px;height:${w}px">`; }
+    const h = w * 1.65, q = HUM(o), k = JSON.stringify(q), r = Math.min(2, 600 / w);
+    const a = once(k, () => M3.sprite(M3.human(q), Math.round(w * r), Math.round(h * r), { y0: -.02, y1: 2.17, lights: { ki: 2.5, ri: 2.2 } }));
+    const shut = q.expr === 'talk' ? `<img class="mo" src="${once(k + 'm', () => M3.sprite(M3.human(Object.assign({}, q, { expr: 'happy' })), Math.round(w * r), Math.round(h * r), { y0: -.02, y1: 2.17, lights: { ki: 2.5, ri: 2.2 } }))}" style="${pimg(w, h)};opacity:0">` : '';
+    return `<div class="p3" style="position:relative;width:${w}px;height:${h}px;${o.css || ''}"><img src="${a}" style="${pimg(w, h)}">${shut}</div>`;
+  };
+  crate = w => `<img src="${once('crate', () => M3.sprite(M3.crate(), 440, 260, { fit: 1, pitch: .32, yaw: -.25, pad: 1.02 }))}" style="display:block;width:${w}px;height:${w * 130 / 220}px;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(0,0,0,.45))">`;
+  ship = w => `<img src="${once('ship', () => M3.sprite(M3.ship(), 760, 460, { fit: 1, pitch: .16, yaw: -.42, pad: 1.0 }))}" style="display:block;width:${w}px;height:${w * 230 / 380}px;object-fit:contain">`;
+  shed = w => `<img src="${once('shed', () => M3.sprite(M3.shed(), 640, 520, { fit: 1, pitch: .18, yaw: -.3, pad: 1.0 }))}" style="display:block;width:${w}px;height:${w * 260 / 320}px;object-fit:contain">`;
 }

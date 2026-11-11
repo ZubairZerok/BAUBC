@@ -12,13 +12,14 @@ K4, K2, K1 = [0, 1, 2, 3], [0, 2, 2.5], [0]
 def b(ch, kick=(), clap=(), hat=None, bass=None, arp=None, pad=.8, cut=1100, roll=None, kd=1.6):
     return dict(ch=ch, kick=kick, clap=clap, hat=hat, bass=bass, arp=arp, pad=pad, cut=cut, roll=roll, kd=kd)
 
-def arrange(BARS, CH, DUR, BAR=2.4, arp_inst='pluck', arp_seq=(0, 1, 2, 1, 3, 2, 1, 2), duck_amt=.62):
-    BEAT = BAR / 4
+def arrange(BARS, CH, DUR, BAR=2.4, arp_inst='pluck', arp_seq=(0, 1, 2, 1, 3, 2, 1, 2), duck_amt=.62, starts=None):
+    """starts: optional list of bar start times (len(BARS)+1) for variable-length bars, e.g. when cuts follow a voice-over"""
+    BEAT = BAR / 4; BAR0 = BAR
     drums, bassb, padb, arpb = Mix(DUR), Mix(DUR), Mix(DUR), Mix(DUR)
     duck = np.ones(int((DUR + 4) * SR))
     snare = lambda g: bp(noise(.09), 1200, 6000) * env(.09, .001, .01, 9) * g
     for i, B_ in enumerate(BARS):
-        t0 = i * BAR; root, voic = CH[B_['ch']]
+        t0 = starts[i] if starts else i * BAR0; BAR = (starts[i + 1] - starts[i]) if starts else BAR0; BEAT = BAR / 4; root, voic = CH[B_['ch']]
         for k in B_['kick']:
             drums.add(kick(drive=B_['kd']), t0 + k * BEAT, .95); o = int((t0 + k * BEAT) * SR); n = int(.3 * SR)
             duck[o:o + n] = np.minimum(duck[o:o + n], 1 - duck_amt * np.exp(-np.arange(n) / (.09 * SR)))
@@ -45,7 +46,7 @@ def arrange(BARS, CH, DUR, BAR=2.4, arp_inst='pluck', arp_seq=(0, 1, 2, 1, 3, 2,
                 nt = voic[s % len(voic)] + 12
                 y = mallet(nt, .5) if arp_inst == 'mallet' else pluck(nt, .45, 4200 if B_['cut'] > 1400 else 2600)
                 arpb.add(y, t0 + j * .25 * BEAT, .34 if B_['arp'] == 'on' else .5, pan=.5 * (-1) ** j)
-    ar = arpb.bus(); dl = int(.75 * BEAT * SR); src = arpb.bus().copy()
+    ar = arpb.bus(); dl = int(.75 * BAR0 / 4 * SR); src = arpb.bus().copy()
     for rep, g in ((1, .42), (2, .22), (3, .1)): ar[rep % 2, rep * dl:] += src[(rep + 1) % 2, :-rep * dl] * g
     return drums.bus() * .9 + (bassb.bus() * .95 + padb.bus()) * duck[:drums.n] + ar * .8
 

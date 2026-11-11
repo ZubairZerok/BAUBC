@@ -3,3 +3,4 @@ node_modules/
 **/frames/
 *.tmp
 .DS_Store
+__pycache__/

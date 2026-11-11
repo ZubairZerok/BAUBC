@@ -4,10 +4,12 @@
 
 | | |
 |---|---|
-| Deliverable | [`renders/BAUBC_CaseStudies_EP02_OnionParadox_1080x1920_60fps.mp4`](renders/) |
-| Format | 1080×1920 · 60 fps · 69.6 s · H.264 + AAC |
-| Style | flat explainer illustration (Kurzgesagt-inspired) in BAUBC greens; all art drawn in code (`src/art.js`) |
-| Language | Bangla captions, no voice-over · original synthesized score + SFX |
+| Deliverable (final) | [`renders/BAUBC_CaseStudies_EP02_OnionParadox_VO_1080x1920_60fps.mp4`](renders/): **with ElevenLabs voice-over**, 105.8 s |
+| Earlier cut | `renders/BAUBC_CaseStudies_EP02_OnionParadox_1080x1920_60fps.mp4`: captions only, 69.6 s, flat art |
+| Format | 1080×1920 · 60 fps · H.264 + AAC |
+| Style | Kurzgesagt-like explainer + Zack D Films-style **3D models** (three.js): Bangladeshi farmers, glossy onions, live 3D onion field, mud/tin storage house, 3D crates and ship |
+| Sound | ElevenLabs VO (`audio/vo/`, tagged script in `docs/vo-script-elevenlabs.md`) + original score ducked under the voice + SFX |
+| Sync | captions pinned to the 19 voice-line onsets (ASR + silence detection) via a time-warp in `src/core.js` |
 | Outro | CASE STUDIES logo v2 (BAUBC mark as the "A") |
 
 | path | |
@@ -15,7 +17,8 @@
 | `docs/script.md` · `docs/storyboard.md` | captions with timings, original brief, scene plan |
 | `src/index.html` | stage shell: uses `_common/toolkit/stage.js` (timeline helpers, captions, transitions) |
 | `src/core.js` | bar grid, sky + foreground dust, HUD |
-| `src/art.js` | illustration kit: onion (fresh/rotting), people (poses, expressions), farmer, shed, ship, crate, hills, clouds… |
+| `src/art.js` | illustration kit; at the bottom, `onion/person/crate/ship/shed` are swapped for 3D renders from `_common/toolkit/m3d.js` |
+| `src/3d.js` | 3D plates (hook grassland, storage house fresh/rotten), the live onion-field rig (4 farmers, camera dolly + crane), rocket flame |
 | `src/scenes.js`, `src/scenes2.js` | the eight chapters |
 | `audio/build_audio.py` | score (via `_common/toolkit/audio/arrange.py`) + SFX from `cues.json` |
 
@@ -30,7 +33,7 @@ python3 audio/build_audio.py
 ```
 
 ```bash
-node ../../_common/toolkit/render.mjs --html src/index.html --audio audio/build/ep02_mix.wav --out renders/BAUBC_CaseStudies_EP02_OnionParadox_1080x1920_60fps.mp4
+node ../../_common/toolkit/render.mjs --html src/index.html --audio audio/build/ep02_mix.wav --out renders/BAUBC_CaseStudies_EP02_OnionParadox_VO_1080x1920_60fps.mp4
 ```
 
 ## Facts used (from the brief)

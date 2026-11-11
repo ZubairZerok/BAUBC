@@ -12,7 +12,7 @@
   MON.forEach((m, i) => { const at = t + 0.25 + i * 0.42; tl.set(mEl, { innerHTML: m, fontSize: m.length > 5 ? 74 : 96 }, at).fromTo(mEl, { rotationX: -90, opacity: 0 }, { rotationX: 0, opacity: 1, duration: 0.2, transformOrigin: '50% 0%', immediateRender: false }, at); sfx(at, 'flip', { p: i }); });
   tl.set(mEl, { innerHTML: '' }, 0);
   const crt = E(A, 'a', crate(400), { left: 590, top: 470 });
-  const stk = pile(A, 790, 492, 3, 78, 7);
+  const stk = pile(A, 790, 548, 3, 78, 7);
   const stl = chip(A, 'দেশি মজুদ', { left: 640, top: 330 });
   [cal, crt, stl].forEach(e => pop(e, t + 0.05)); stk.forEach(o => tl.fromTo(o, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t + 0.15));
   [...stk].reverse().forEach((o, i) => { tl.to(o, { scale: 0, opacity: 0, y: -40, duration: 0.18, ease: 'power2.in' }, t + 0.5 + i * 0.13); });
@@ -89,12 +89,11 @@
   const syn = chip(c, 'সিন্ডিকেটের কারসাজি', { left: 0, width: 1080, top: 1196, textAlign: 'center' }, '#ff4a3d');
   tl.to(ch, { y: 370, duration: 0.5, ease: 'power3.inOut' }, Y - 0.15).fromTo(bosses, { y: 400, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out', stagger: 0.12 }, Y)
     .to(strings, { opacity: 1, duration: 0.3 }, Y + 0.5).to(wig, { v: 1, duration: 0.6 }, Y + 0.6);
-  bosses.forEach((b, i) => tl.to($('.armR', b), { rotation: -10, svgOrigin: '142 236', duration: 0.18, yoyo: true, repeat: 8, ease: 'sine.inOut' }, Y + 0.6 + i * 0.09)
-    .to($('.armL', b), { rotation: 10, svgOrigin: '58 236', duration: 0.21, yoyo: true, repeat: 7, ease: 'sine.inOut' }, Y + 0.65));
+  bosses.forEach((b, i) => tl.to(b, { rotation: i ? 3 : -3, y: -12, transformOrigin: '50% 100%', duration: 0.2, yoyo: true, repeat: 8, ease: 'sine.inOut' }, Y + 0.6 + i * 0.09));
   pop(syn, Y + 0.7); sfx(Y, 'sub'); sfx(Y + 0.7, 'deny'); sfx(Y + 0.6, 'wobble', { d: 2.2 });
   tl.to(mood, { red: 0, duration: 0.4 }, T.s4 - 0.4);
   cap(26.55, 29.0, 'বছর শেষে দেশি মজুদ ফুরালেই বাজার *জিম্মি* হয়ে পড়ে আমদানির ওপর।');
-  cap(29.15, 33.0, 'আমদানি বন্ধ বা শুল্ক জটিলতার খবরেই *৳৬০-৭০* এর পেঁয়াজ রাতারাতি *৳২০০* ছাড়িয়েছিল!');
+  cap(29.15, 33.0, 'আমদানি বন্ধ বা শুল্ক জটিলতার খবরেই *৬০-৭০ টাকার* পেঁয়াজ রাতারাতি *২০০ টাকা* ছাড়িয়েছিল!');
   cap(33.15, 35.9, 'এ বছরও মৌসুম শেষে আমদানির ধীরগতি আর *সিন্ডিকেটের কারসাজিতে* ফিরেছে সেই অস্থিরতা।');
 }
 
@@ -110,7 +109,7 @@
     ['আড়তদার', { shirt: '#8a5a2b', hat: 'cap', capc: '#ffc83d', expr: 'smirk' }], ['পাইকার', { shirt: '#5b4a8a', expr: 'smirk' }], ['খুচরা বিক্রেতা', { shirt: '#a8433a', hat: 'cap', capc: '#efe9dc', expr: 'smirk' }]];
   const busts = WHO.map(([nm, o], i) => {
     const [x, y] = N[i];
-    const b = E(c, 'a', `<div style="width:190px;height:190px;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 30%,#2a9a6a,#0f4a36);border:6px solid ${i ? '#efe9dc' : '#c6ff1f'};box-shadow:0 18px 40px rgba(0,0,0,.4)"><div style="margin:14px 0 0 16px">${person(150, Object.assign({ expr: 'happy' }, o))}</div></div>`, { left: x - 95, top: y - 95 });
+    const b = E(c, 'a', `<div style="width:190px;height:190px;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 30%,#2a9a6a,#0f4a36);border:6px solid ${i ? '#efe9dc' : '#c6ff1f'};box-shadow:0 18px 40px rgba(0,0,0,.4)">${person(178, Object.assign({ expr: 'happy', bust: 1 }, o))}</div>`, { left: x - 95, top: y - 95 });
     const n = E(c, 'a', `<span class="chip" style="font-size:32px;padding:8px 20px 4px">${nm}</span>`, { left: x - 150, width: 300, top: y + 104, textAlign: 'center' });
     pop(b, t + 0.2 + i * 0.12, { ease: 'back.out(2)' }); pop(n, t + 0.3 + i * 0.12); sfx(t + 0.2 + i * 0.12, 'pop', { p: i });
     return b;
@@ -157,7 +156,7 @@
   }
   const sliver = chip(c, 'কৃষকের হাতে সামান্য', { left: 230, top: 680 }, '#c6ff1f');
   pop(sliver, M + 1.8); sfx(M + 1.8, 'sad');
-  cap(36.15, 39.25, 'সবচেয়ে অবাক তথ্য: মৌসুমের শুরুতে কৃষক পেঁয়াজ বিক্রি করেন মাত্র *৳৩৫–৪০* কেজিতে…');
+  cap(36.15, 39.25, 'সবচেয়ে অবাক তথ্য: মৌসুমের শুরুতে কৃষক পেঁয়াজ বিক্রি করেন মাত্র *৩৫–৪০ টাকা* কেজিতে…');
   cap(39.4, 42.7, '…আর ৪-৫ হাত ঘুরে আপনার রান্নাঘরে পৌঁছাতে দাম বাড়ে *৩ থেকে ৪ গুণ!*');
   cap(42.85, 45.5, 'আপনি দেন অনেক, কৃষক পান সামান্য — মাঝের লাভ যায় *মধ্যস্বত্বভোগীদের* পকেটে।');
 }
@@ -172,9 +171,9 @@
   const X = [40, 390, 740], NM = ['উৎপাদন', 'সংরক্ষণ', 'মধ্যস্বত্ব'];
   const crates = X.map((x, i) => {
     const g2 = E(c, 'a', '', { left: x, top: 0, width: 300, height: 1300 });
-    if (i === 0) pile(g2, 150, 885, 3, 74, 21);
-    if (i === 1) pile(g2, 150, 885, 3, 74, 31, { rot: 1 });
-    if (i === 2) for (let k = 0; k < 7; k++) E(g2, 'a', coin(64), { left: 40 + (k % 4) * 52 + (k > 3 ? 26 : 0), top: 820 - (k > 3 ? 50 : 0) - (k % 2) * 8 });
+    if (i === 0) pile(g2, 150, 925, 3, 74, 21);
+    if (i === 1) pile(g2, 150, 925, 3, 74, 31, { rot: 1 });
+    if (i === 2) for (let k = 0; k < 7; k++) E(g2, 'a', coin(64), { left: 40 + (k % 4) * 52 + (k > 3 ? 26 : 0), top: 860 - (k > 3 ? 50 : 0) - (k % 2) * 8 });
     E(g2, 'a', crate(300), { left: 0, top: 860 });
     E(g2, 'a', `<span class="chip" style="font-size:38px">${NM[i]}</span>`, { left: -20, width: 340, top: 1070, textAlign: 'center' });
     return g2;
@@ -203,7 +202,7 @@
   tl.to(mood, { gold: 0.35, duration: 0.6 }, K2).to(mood, { gold: 0, duration: 0.4 }, T.s6 - 0.3);
   sfx(K2 + 1.3, 'success', { soft: 1 });
   cap(45.75, 48.6, 'অর্থাৎ আমাদের আসল সংকট পেঁয়াজের *উৎপাদনে নয়*…');
-  cap(48.75, 51.9, 'সংকট হলো *৩০% পচন* ঠেকাতে না পারা আর *মধ্যস্বত্বভোগীদের দৌরাত্ম্য।*');
+  cap(48.75, 51.9, 'সংকট হলো *৩০% পচন* ঠেকাতে না পারা, আর *মধ্যস্বত্বভোগীদের দৌরাত্ম্য।*');
   cap(52.05, 55.1, 'পচন ঠেকানো আর হাতবদলের শিকল ছোট করাই তাই *সমাধানের চাবি।*');
 }
 
@@ -222,8 +221,8 @@
   tl.fromTo([awn, bulbs], { y: -500 }, { y: 0, duration: 0.6, ease: 'back.out(1.3)' }, t)
     .fromTo(board, { rotation: -70, transformOrigin: '50% -60px', opacity: 0 }, { rotation: 0, opacity: 1, duration: 1.2, ease: 'elastic.out(1,0.4)' }, t + 0.3)
     .fromTo(guy, { x: -420 }, { x: 0, duration: 0.6, ease: 'back.out(1.4)' }, t + 0.5)
-    .to($('.mo', guy), { scaleY: 0.3, transformOrigin: '50% 50%', duration: 0.11, yoyo: true, repeat: 40, ease: 'none' }, t + 0.8)
-    .to($('.armR', guy), { rotation: -18, svgOrigin: '142 236', duration: 0.5, yoyo: true, repeat: 9, ease: 'sine.inOut' }, t + 0.8);
+    .to($('.mo', guy), { opacity: 1, duration: 0.13, yoyo: true, repeat: 40, ease: 'steps(1)' }, t + 0.8)
+    .to(guy, { rotation: 2, transformOrigin: '50% 100%', duration: 0.5, yoyo: true, repeat: 9, ease: 'sine.inOut' }, t + 0.8);
   binds.push(T2 => { c.querySelectorAll('.bb').forEach((b, i) => { b.style.opacity = 0.55 + 0.45 * Math.sin(T2 * 3 + i * 1.3); }); $('.q', board).textContent = ['?', '৬০', '৯০', '১২০', '?', '১৫০', '?'][Math.floor(Math.max(0, T2 - t - 1) * 2.6) % 7]; });
   sfx(t + 0.3, 'creak'); sfx(t + 0.5, 'swish');
   // the poll

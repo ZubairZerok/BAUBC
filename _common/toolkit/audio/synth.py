@@ -167,6 +167,12 @@ def _make(name, p, d, soft):
         return reverb(y, .3)
     if name == 'creak': dd = .7; t = tt(dd); return bp(saw(2 * np.pi * np.cumsum(90 + 40 * np.sin(2 * np.pi * 2 * t)) / SR), 300, 2000) * np.sin(np.pi * t / dd) * .35
     if name == 'smoke': dd = 2.2; t = tt(dd); return reverb(lp(noise(dd), 500) * env(dd, .02, .5, 2.2) * 1.6 + svf_bp(noise(dd), 300 + 1500 * np.exp(-t * 2), 1.2) * env(dd, .01, .4, 3) * .7, .4)
+    if name == 'birds':
+        dd = d or 2.5; y = np.zeros(int(dd * SR))
+        for i in range(int(dd * 3)):
+            f0 = 2600 + 900 * rng.random(); k = np.sin(sweep(f0, f0 * (1.25 + .3 * rng.random()), .09, .7)) * env(.09, .005, .02, 2) * .18
+            for j in range(2): o = int((i / 3 + rng.random() * .2 + j * .11) * SR); y[o:o + len(k)] += k[:max(0, len(y) - o)]
+        return reverb(y, .4)
     raise KeyError(name)
 
 class Mix:
