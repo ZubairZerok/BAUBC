@@ -132,6 +132,41 @@ def _make(name, p, d, soft):
         t = tt(.9); return reverb(bp(noise(.9), 6000, 12000) * np.sin(np.pi * t / .9) ** 2 * .25 + bell(2637, .9, .4) * .25, .4)
     if name == 'lock': y = np.concatenate([sfx('click') * 1.2, sfx('boom')[:int(1.2 * SR)]]); return y
     if name == 'ticks': return np.concatenate([np.pad(sfx('tick', i * 2), (0, int(.05 * SR) - int(.035 * SR))) for i in range(6)])
+    # ── EP02 additions ──
+    if name == 'zoom': dd = .6; t = tt(dd); return (_whoosh(dd, 200, 7000, 1.4, .6) + np.sin(sweep(60, 160, dd, 2)) * (t / dd) ** 2 * .5) * .6
+    if name == 'iris': return reverb(_whoosh(.6, 400, 4000, 2) * .6 + np.pad(bell(1567.98, .8, .5) * .3, (int(.45 * SR), 0))[:int(.6 * SR)], .3)
+    if name == 'plop':
+        f = 300 * 2 ** (PENTA[p % 11] / 12 / 2); y = np.sin(sweep(f * 2.2, f * .8, .09, .4)) * env(.09, .001, .02, 4) * .8; y[:int(.04 * SR)] += lp(noise(.04), 1500) * env(.04, .001, .01, 20) * .4; return y
+    if name == 'pour':
+        dd = d or 1.5; y = np.zeros(int(dd * SR))
+        for i in range(int(dd * 11)): k = sfx('plop', (i * 3) % 7) * (.35 + .3 * rng.random()); o = int((i / 11 + rng.random() * .04) * SR); y[o:o + len(k)] += k[:len(y) - o]
+        return y * .8
+    if name == 'flicker':
+        y = np.zeros(int(.9 * SR))
+        for o in (0, .12, .21, .36, .44, .6, .7): k = bp(noise(.05), 2000, 6000) * env(.05, .0005, .01, 15) * .5; y[int(o * SR):int(o * SR) + len(k)] += k
+        return y
+    if name == 'squish': dd = .35; return lp(noise(dd), 900 + p * 80) * env(dd, .01, .05, 3) * .9 + np.sin(sweep(220, 90, dd, .6)) * env(dd, .005, .05, 4) * .5
+    if name == 'buzz':
+        dd = d or 3; t = tt(dd); f = 220 + 25 * np.sin(2 * np.pi * 1.7 * t) + 12 * np.sin(2 * np.pi * 5.3 * t)
+        y = lp(saw(2 * np.pi * np.cumsum(f) / SR), 2400) * (.55 + .45 * np.sin(2 * np.pi * 0.9 * t) ** 2); return y * np.minimum(1, t / .3) * np.minimum(1, (dd - t) / .4) * .22
+    if name == 'horn':
+        dd = 1.3; t = tt(dd); y = sum(saw(2 * np.pi * f * t) for f in (98, 98.6, 147.3)) * np.minimum(1, t / .08) * np.minimum(1, (dd - t) / .25)
+        return reverb(lp(y, 700) * .3, .5)
+    if name == 'rocket':
+        dd = d or 3; t = tt(dd); k = t / dd; y = svf_bp(noise(dd), 500 + 3500 * k, .7) * (.4 + .6 * k) + np.sin(sweep(70, 260, dd, 1.5)) * .3 * k
+        return y * np.minimum(1, t / .15) * np.minimum(1, (dd - t) / .1) * .7
+    if name == 'sub': dd = 1.6; return np.sin(sweep(55, 32, dd, .5)) * env(dd, .05, .3, 2.5) * 1.1
+    if name == 'wobble':
+        dd = d or 2; t = tt(dd); y = svf_bp(saw(2 * np.pi * 55 * t) + saw(2 * np.pi * 55.5 * t), 200 + 900 * (0.5 + 0.5 * np.sin(2 * np.pi * 3 * t)), .9)
+        return y * np.minimum(1, t / .1) * np.minimum(1, (dd - t) / .2) * .3
+    if name == 'coin':
+        f = 1975.5 * 2 ** (PENTA[p % 11] / 24); t = tt(.35); return (np.sin(2 * np.pi * f * t) + .6 * np.sin(2 * np.pi * f * 1.5 * t) * (t > .06)) * env(.35, .001, .05, 6) * .4
+    if name == 'sad':
+        y = np.zeros(int(1.4 * SR))
+        for i, n in enumerate((67, 66, 65, 64)): k = lp(sq(2 * np.pi * midi(n) * tt(.32)), 1400) * env(.32, .01, .05, 1.5) * .22; o = int(i * .3 * SR); y[o:o + len(k)] += k
+        return reverb(y, .3)
+    if name == 'creak': dd = .7; t = tt(dd); return bp(saw(2 * np.pi * np.cumsum(90 + 40 * np.sin(2 * np.pi * 2 * t)) / SR), 300, 2000) * np.sin(np.pi * t / dd) * .35
+    if name == 'smoke': dd = 2.2; t = tt(dd); return reverb(lp(noise(dd), 500) * env(dd, .02, .5, 2.2) * 1.6 + svf_bp(noise(dd), 300 + 1500 * np.exp(-t * 2), 1.2) * env(dd, .01, .4, 3) * .7, .4)
     raise KeyError(name)
 
 class Mix:
@@ -147,3 +182,8 @@ class Mix:
         with wave.open(path, 'wb') as w:
             w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR); w.writeframes((x.T * 32767).astype('<i2').tobytes())
         return x
+
+def mallet(note, d=.5, bright=.3):
+    """soft marimba-ish tone (for warm explainer arps)"""
+    t = tt(d); f = midi(note)
+    return (np.sin(2 * np.pi * f * t) + bright * np.sin(2 * np.pi * f * 4 * t) * np.exp(-30 * t) + .3 * np.sin(2 * np.pi * f * 2 * t) * np.exp(-9 * t)) * env(d, .002, .03, 7) * .55

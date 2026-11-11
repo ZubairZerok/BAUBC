@@ -6,19 +6,20 @@ kept as *source code*: each video is an HTML/GSAP composition that renders, fram
 ```
 BAUBC/
 ├── _common/                  ← universal: brand, fonts, render engine, audio kit, templates
-│   ├── brand/                   colours · fonts · club info · official logo drop-zone
-│   ├── toolkit/                 render.mjs (HTML → MP4) · audio/synth.py (BGM + SFX synth) · vendor/gsap
+│   ├── brand/                   colours · fonts · club info · BAUBC logo (official PNG + traced vector)
+│   ├── toolkit/                 render.mjs (HTML → MP4) · stage.js (timeline/captions/transitions) · audio/ (synth + arranger) · vendor/gsap
 │   └── templates/               starter project for a new episode
 │
 ├── case-studies/             ← SERIES · business case studies told in ~90 s
 │   ├── ep01-cart-abandonment/   ✅ finished — "কার্ট রহস্য: ৭০% কেন ফিরে যায়?"
-│   ├── ep02/  ep03/             🟡 slots, brief pending
+│   ├── ep02-onion-paradox/      ✅ finished — "পেঁয়াজের ধাঁধা" (flat explainer style)
+│   ├── ep03/                    🟡 slot, brief pending
 │
 ├── recruitment/              ← SERIES · recruitment campaign reels
 │   └── ep01/ ep02/ ep03/        🟡 slots, brief pending
 │
 └── logo-animations/          ← SERIES IDENTS · one folder per series logo
-    ├── case-studies/            ✅ finished — CASE STUDIES logo + standalone sting
+    ├── case-studies/            ✅ CASE STUDIES logo v2 (BAUBC mark as the A) + sting
     ├── decoded-season-2/        🟡 slot
     └── recruitment/             🟡 slot
 ```

@@ -1,0 +1,653 @@
+{
+ "duration": 69.6,
+ "cues": [
+  {
+   "t": 0.65,
+   "name": "plop",
+   "p": 0
+  },
+  {
+   "t": 0.8,
+   "name": "plop",
+   "p": 1
+  },
+  {
+   "t": 0.95,
+   "name": "plop",
+   "p": 2
+  },
+  {
+   "t": 1.1,
+   "name": "plop",
+   "p": 3
+  },
+  {
+   "t": 1.25,
+   "name": "plop",
+   "p": 4
+  },
+  {
+   "t": 1.3,
+   "name": "swish"
+  },
+  {
+   "t": 1.45,
+   "name": "count",
+   "d": 0.9,
+   "soft": 1
+  },
+  {
+   "t": 2.35,
+   "name": "ding"
+  },
+  {
+   "t": 3.45,
+   "name": "stamp"
+  },
+  {
+   "t": 3.8,
+   "name": "rocket",
+   "d": 3.1
+  },
+  {
+   "t": 6.2,
+   "name": "boom"
+  },
+  {
+   "t": 5.4,
+   "name": "bubble"
+  },
+  {
+   "t": 5.75,
+   "name": "pop",
+   "p": 4
+  },
+  {
+   "t": 6.95,
+   "name": "sweep"
+  },
+  {
+   "t": 7.55,
+   "name": "plop",
+   "p": 2
+  },
+  {
+   "t": 7.75,
+   "name": "plop",
+   "p": 3
+  },
+  {
+   "t": 7.95,
+   "name": "plop",
+   "p": 4
+  },
+  {
+   "t": 8.15,
+   "name": "plop",
+   "p": 5
+  },
+  {
+   "t": 9.1,
+   "name": "whoosh"
+  },
+  {
+   "t": 9.8,
+   "name": "pour",
+   "d": 1.5
+  },
+  {
+   "t": 9.8,
+   "name": "count",
+   "d": 1.5,
+   "soft": 1
+  },
+  {
+   "t": 11.3,
+   "name": "ding"
+  },
+  {
+   "t": 11.2,
+   "name": "pour",
+   "d": 1.7
+  },
+  {
+   "t": 11.2,
+   "name": "count",
+   "d": 1.7,
+   "soft": 1
+  },
+  {
+   "t": 12.9,
+   "name": "ding"
+  },
+  {
+   "t": 13.55,
+   "name": "swish"
+  },
+  {
+   "t": 14,
+   "name": "success",
+   "soft": 1
+  },
+  {
+   "t": 16.25,
+   "name": "zoom"
+  },
+  {
+   "t": 17.3,
+   "name": "deny"
+  },
+  {
+   "t": 18,
+   "name": "flicker"
+  },
+  {
+   "t": 20.1,
+   "name": "squish",
+   "p": 0
+  },
+  {
+   "t": 20.32,
+   "name": "squish",
+   "p": 1
+  },
+  {
+   "t": 20.54,
+   "name": "squish",
+   "p": 2
+  },
+  {
+   "t": 20.76,
+   "name": "squish",
+   "p": 3
+  },
+  {
+   "t": 20.98,
+   "name": "squish",
+   "p": 4
+  },
+  {
+   "t": 21.2,
+   "name": "squish",
+   "p": 5
+  },
+  {
+   "t": 20.7,
+   "name": "buzz",
+   "d": 4.2
+  },
+  {
+   "t": 20.3,
+   "name": "count",
+   "d": 1.2,
+   "soft": 1
+  },
+  {
+   "t": 21.4,
+   "name": "thud"
+  },
+  {
+   "t": 23.3,
+   "name": "whoosh"
+  },
+  {
+   "t": 24.7,
+   "name": "squish",
+   "p": 3
+  },
+  {
+   "t": 25.25,
+   "name": "fall"
+  },
+  {
+   "t": 26,
+   "name": "stamp"
+  },
+  {
+   "t": 26.02,
+   "name": "alarm"
+  },
+  {
+   "t": 25.8,
+   "name": "iris"
+  },
+  {
+   "t": 26.65,
+   "name": "flip",
+   "p": 0
+  },
+  {
+   "t": 27.07,
+   "name": "flip",
+   "p": 1
+  },
+  {
+   "t": 27.49,
+   "name": "flip",
+   "p": 2
+  },
+  {
+   "t": 27.91,
+   "name": "flip",
+   "p": 3
+  },
+  {
+   "t": 28.33,
+   "name": "flip",
+   "p": 4
+  },
+  {
+   "t": 26.9,
+   "name": "ticks"
+  },
+  {
+   "t": 27.5,
+   "name": "ticks"
+  },
+  {
+   "t": 28.65,
+   "name": "stamp"
+  },
+  {
+   "t": 29,
+   "name": "whoosh"
+  },
+  {
+   "t": 29.9,
+   "name": "horn"
+  },
+  {
+   "t": 30.3,
+   "name": "swish"
+  },
+  {
+   "t": 31,
+   "name": "stamp"
+  },
+  {
+   "t": 31.25,
+   "name": "swish"
+  },
+  {
+   "t": 31.6,
+   "name": "whoosh"
+  },
+  {
+   "t": 32.6,
+   "name": "riser",
+   "d": 1
+  },
+  {
+   "t": 33.6,
+   "name": "impact"
+  },
+  {
+   "t": 33.05,
+   "name": "sub"
+  },
+  {
+   "t": 33.75,
+   "name": "deny"
+  },
+  {
+   "t": 33.65,
+   "name": "wobble",
+   "d": 2.2
+  },
+  {
+   "t": 35.75,
+   "name": "sweep"
+  },
+  {
+   "t": 36.2,
+   "name": "pop",
+   "p": 0
+  },
+  {
+   "t": 36.32,
+   "name": "pop",
+   "p": 1
+  },
+  {
+   "t": 36.44,
+   "name": "pop",
+   "p": 2
+  },
+  {
+   "t": 36.56,
+   "name": "pop",
+   "p": 3
+  },
+  {
+   "t": 36.68,
+   "name": "pop",
+   "p": 4
+  },
+  {
+   "t": 36.8,
+   "name": "pop",
+   "p": 5
+  },
+  {
+   "t": 36.6,
+   "name": "stamp"
+  },
+  {
+   "t": 39.38,
+   "name": "coin",
+   "p": 1
+  },
+  {
+   "t": 39.1,
+   "name": "swish"
+  },
+  {
+   "t": 39.78,
+   "name": "coin",
+   "p": 2
+  },
+  {
+   "t": 39.5,
+   "name": "swish"
+  },
+  {
+   "t": 40.18,
+   "name": "coin",
+   "p": 3
+  },
+  {
+   "t": 39.9,
+   "name": "swish"
+  },
+  {
+   "t": 40.58,
+   "name": "coin",
+   "p": 4
+  },
+  {
+   "t": 40.3,
+   "name": "swish"
+  },
+  {
+   "t": 40.98,
+   "name": "coin",
+   "p": 5
+  },
+  {
+   "t": 40.7,
+   "name": "swish"
+  },
+  {
+   "t": 41.1,
+   "name": "swish"
+  },
+  {
+   "t": 41.5,
+   "name": "swish"
+  },
+  {
+   "t": 42,
+   "name": "boom"
+  },
+  {
+   "t": 43.3,
+   "name": "coin",
+   "p": 0
+  },
+  {
+   "t": 43.66,
+   "name": "coin",
+   "p": 3
+  },
+  {
+   "t": 44.02,
+   "name": "coin",
+   "p": 1
+  },
+  {
+   "t": 44.38,
+   "name": "coin",
+   "p": 4
+  },
+  {
+   "t": 44.8,
+   "name": "sad"
+  },
+  {
+   "t": 45.05,
+   "name": "zoom"
+  },
+  {
+   "t": 45.9,
+   "name": "thud",
+   "p": 0
+  },
+  {
+   "t": 46.02,
+   "name": "thud",
+   "p": 1
+  },
+  {
+   "t": 46.14,
+   "name": "thud",
+   "p": 2
+  },
+  {
+   "t": 46.5,
+   "name": "ding"
+  },
+  {
+   "t": 49,
+   "name": "stamp"
+  },
+  {
+   "t": 49.55,
+   "name": "stamp"
+  },
+  {
+   "t": 52,
+   "name": "whoosh"
+  },
+  {
+   "t": 52.4,
+   "name": "star",
+   "p": 1
+  },
+  {
+   "t": 52.65,
+   "name": "star",
+   "p": 2
+  },
+  {
+   "t": 52.9,
+   "name": "star",
+   "p": 3
+  },
+  {
+   "t": 53.3,
+   "name": "success",
+   "soft": 1
+  },
+  {
+   "t": 54.95,
+   "name": "sweep"
+  },
+  {
+   "t": 55.5,
+   "name": "creak"
+  },
+  {
+   "t": 55.7,
+   "name": "swish"
+  },
+  {
+   "t": 58.4,
+   "name": "pop",
+   "p": 0
+  },
+  {
+   "t": 58.55,
+   "name": "pop",
+   "p": 2
+  },
+  {
+   "t": 58.7,
+   "name": "pop",
+   "p": 4
+  },
+  {
+   "t": 59.2,
+   "name": "tick",
+   "p": 0
+  },
+  {
+   "t": 59.56,
+   "name": "tick",
+   "p": 2
+  },
+  {
+   "t": 59.92,
+   "name": "tick",
+   "p": 4
+  },
+  {
+   "t": 60.28,
+   "name": "tick",
+   "p": 2
+  },
+  {
+   "t": 60.64,
+   "name": "tick",
+   "p": 0
+  },
+  {
+   "t": 61,
+   "name": "tick",
+   "p": 4
+  },
+  {
+   "t": 61.36,
+   "name": "tick",
+   "p": 2
+  },
+  {
+   "t": 61.72,
+   "name": "tick",
+   "p": 4
+  },
+  {
+   "t": 60,
+   "name": "bubble"
+  },
+  {
+   "t": 60.3,
+   "name": "ding"
+  },
+  {
+   "t": 61.85,
+   "name": "iris"
+  },
+  {
+   "t": 62.4,
+   "name": "logo_riser",
+   "d": 1.25
+  },
+  {
+   "t": 62.58,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 62.91,
+   "name": "logo_tick",
+   "p": 0
+  },
+  {
+   "t": 62.75,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 63.08,
+   "name": "logo_tick",
+   "p": 2
+  },
+  {
+   "t": 62.92,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 63.25,
+   "name": "logo_tick",
+   "p": 4
+  },
+  {
+   "t": 63.09,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 63.42,
+   "name": "logo_tick",
+   "p": 6
+  },
+  {
+   "t": 63.26,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 63.59,
+   "name": "logo_tick",
+   "p": 8
+  },
+  {
+   "t": 63.43,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 63.76,
+   "name": "logo_tick",
+   "p": 10
+  },
+  {
+   "t": 63.72,
+   "name": "logo_impact"
+  },
+  {
+   "t": 63.74,
+   "name": "logo_smoke"
+  },
+  {
+   "t": 64.02,
+   "name": "logo_sweep"
+  },
+  {
+   "t": 64.92,
+   "name": "logo_thud",
+   "p": 0
+  },
+  {
+   "t": 65.02,
+   "name": "logo_thud",
+   "p": 1
+  },
+  {
+   "t": 65.12,
+   "name": "logo_thud",
+   "p": 2
+  },
+  {
+   "t": 64.97,
+   "name": "logo_ticks"
+  },
+  {
+   "t": 65.39,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 65.81,
+   "name": "logo_lock"
+  },
+  {
+   "t": 65.96,
+   "name": "logo_shine"
+  }
+ ]
+}

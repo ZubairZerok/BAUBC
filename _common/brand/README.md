@@ -25,5 +25,6 @@ Never split Bangla text per character for animation (it breaks conjuncts) — an
 
 ## Logos
 
-- `logo/` — **drop the official club logo files here** (SVG + PNG, light & dark). Compositions currently use a typographic `BAUBC` chip so nothing unofficial is passed off as the club mark.
+- `logo/baubc-logo-official-white.png` — the official club mark as supplied (white).
+- `logo/baubc-mark-lime.svg`, `logo/baubc-mark-white.svg` — vector trace of the mark (6 pieces). Code access: `baubc-mark.js` → `BAUBC_MARK.pieces`, `baubcMarkSVG(size, color)`. Used in the HUD chip from EP02 and as the "A" of the CASE STUDIES logo v2.
 - Series logos live with their animations in [`/logo-animations`](../../logo-animations/); static exports are copied to `logo/series/`.

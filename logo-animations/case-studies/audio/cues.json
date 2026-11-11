@@ -1,36 +1,106 @@
 {
- "duration": 6,
+ "duration": 7.5,
  "cues": [
   {
-   "t": 0.4,
+   "t": 0,
+   "name": "riser",
+   "d": 1.25
+  },
+  {
+   "t": 0.18,
    "name": "whoosh"
   },
   {
-   "t": 0.54,
+   "t": 0.51,
+   "name": "tick",
+   "p": 0
+  },
+  {
+   "t": 0.35,
+   "name": "whoosh"
+  },
+  {
+   "t": 0.68,
+   "name": "tick",
+   "p": 2
+  },
+  {
+   "t": 0.52,
+   "name": "whoosh"
+  },
+  {
+   "t": 0.85,
+   "name": "tick",
+   "p": 4
+  },
+  {
+   "t": 0.69,
    "name": "whoosh"
   },
   {
    "t": 1.02,
-   "name": "impact"
+   "name": "tick",
+   "p": 6
   },
   {
-   "t": 1.28,
-   "name": "swish"
-  },
-  {
-   "t": 1.6,
-   "name": "ticks"
-  },
-  {
-   "t": 2.05,
+   "t": 0.86,
    "name": "whoosh"
   },
   {
-   "t": 2.42,
+   "t": 1.19,
+   "name": "tick",
+   "p": 8
+  },
+  {
+   "t": 1.03,
+   "name": "whoosh"
+  },
+  {
+   "t": 1.36,
+   "name": "tick",
+   "p": 10
+  },
+  {
+   "t": 1.32,
+   "name": "impact"
+  },
+  {
+   "t": 1.34,
+   "name": "smoke"
+  },
+  {
+   "t": 1.62,
+   "name": "sweep"
+  },
+  {
+   "t": 2.52,
+   "name": "thud",
+   "p": 0
+  },
+  {
+   "t": 2.62,
+   "name": "thud",
+   "p": 1
+  },
+  {
+   "t": 2.72,
+   "name": "thud",
+   "p": 2
+  },
+  {
+   "t": 2.57,
+   "name": "ticks"
+  },
+  {
+   "t": 2.99,
+   "name": "whoosh"
+  },
+  {
+   "t": 3.41,
    "name": "lock"
   },
   {
-   "t": 2.8,
+   "t": 3.56,
    "name": "shine"
   }
  ]

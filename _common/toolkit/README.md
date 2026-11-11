@@ -25,9 +25,13 @@ node render.mjs --html <index.html> --stills "0.5,3,12.4" --stilldir ./preview
 node render.mjs --html <index.html> --cues audio/cues.json
 ```
 
+## `stage.js` — shared reel engine
+
+Timeline helpers used by every episode: `E` (element factory), `scene(name, t0, t1, {pre, post, push})`, `hIn` (word-by-word Bangla-safe headline), `pop`, `out`, `shake`, `flash`, `counter`, the caption engine (`cap(t0, t1, 'text with *lime* words')` / `drawCaps`), the 24px icon set (`ico`), and transitions: `wipe`, `whip(t, A, B, dir)`, `zoomThru(t, A, B, x, y)`, `iris(t, B, x, y)`. An episode adds its own bar grid `T`, background and HUD, then calls `stageInit(duration, ...frameFns)`. EP02 is the reference.
+
 ## `audio/synth.py` — procedural sound kit
 
-Drums, bass, pads, plucks, bells and ~35 named SFX (`whoosh`, `pop`, `impact`, `riser`, `alarm`, `success`, …), all synthesized with numpy/scipy — original and royalty-free. Each episode's `audio/build_audio.py` arranges the music and drops SFX at the times listed in `cues.json`.
+Drums, bass, pads, plucks, bells and ~35 named SFX (`whoosh`, `pop`, `impact`, `riser`, `alarm`, `success`, …), all synthesized with numpy/scipy — original and royalty-free. `audio/arrange.py` turns a per-bar chord/drum chart into a full score (`arrange(BARS, CH, DUR, arp_inst='pluck'|'mallet')`) and places SFX from `cues.json` (`place_cues`). An episode's `audio/build_audio.py` is then about 40 lines (see EP02).
 
 ## `vendor/`
 
