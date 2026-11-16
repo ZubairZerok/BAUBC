@@ -13,7 +13,7 @@ from scipy.signal import lfilter
 
 import subprocess
 CJ = json.load(open(os.path.join(HERE, 'cues.json'))); DUR = CJ['duration']
-VO_OFF = 1.2
+VO_OFF = -0.4   # new voice (parts 1-6 joined) starts 0.4 s into the video
 CH = {'D': (38, [62, 66, 69, 74]), 'Bm': (35, [59, 62, 66, 71]), 'G': (31, [59, 62, 67, 71]), 'A': (33, [61, 64, 69, 73]), 'Em': (40, [59, 64, 67, 71]),
       'F#m': (42, [61, 66, 69, 73]), 'Gm': (31, [58, 62, 67, 70]), 'Bb': (34, [58, 62, 65, 70]), 'Dm': (38, [62, 65, 69, 74]), 'Bm9': (35, [59, 61, 62, 66])}
 BARS = [
@@ -57,7 +57,7 @@ GAIN = dict(whoosh=.5, swish=.4, sweep=.55, click=.8, pop=.55, plop=.6, pour=.6,
             sub=.9, wobble=.6, coin=.55, sad=.6, creak=.6, smoke=.8, fall=.6)
 fx = place_cues(cues, GAIN, DUR)
 os.makedirs(os.path.join(HERE, 'build'), exist_ok=True)
-raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', str(VO_OFF), '-i', os.path.join(HERE, 'vo/ep02_vo_elevenlabs.mp3'), '-ac', '2', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True).stdout
+raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', os.path.join(HERE, 'vo/ep02_vo_v2.mp3'), '-af', 'adelay=400|400', '-ac', '2', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True).stdout
 vo = np.frombuffer(raw, np.float32).reshape(-1, 2).T.copy(); vo = np.pad(vo, ((0, 0), (0, max(0, music.shape[1] - vo.shape[1]))))[:, :music.shape[1]]
 vo = vo / np.abs(vo).max() * .92
 # side-chain: smooth voice envelope → music ducks ~10 dB under speech, SFX ~4 dB

@@ -45,7 +45,7 @@ stageInit(T.end, drawBg, drawHud, drawCaps);
 /* ───── voice-over sync: piecewise-linear time-warp (video time → composition time) ─────
  * VO_ON = onsets of the 19 voice lines in the ElevenLabs file (measured by ASR + silence detection).
  * The VO plays from VO_OFF s into the file at video t=0; each caption's start is pinned 0.1 s before its line. */
-const VO_OFF = 1.2, VO_END = 99.51, VO_ON = [1.42, 5.67, 9.32, 13.52, 16.66, 21.21, 24.0, 31.11, 36.53, 41.32, 48.49, 55.08, 62.25, 68.63, 74.73, 78.90, 84.78, 89.62, 93.55];
+const VO_OFF = -0.4, VO_END = 111.0, VO_ON = [0.1, 6.08, 11.2, 16.46, 19.96, 25.26, 28.68, 35.68, 43.7, 49.02, 57.3, 64.88, 72.42, 78.6, 85.92, 89.46, 94.84, 100.24, 104.86];
 const LOGO_AT = VO_END - VO_OFF + 0.25, DURATION = LOGO_AT + (T.end - T.s7);
 let WARP = null;
 const warpBuild = () => { WARP = [[0, 0], ...VO_ON.map((v, i) => [v - VO_OFF - 0.1, CAPS[i].t0]), [LOGO_AT, T.s7], [DURATION, T.end]]; };
