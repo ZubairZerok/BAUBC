@@ -1,0 +1,673 @@
+{
+ "duration": 132.85999999999999,
+ "cues": [
+  {
+   "t": 0,
+   "name": "mark",
+   "p": 0
+  },
+  {
+   "t": 13.39,
+   "name": "mark",
+   "p": 1
+  },
+  {
+   "t": 24,
+   "name": "mark",
+   "p": 2
+  },
+  {
+   "t": 36.96,
+   "name": "mark",
+   "p": 3
+  },
+  {
+   "t": 55.16,
+   "name": "mark",
+   "p": 4
+  },
+  {
+   "t": 67.16,
+   "name": "mark",
+   "p": 5
+  },
+  {
+   "t": 80.33,
+   "name": "mark",
+   "p": 6
+  },
+  {
+   "t": 109.37,
+   "name": "mark",
+   "p": 7
+  },
+  {
+   "t": 125.66,
+   "name": "mark",
+   "p": 8
+  },
+  {
+   "t": 0,
+   "name": "dhol",
+   "p": 0
+  },
+  {
+   "t": 0.5,
+   "name": "dhol",
+   "p": 1
+  },
+  {
+   "t": 1,
+   "name": "dhol",
+   "p": 2
+  },
+  {
+   "t": 1.5,
+   "name": "dhol",
+   "p": 0
+  },
+  {
+   "t": 2,
+   "name": "dhol",
+   "p": 1
+  },
+  {
+   "t": 2.5,
+   "name": "dhol",
+   "p": 2
+  },
+  {
+   "t": 3,
+   "name": "dhol",
+   "p": 0
+  },
+  {
+   "t": 3.5,
+   "name": "dhol",
+   "p": 1
+  },
+  {
+   "t": 4,
+   "name": "dhol",
+   "p": 2
+  },
+  {
+   "t": 0,
+   "name": "crowd",
+   "d": 4.768749999999999
+  },
+  {
+   "t": 4.719,
+   "name": "scratch"
+  },
+  {
+   "t": 5.169,
+   "name": "stamp"
+  },
+  {
+   "t": 7.996,
+   "name": "swish"
+  },
+  {
+   "t": 9.883,
+   "name": "deny"
+  },
+  {
+   "t": 11.177,
+   "name": "impact"
+  },
+  {
+   "t": 11.327,
+   "name": "quill",
+   "d": 1.2
+  },
+  {
+   "t": 11.687,
+   "name": "stamp"
+  },
+  {
+   "t": 11.827,
+   "name": "coin",
+   "p": 0
+  },
+  {
+   "t": 12.067,
+   "name": "coin",
+   "p": 4
+  },
+  {
+   "t": 12.307,
+   "name": "coin",
+   "p": 3
+  },
+  {
+   "t": 12.547,
+   "name": "coin",
+   "p": 2
+  },
+  {
+   "t": 13.14,
+   "name": "sweep"
+  },
+  {
+   "t": 13.69,
+   "name": "whoosh"
+  },
+  {
+   "t": 16.185,
+   "name": "pop",
+   "p": 2
+  },
+  {
+   "t": 18.025,
+   "name": "pop",
+   "p": 5
+  },
+  {
+   "t": 18.07,
+   "name": "zoom"
+  },
+  {
+   "t": 21.016,
+   "name": "success",
+   "soft": 1
+  },
+  {
+   "t": 18.62,
+   "name": "birds",
+   "d": 3
+  },
+  {
+   "t": 19.12,
+   "name": "swish"
+  },
+  {
+   "t": 23.75,
+   "name": "sweep"
+  },
+  {
+   "t": 24.3,
+   "name": "quill",
+   "d": 3
+  },
+  {
+   "t": 24.975,
+   "name": "stamp"
+  },
+  {
+   "t": 28.688,
+   "name": "coin",
+   "p": 3
+  },
+  {
+   "t": 29.001,
+   "name": "whoosh"
+  },
+  {
+   "t": 29.614,
+   "name": "windup",
+   "d": 1.4
+  },
+  {
+   "t": 31.014,
+   "name": "lock"
+  },
+  {
+   "t": 33.19,
+   "name": "creak"
+  },
+  {
+   "t": 33.585,
+   "name": "thud"
+  },
+  {
+   "t": 35.532,
+   "name": "fall"
+  },
+  {
+   "t": 36.215,
+   "name": "sad"
+  },
+  {
+   "t": 36.41,
+   "name": "zoom"
+  },
+  {
+   "t": 37.26,
+   "name": "rumble"
+  },
+  {
+   "t": 37.66,
+   "name": "machine",
+   "d": 3
+  },
+  {
+   "t": 40.96,
+   "name": "thump",
+   "p": 0
+  },
+  {
+   "t": 41.46,
+   "name": "thump",
+   "p": 1
+  },
+  {
+   "t": 41.96,
+   "name": "thump",
+   "p": 0
+  },
+  {
+   "t": 42.46,
+   "name": "thump",
+   "p": 1
+  },
+  {
+   "t": 42.96,
+   "name": "thump",
+   "p": 0
+  },
+  {
+   "t": 43.46,
+   "name": "thump",
+   "p": 1
+  },
+  {
+   "t": 43.96,
+   "name": "thump",
+   "p": 0
+  },
+  {
+   "t": 44.46,
+   "name": "thump",
+   "p": 1
+  },
+  {
+   "t": 44.96,
+   "name": "thump",
+   "p": 0
+  },
+  {
+   "t": 43.897,
+   "name": "bubble"
+  },
+  {
+   "t": 44.047,
+   "name": "bubble"
+  },
+  {
+   "t": 44.197,
+   "name": "bubble"
+  },
+  {
+   "t": 44.94,
+   "name": "sweep"
+  },
+  {
+   "t": 47.405,
+   "name": "count",
+   "d": 1.8
+  },
+  {
+   "t": 47.405,
+   "name": "riser",
+   "d": 1.8
+  },
+  {
+   "t": 49.205,
+   "name": "impact"
+  },
+  {
+   "t": 49.455,
+   "name": "stamp"
+  },
+  {
+   "t": 53.642,
+   "name": "switch"
+  },
+  {
+   "t": 54.042,
+   "name": "ticks"
+  },
+  {
+   "t": 54.61,
+   "name": "zoom"
+  },
+  {
+   "t": 57.626,
+   "name": "machine",
+   "d": 1.1303225806451664
+  },
+  {
+   "t": 57.826,
+   "name": "squish"
+  },
+  {
+   "t": 58.457,
+   "name": "shine"
+  },
+  {
+   "t": 58.557,
+   "name": "pop",
+   "p": 6
+  },
+  {
+   "t": 60.264,
+   "name": "swish"
+  },
+  {
+   "t": 60.764,
+   "name": "coin",
+   "p": 4
+  },
+  {
+   "t": 63.843,
+   "name": "boil",
+   "d": 2.5
+  },
+  {
+   "t": 65.068,
+   "name": "ticks"
+  },
+  {
+   "t": 66.669,
+   "name": "pop",
+   "p": 8
+  },
+  {
+   "t": 66.91,
+   "name": "sweep"
+  },
+  {
+   "t": 67.76,
+   "name": "swish"
+  },
+  {
+   "t": 72.84,
+   "name": "shine"
+  },
+  {
+   "t": 75.081,
+   "name": "success",
+   "soft": 1
+  },
+  {
+   "t": 76.001,
+   "name": "deny"
+  },
+  {
+   "t": 78.189,
+   "name": "lock"
+  },
+  {
+   "t": 78.869,
+   "name": "shine"
+  },
+  {
+   "t": 79.78,
+   "name": "zoom"
+  },
+  {
+   "t": 80.83,
+   "name": "windup",
+   "d": 2.2
+  },
+  {
+   "t": 83.13,
+   "name": "lock"
+  },
+  {
+   "t": 82.928,
+   "name": "pop",
+   "p": 3
+  },
+  {
+   "t": 85.79,
+   "name": "sweep"
+  },
+  {
+   "t": 86.74,
+   "name": "boom",
+   "p": 0
+  },
+  {
+   "t": 87.29,
+   "name": "boom",
+   "p": 1
+  },
+  {
+   "t": 87.84,
+   "name": "boom",
+   "p": 2
+  },
+  {
+   "t": 88.39,
+   "name": "boom",
+   "p": 3
+  },
+  {
+   "t": 88.94,
+   "name": "boom",
+   "p": 4
+  },
+  {
+   "t": 87.898,
+   "name": "coin",
+   "p": 2
+  },
+  {
+   "t": 86.04,
+   "name": "crowd",
+   "d": 4.5
+  },
+  {
+   "t": 91.986,
+   "name": "thud"
+  },
+  {
+   "t": 93.06,
+   "name": "stamp"
+  },
+  {
+   "t": 95.002,
+   "name": "swish"
+  },
+  {
+   "t": 96.463,
+   "name": "riser",
+   "d": 1
+  },
+  {
+   "t": 97.344,
+   "name": "alarm"
+  },
+  {
+   "t": 102.481,
+   "name": "sad"
+  },
+  {
+   "t": 103.378,
+   "name": "stamp"
+  },
+  {
+   "t": 106.939,
+   "name": "coin",
+   "p": 0
+  },
+  {
+   "t": 107.299,
+   "name": "coin",
+   "p": 3
+  },
+  {
+   "t": 107.659,
+   "name": "coin",
+   "p": 1
+  },
+  {
+   "t": 108.019,
+   "name": "coin",
+   "p": 4
+  },
+  {
+   "t": 108.82,
+   "name": "zoom"
+  },
+  {
+   "t": 109.67,
+   "name": "swish"
+  },
+  {
+   "t": 110.87,
+   "name": "swish"
+  },
+  {
+   "t": 112.653,
+   "name": "count",
+   "d": 1.2
+  },
+  {
+   "t": 113.853,
+   "name": "boom"
+  },
+  {
+   "t": 116.25,
+   "name": "pop",
+   "p": 4
+  },
+  {
+   "t": 116.791,
+   "name": "pop",
+   "p": 0
+  },
+  {
+   "t": 118.169,
+   "name": "pop",
+   "p": 2
+  },
+  {
+   "t": 119.35,
+   "name": "pop",
+   "p": 4
+  },
+  {
+   "t": 122.843,
+   "name": "riser",
+   "d": 1
+  },
+  {
+   "t": 124.029,
+   "name": "impact",
+   "soft": 1
+  },
+  {
+   "t": 124.816,
+   "name": "ding"
+  },
+  {
+   "t": 125.11,
+   "name": "iris"
+  },
+  {
+   "t": 125.66,
+   "name": "logo_riser",
+   "d": 1.25
+  },
+  {
+   "t": 125.84,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 126.17,
+   "name": "logo_tick",
+   "p": 0
+  },
+  {
+   "t": 126.01,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 126.34,
+   "name": "logo_tick",
+   "p": 2
+  },
+  {
+   "t": 126.18,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 126.51,
+   "name": "logo_tick",
+   "p": 4
+  },
+  {
+   "t": 126.35,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 126.68,
+   "name": "logo_tick",
+   "p": 6
+  },
+  {
+   "t": 126.52,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 126.85,
+   "name": "logo_tick",
+   "p": 8
+  },
+  {
+   "t": 126.69,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 127.02,
+   "name": "logo_tick",
+   "p": 10
+  },
+  {
+   "t": 126.98,
+   "name": "logo_impact"
+  },
+  {
+   "t": 127,
+   "name": "logo_smoke"
+  },
+  {
+   "t": 127.28,
+   "name": "logo_sweep"
+  },
+  {
+   "t": 128.18,
+   "name": "logo_thud",
+   "p": 0
+  },
+  {
+   "t": 128.28,
+   "name": "logo_thud",
+   "p": 1
+  },
+  {
+   "t": 128.38,
+   "name": "logo_thud",
+   "p": 2
+  },
+  {
+   "t": 128.23,
+   "name": "logo_ticks"
+  },
+  {
+   "t": 128.65,
+   "name": "logo_whoosh"
+  },
+  {
+   "t": 129.07,
+   "name": "logo_lock"
+  },
+  {
+   "t": 129.22,
+   "name": "logo_shine"
+  }
+ ]
+}

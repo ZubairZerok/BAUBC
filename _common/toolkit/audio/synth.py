@@ -167,6 +167,26 @@ def _make(name, p, d, soft):
         return reverb(y, .3)
     if name == 'creak': dd = .7; t = tt(dd); return bp(saw(2 * np.pi * np.cumsum(90 + 40 * np.sin(2 * np.pi * 2 * t)) / SR), 300, 2000) * np.sin(np.pi * t / dd) * .35
     if name == 'smoke': dd = 2.2; t = tt(dd); return reverb(lp(noise(dd), 500) * env(dd, .02, .5, 2.2) * 1.6 + svf_bp(noise(dd), 300 + 1500 * np.exp(-t * 2), 1.2) * env(dd, .01, .4, 3) * .7, .4)
+    if name == 'dhol':
+        y = np.sin(sweep(150 - p * 20, 55, .35, .4)) * env(.35, .002, .05, 5) * 1.1; y[:int(.03 * SR)] += bp(noise(.03), 800, 3000) * env(.03, .0005, .005, 30) * .6
+        k = np.sin(sweep(420, 260, .12, .5)) * env(.12, .001, .02, 9) * .5; o = int(.3 * SR); y = np.concatenate([y, np.zeros(int(.2 * SR))]); y[o:o + len(k)] += k
+        return np.tanh(y * 1.4) * .8
+    if name == 'crowd':
+        dd = d or 4; t = tt(dd); y = bp(noise(dd), 300, 2500) * (.55 + .45 * np.sin(2 * np.pi * .8 * t) ** 2)
+        for i in range(int(dd * 4)): f = 500 + rng.random() * 700; k = np.sin(sweep(f, f * 1.3, .3, 1)) * env(.3, .03, .1, 2) * .15; o = int(rng.random() * (dd - .4) * SR); y[o:o + len(k)] += k
+        return reverb(y * np.minimum(1, t / .5) * np.minimum(1, (dd - t) / .8) * .35, .4)
+    if name == 'scratch':
+        dd = .45; t = tt(dd); f = 300 + 2500 * np.abs(np.sin(2 * np.pi * 3.5 * t)); return svf_bp(noise(dd), f, 3) * env(dd, .005, .05, 2) * 1.3
+    if name == 'quill':
+        dd = d or 1.5; t = tt(dd); y = bp(noise(dd), 3000, 9000) * (np.sin(2 * np.pi * 7 * t) > .2) * (.4 + .6 * rng.random()) * .25; return y * np.minimum(1, (dd - t) / .1)
+    if name == 'machine':
+        dd = d or 3; t = tt(dd); y = lp(saw(2 * np.pi * 55 * t) + .5 * saw(2 * np.pi * 110.5 * t), 600) * .35 + bp(noise(dd), 1500, 4000) * (.5 + .5 * np.sin(2 * np.pi * 12 * t)) * .15
+        return y * np.minimum(1, t / .3) * np.minimum(1, (dd - t) / .3)
+    if name == 'thump': return np.tanh(np.sin(sweep(110 + p * 15, 50, .25, .4)) * env(.25, .002, .04, 6) * 1.4) * .7 + np.pad(bp(noise(.06), 400, 1500) * env(.06, .001, .01, 20) * .4, (0, int(.19 * SR)))
+    if name == 'boil':
+        dd = d or 2.5; y = np.zeros(int(dd * SR))
+        for i in range(int(dd * 14)): f = 400 + rng.random() * 900; k = np.sin(sweep(f, f * 1.8, .05, 1)) * env(.05, .002, .01, 3) * .2; o = int(rng.random() * (dd - .06) * SR); y[o:o + len(k)] += k
+        return y
     if name == 'crickets':
         dd = d or 6; t = tt(dd); y = np.zeros(len(t))
         for f, r, ph in ((4300, 17, 0), (4750, 21, 1.3), (3900, 14, 2.1)): y += np.sin(2 * np.pi * f * t) * np.clip(np.sin(2 * np.pi * r * t + ph), 0, 1) ** 4 * (.5 + .5 * np.sin(2 * np.pi * .7 * t + ph)) ** 2
