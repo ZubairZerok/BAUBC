@@ -8,7 +8,7 @@ One sharp business insight per reel, told in ~90 seconds: **hook → the puzzle 
 |---|---|---|---|
 | [01](ep01-cart-abandonment/) | কার্টুর গল্প — ৭০% কার্ট কেন পড়ে থাকে? | e-commerce cart abandonment, surprise delivery fees, reviews | ✅ delivered (2D story cut + ElevenLabs VO; first neon cut archived) |
 | [02](ep02-onion-paradox/) | পেঁয়াজের ধাঁধা — বাড়তি ফলিয়েও কেন দাম আকাশছোঁয়া? | onion surplus vs. rot, imports, syndicates, middlemen | ✅ delivered (3D + ElevenLabs VO) |
-| [03](ep03/) | নবান্নের হিসাব — পহেলা বৈশাখ কি আসল নববর্ষ? | Nabanna, Akbar's tax calendar, rice mills, 2026 paddy prices | ✅ delivered (2D cartoon + swappable VO) |
+| [03](ep03/) | পুরান চাল ভাতে বাড়ে? — নবান্নের আসল হিসাব | the proverb as mill marketing: 833× mill cost, bran polishing, 3–4-month storage, aroma & stickiness of new rice | ✅ delivered v2 (Kurzgesagt-style 2D + swappable VO; v1 "নবান্নের হিসাব" in `ep03/archive-v1-maya/`) |
 
 ## Series format
 

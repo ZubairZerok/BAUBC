@@ -39,7 +39,7 @@ html,body{margin:0;background:#000;overflow:hidden}
 #vig{background:radial-gradient(ellipse 85% 70% at 50% 46%,transparent 55%,rgba(0,0,0,.72) 100%);pointer-events:none}
 #grain{opacity:.07;mix-blend-mode:overlay;pointer-events:none}
 .wipe{visibility:hidden}
-#wipeA{background:var(--lime)} #wipeB{background:#0a0c06}
+#wipeA{background:var(--lime)} #wipeB{background:#0e1a44}
 #flash{background:#fff;opacity:0;pointer-events:none}
 
 /* phone mock */

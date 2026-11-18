@@ -175,6 +175,20 @@ def _make(name, p, d, soft):
         dd = d or 4; t = tt(dd); y = bp(noise(dd), 300, 2500) * (.55 + .45 * np.sin(2 * np.pi * .8 * t) ** 2)
         for i in range(int(dd * 4)): f = 500 + rng.random() * 700; k = np.sin(sweep(f, f * 1.3, .3, 1)) * env(.3, .03, .1, 2) * .15; o = int(rng.random() * (dd - .4) * SR); y[o:o + len(k)] += k
         return reverb(y * np.minimum(1, t / .5) * np.minimum(1, (dd - t) / .8) * .35, .4)
+    if name == 'shutter':   # camera shutter: two clicks + a short mechanical whirr
+        a = hp(noise(.025), 2500) * env(.025, .0005, .005, 25); y = np.zeros(int(.16 * SR)); y[:len(a)] += a; y[int(.07 * SR):int(.07 * SR) + len(a)] += a * .8
+        w = bp(noise(.06), 900, 3000) * env(.06, .002, .02, 6) * .25; y[int(.02 * SR):int(.02 * SR) + len(w)] += w; return y * .9
+    if name == 'rewind':    # tape rewind: fast-rising chirpy warble
+        dd = d or 1.1; t = tt(dd); f = 400 * (8 ** (t / dd)) * (1 + .3 * np.sin(2 * np.pi * 23 * t)); y = np.sin(2 * np.pi * np.cumsum(f) / SR) * .35 + bp(noise(dd), 1500, 7000) * .18
+        return y * np.minimum(1, t / .05) * np.minimum(1, (dd - t) / .08)
+    if name == 'snap':      # sticky strand snapping
+        dd = .18; return (np.sin(sweep(1400, 200, dd, .4)) * env(dd, .001, .03, 7) + hp(noise(dd), 3000) * env(dd, .0005, .02, 18) * .6) * .8
+    if name == 'shatter':   # glass/board shatter: crack + many tinkles
+        dd = 1.6; y = lp(noise(dd), 7000) * env(dd, .001, .1, 9) * .9
+        for k in range(26):
+            o = int(rng.uniform(.03, 1.1) * SR); f = rng.uniform(2500, 7500); b = np.sin(2 * np.pi * f * tt(.09)) * env(.09, .001, .02, 10) * rng.uniform(.15, .4)
+            y[o:o + len(b)] += b[:max(0, len(y) - o)]
+        return reverb(np.tanh(y * 1.4), .4)
     if name == 'scratch':
         dd = .45; t = tt(dd); f = 300 + 2500 * np.abs(np.sin(2 * np.pi * 3.5 * t)); return svf_bp(noise(dd), f, 3) * env(dd, .005, .05, 2) * 1.3
     if name == 'quill':

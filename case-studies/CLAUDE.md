@@ -76,3 +76,4 @@ Rendering itself uses the machine's CPU, not Claude tokens; tokens are spent on 
 - EP02: Kurzgesagt-style flat explainer + **Zack D Films-style 3D models** (glossy, stylised-realistic), slower pacing to match a calm ElevenLabs narrator ("Dr Mahmood – Calm Telecasting Host").
 - EP01 story cut: "no 3D", "more like a story/animation than an explainer", "everything Bangla", "ultra creative hook", "have depth".
 - Logo v2 feedback: wanted *more dynamic camera, more fog, more smoke*.
+- EP03 v2: "premium Kurzgesagt-inspired 2D", palette **deep navy + vibrant lime, golden yellow, warm orange, red accents**; parallax, push-ins/pull-outs, squash & stretch, overshoot, transitions through objects (zoom into a head, a drum window, a question mark), no unnecessary text. Owner may send scene reference images; if none arrive, build from the script.

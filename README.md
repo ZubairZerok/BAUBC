@@ -14,7 +14,7 @@ BAUBC/
 │   ├── skill/                   cinematic-vector-explainer.md — the method for all Case Studies videos
 │   ├── ep01-cart-abandonment/   ✅ finished — "কার্টুর গল্প" (2D story cut + voice-over; v1 in archive-v1/)
 │   ├── ep02-onion-paradox/      ✅ finished — "পেঁয়াজের ধাঁধা" (flat explainer style)
-│   ├── ep03/                    🟡 slot, brief pending
+│   ├── ep03/                    ✅ finished — "পুরান চাল ভাতে বাড়ে?" (Kurzgesagt-style 2D, swappable voice; v1 in archive-v1-maya/)
 │
 ├── recruitment/              ← SERIES · recruitment campaign reels
 │   └── ep01/ ep02/ ep03/        🟡 slots, brief pending

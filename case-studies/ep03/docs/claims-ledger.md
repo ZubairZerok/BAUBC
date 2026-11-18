@@ -1,15 +1,16 @@
-# Claims ledger — EP03 (all figures come from the owner's script; re-check before reuse)
+# EP03 v2 — claims ledger
 
-| # | claim | type | status |
-|---|---|---|---|
-| 1 | Pohela Boishakh was not the first Bengali new year; Nabanna (Agrahayan) was | historical interpretation | widely stated; Agrahayan was historically the first month in some reckonings |
-| 2 | অগ্র = first, হায়ণ = paddy/year | etymology | commonly cited (হায়ন is also glossed as "year") |
-| 3 | In 1584 Akbar reformed the calendar (ফসলি সন / বঙ্গাব্দ) to ease revenue collection, starting the year in Boishakh | historical | widely accepted; exact attribution debated by historians |
-| 4 | An auto rice mill costs 833× a ঢেঁকি | statistic (script) | source needed |
-| 5 | Mill polishing removes the reddish bran (nutrients); old rice cooks fluffier and swells, priced higher | general | consistent with common knowledge |
-| 6 | Lab tests found Kalijira and Gobindobhog more aromatic than Basmati | research claim (script) | source needed; on screen shown as relative bars without numbers |
-| 7 | 2026: government buys paddy at ৳35/kg; fertilizer and diesel up 15–20% | statistic (script) | source needed |
-| 8 | Farmer loses ৳2–3/kg; rice sells at ৳49/kg | statistic (script) | source needed |
-| 9 | "৪৪০ বছর" (1584 → 2026 is 442) | rounded, as narrated | ok |
+All claims come from the owner's script. Nothing was added. Status: **brief** = taken from the owner's script, not independently verified; **qualitative** = shown without numbers or scale.
 
-Illustrative only: "কোটি টাকার উৎসব" visuals, the characters, the ×১ → ×৮৩৩ counter animation (shows the narrated ratio, not a price).
+| # | claim (spoken / on screen) | type | how it is shown | status |
+|---|---|---|---|---|
+| 1 | "পুরান চাল ভাতে বাড়ে" is a business brain-wash | opinion / framing | proverb in a washing drum | brief (argument of the episode) |
+| 2 | Nabanna is a thousand-year-old festival | history | counter "১০০০ বছরের নবান্ন" | brief |
+| 3 | নবান্ন = নব (নতুন) + অন্ন (ভাত); new aman paddy | etymology | word split | standard etymology |
+| 4 | New rice used to be Bengal's real new year | history | অগ্রহায়ণ calendar page | brief (see EP03 v1 for the অগ্র + হায়ণ explanation) |
+| 5 | An auto rice mill costs 833× a ঢেঁকি | number | 49 × 17 = 833 dots, one dot = one ঢেঁকি; drawn to scale | brief (owner's figure) |
+| 6 | Mills polish off the nutritious red bran layer | process | polisher; vitamin B, fibre, minerals and oil fly off | general rice-milling fact; the nutrient labels are the textbook bran components |
+| 7 | Mills store rice 3–4 months so the natural oil dries; the rice cooks fluffy and looks like more | process | godown + month tiles 1–4, oil drops leave, mound grows | brief. The visual says "বেশি দেখায়" (*looks* bigger), as the script does |
+| 8 | Kalijira and Gobindobhog are more aromatic than Basmati (lab tests) | comparison | aroma plumes and medals, **no axis or numbers** | brief, qualitative |
+| 9 | The stickiness of new rice makes payesh and pitha creamy; old rice can't | culinary | sticky strand vs snapping strand | brief |
+| 10 | An industry made us forget the best food on our plate | opinion | eraser | brief (argument) |
