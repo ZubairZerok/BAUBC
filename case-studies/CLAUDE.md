@@ -21,13 +21,20 @@ Story spine: **hook → the puzzle → the number(s) → the real reason → the
 | 8 | **Always end on the CASE STUDIES logo animation** (`/logo-animations/case-studies`, v2: the BAUBC mark is the "A", 3D camera, fog, smoke, light rays). |
 | 9 | **Bangladeshi context must look Bangladeshi.** Farmers wear a lungi (checked), gamcha, vest or fatua, mathal (bamboo hat) or tupi, have sun-tanned brown skin and a moustache, carry baskets (tukri) on the head; villages have tin-roof mud houses, areca and banana trees, and real BD market and trade terms (ফড়িয়া, বেপারী, আড়তদার, পাইকার, খুচরা). |
 | 10 | **Charts must be correct and readable.** Scales consistent across scenes, reference lines at the true value, labels next to the thing they label. (EP02 was sent back because the demand-28 line looked misplaced, so show quantities with the same visual device, e.g. tanks, every time.) |
-| 11 | Visual style may change per episode when the owner asks (EP01 neon UI · EP02 Kurzgesagt-like explainer + Zack D Films-style 3D models). Palette, HUD, captions and logo outro stay constant. |
+| 11 | Visual style may change per episode when the owner asks (EP01 neon UI · EP02 Kurzgesagt-like explainer + Zack D Films-style 3D models). Captions and logo outro stay constant (no HUD, see rule 19). |
 | 12 | **Save tokens and effort:** reuse the toolkit (below), extend shared files instead of copying, and render only the changed frame ranges when fixing. |
 | 14 | **Default style from EP01 story cut onward: 2D vector, NO 3D** (unless the owner asks for 3D again). Depth comes from 4–6 parallax planes, fog, foreground grass and fireflies, not from 3D models. |
 | 15 | **Story, not lecture.** Visuals should play like an animated story with recurring characters (e.g. the cart কার্টু and the shopper মিতু), a setting, cause and effect, and a bookend, not a slideshow of charts. Numbers appear inside the story world. |
 | 16 | **Everything on screen in Bangla**: HUD, signs, labels, credits. Only the CASE STUDIES logo itself stays English. |
 | 17 | **The hook must be thoughtful and creative**: open on an intriguing story image that raises a question (EP01: a cart that has waited 47 days), not on a title card. |
 | 18 | When the owner supplies the voice-over first, **author the timeline directly on the voice clock** (`V(t)` in EP01 `src/core.js`); measure line onsets with ASR first. |
+| 19 | **NO on-screen header in any reel** (no progress bar, no chapter number/name, no BAUBC badge, no "কেস স্টাডি" label). Only the picture + subtitles. (Owner, EP03 v2 review — applies to ALL future reels.) |
+| 20 | **Hold rule:** a scene never cuts while its last beat is still animating. Insert real silence after scene-ending lines (`hold` in `lines.js`, ~1–1.6 s) so the final animation finishes and reads before the cut. |
+| 21 | **No whoosh-type transition SFX** (whoosh, swish, sweep, zoom, iris). Sound effects only for real on-screen events. |
+| 22 | **Daylight by default.** Backgrounds are mostly day (sky, sun, clouds); night only when the story needs it. |
+| 23 | **Premium detail:** machines, buildings and food are 2.5D / isometric with real texture (plaster, brushed metal, corrugated tin, rust, wood grain). Dishes are shown top-view or isometric. Fire is a glowing, blooming, particle fire that sits exactly in its hearth. |
+| 24 | **Show today's Bangladesh honestly:** no cringe clichés (e.g. "everyone wears a saree for Nabanna"). Use what really happens now (city পিঠা মেলা, Facebook posts, মিনিকেট packets, supermarkets). No human-silhouette heads for "mind" metaphors: show the brain itself. |
+| 25 | **End-logo background follows the episode's palette** (`buildCaseStudiesLogo(c, { theme: 'orange' })` for EP03); the default dark-green one is not mandatory. |
 | 13 | Never invent statistics. Illustrative numbers (example prices etc.) are fine only if labelled as such in `docs/`. Facts come from the brief. |
 
 ## 3. Episode folder layout

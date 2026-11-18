@@ -17,8 +17,9 @@ from arrange import *
 from scipy.signal import lfilter
 
 CJ = json.load(open(os.path.join(HERE, 'cues.json'))); DUR = CJ['duration']
-VO_OFF = float(re.search(r'const VO_OFF = ([\d.]+)', open(os.path.join(ROOT, 'src', 'core.js')).read()).group(1))
-cues = [c for c in CJ['cues'] if c['name'] != 'mark']
+DROP = {'whoosh', 'swish', 'sweep', 'zoom', 'iris', 'logo_whoosh', 'logo_sweep'}   # owner: no whoosh-type transition sounds
+VOC = sorted((c for c in CJ['cues'] if c['name'] == 'vo'), key=lambda c: c['i'])
+cues = [c for c in CJ['cues'] if c['name'] not in ('mark', 'vo') and c['name'] not in DROP]
 MK = sorted(c['t'] for c in CJ['cues'] if c['name'] == 'mark') + [DUR]
 CH = {'D': (38, [62, 66, 69, 74]), 'G': (31, [59, 62, 67, 71]), 'A': (33, [61, 64, 69, 73]), 'Bm': (35, [59, 62, 66, 71]), 'Em': (40, [59, 64, 67, 71]), 'C': (36, [60, 64, 67, 72]),
       'Am': (33, [57, 60, 64, 69]), 'E': (28, [56, 59, 64, 68]), 'F#m': (42, [61, 66, 69, 73]), 'Bm9': (35, [59, 61, 62, 66])}
@@ -53,10 +54,18 @@ dip(MK[NL] - .15, MK[NL] + .1, 0.0, .05, .1)
 music *= g
 GAIN = dict(whoosh=.5, swish=.4, sweep=.55, click=.8, pop=.55, plop=.6, tick=.5, clock=.6, ding=.5, star=.55, impact=1.0, boom=.6, thud=.75, stamp=.85, deny=.5, alarm=.45, glitch=.6,
             bubble=.6, riser=.5, count=.5, success=.55, shine=.45, lock=.85, ticks=.6, zoom=.5, iris=.6, sub=.9, sad=.6, creak=.6, smoke=.8, fall=.55, rumble=.7, windup=.5, coin=.55,
-            birds=.6, dhol=.75, crowd=.55, scratch=.5, quill=.7, machine=.6, thump=.7, boil=.6, switch=.8, shutter=.8, rewind=.55, snap=.7, shatter=.8, squish=.6, wobble=.5, zap=.5, mystery=.5, drain=.5, flip=.5, horn=.4)
+            birds=.6, dhol=.75, crowd=.55, scratch=.5, quill=.7, machine=.6, thump=.7, boil=.6, switch=.8, shutter=.8, rewind=.55, snap=.7, shatter=.8, squish=.6, wobble=.5, zap=.5, mystery=.5, drain=.5, flip=.5, horn=.4, fire=.55, pour=.6, drip=.6, sizzle=.4, rub=.6)
 fx = place_cues(cues, GAIN, DUR)
 raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', os.path.join(HERE, 'vo', 'voice.mp3'), '-ac', '2', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True).stdout
-v = np.frombuffer(raw, np.float32).reshape(-1, 2).T; vo = np.zeros_like(music); o = int(VO_OFF * SR); n = min(v.shape[1], vo.shape[1] - o); vo[:, o:o + n] = v[:, :n]
+v = np.frombuffer(raw, np.float32).reshape(-1, 2).T; vo = np.zeros_like(music)
+# every voice line is cut from the recording and placed on the video clock (core.js S(i)), so holds between lines are real silence
+for k, c in enumerate(VOC):
+    a, b = c['a'], c['b']; pa = VOC[k - 1]['b'] if k else 0.0; nb = VOC[k + 1]['a'] if k + 1 < len(VOC) else v.shape[1] / SR
+    pre, post = min(.12, (a - pa) / 2), min(.3, (nb - b) / 2)
+    s0, s1 = int(max(0, a - pre) * SR), int(min(v.shape[1] / SR, b + post) * SR); clip = v[:, s0:s1].copy()
+    f = min(len(clip[0]) // 4, int(.015 * SR)); ramp = np.linspace(0, 1, f) if f else None
+    if f: clip[:, :f] *= ramp; clip[:, -f:] *= ramp[::-1]
+    o = int((c['t'] - pre) * SR); n = min(clip.shape[1], vo.shape[1] - o); vo[:, o:o + n] += clip[:, :n]
 vo = vo / max(1e-9, np.abs(vo).max()) * .92
 envv = np.sqrt(lfilter([1 - .9995], [1, -.9995], (vo ** 2).mean(0))); envv = np.clip(envv / (envv.max() * .25), 0, 1)
 md = music * (1 - .68 * envv); fxd = fx * (1 - .35 * envv)

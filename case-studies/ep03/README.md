@@ -5,8 +5,8 @@
 | | |
 |---|---|
 | Deliverable | [`renders/BAUBC_CaseStudies_EP03_Nabanna_1080x1920_60fps.mp4`](renders/) |
-| Format | 1080×1920 · 60 fps · ~112 s · H.264 + AAC |
-| Style | Kurzgesagt-inspired 2D vector motion design: deep navy world, rim-lit flat shapes; lime, gold, orange and red accents; multiplane parallax; squash & stretch; object-driven transitions |
+| Format | 1080×1920 · 60 fps · ~129 s · H.264 + AAC |
+| Style | Kurzgesagt-inspired 2D/2.5D motion design in daylight: baked textures (mud plaster, brushed steel, corrugated tin, rust, wood grain), particle fire, an isometric brain-wash station with a procedurally drawn brain, a 2.5D mill complex and polisher, oil-drop physics, top-view and isometric dishes. No header/HUD. Deep-orange end logo |
 | Voice | ElevenLabs "Jessica – Playful, Bright, Warm" (`audio/vo/original_jessica.mp3`). The active voice is always `audio/vo/voice.mp3` |
 | Subtitles | automatic: every line in `src/lines.js` is split into chunks of up to 34 characters and timed by character share |
 | v1 | the first EP03 ("নবান্নের হিসাব", Maya voice, 18 lines) is kept in [`archive-v1-maya/`](archive-v1-maya/) |
@@ -21,6 +21,13 @@
 | ০৪ সাদা চাল | the polisher strips the red bran (vitamin B, fibre, minerals and oil fly off); a white, sad grain comes out · godown, 1–4 months tick by · the oil drops leave the grain · the pot: fluffy separate grains and a mound that only *looks* bigger · the proverb is funnelled into the head again (bookend) |
 | ০৫ ল্যাবের সত্যি | the scientist's surprise · aroma plumes: Kalijira and Gobindobhog rise higher than Basmati, with medals (qualitative, no scale) · two new grains joined by a sticky strand → creamy payesh and pitha · old grains try, the strand snaps ✕ |
 | ০৬ আসল দিন | an eraser wipes the best food off the plate as the mill looms · the saree photoshoot again ("✕ শুধু শাড়ির দিন নয়"), then the proverb billboard **shatters** into a sunrise paddy field, a family, and the crowned new-rice grain → CASE STUDIES logo |
+
+## v3 changes (owner review)
+- No header (progress bar, logo badge, chapter name) — a rule for every future reel.
+- Holds after scene-ending lines (`hold` in `src/lines.js`): voice lines are cut from the recording and placed on the video clock, so every last beat lands before the cut.
+- No whoosh/swish/sweep/zoom/iris sounds; new real-event sounds: fire, pour, drip, sizzle, eraser rub, shutter, rewind, snap, shatter.
+- Saree cliché removed: line 2 now shows a city পিঠা উৎসব photo going on Facebook; line 16 says "তাই নবান্ন শুধু ঘোরার দিন নয়…" over a pitha-fair selfie crowd.
+- Day backgrounds; deep-orange logo (`buildCaseStudiesLogo(c, { theme: 'orange' })`).
 
 ## Replace the voice-over (one command)
 
@@ -37,7 +44,7 @@ That's it. The script:
 Add `--no-render` to rebuild only the audio and timings.
 
 Rules for the new recording:
-- Record the same 16 lines in the same order as `src/lines.js`.
+- Record the same 16 lines in the same order as `src/lines.js` (the exact text is in `docs/script.md`).
 - Leave a short pause between lines (ElevenLabs does this naturally).
 - The ElevenLabs tags (`[shocked]`, `[warm]` …) are not spoken, so they don't matter.
 
@@ -62,7 +69,7 @@ The script prints a table of where it found each line. If a line is off, edit it
 | `src/lines.js` | the script (single source of truth) |
 | `src/vo_timing.js` | generated: where each line sits in the voice file |
 | `src/core.js` | voice clock (`S(i)`, `Z(i)`, `W(i,'word')`), navy palette, HUD, auto-subtitles |
-| `src/art.js` · `src/art2.js` | characters (Dadi, farmers, the saree girl, the mill owner, the scientist) plus the Kurzgesagt-style kit: head profile, washing drum, phone, polaroid, crown, seesaw, polisher, godown, handi, aroma plumes, payesh, pitha, billboard shards, foreground strips |
+| `src/art.js` · `src/art2.js` · `src/art3.js` | characters (Dadi, farmers, the saree girl, the mill owner, the scientist) plus the Kurzgesagt-style kit: head profile, washing drum, phone, polaroid, crown, seesaw, polisher, godown, handi, aroma plumes, payesh, pitha, billboard shards, foreground strips |
 | `src/scenes*.js` | 17 shots + logo |
 | `audio/voice_sync.py` · `audio/build_audio.py` · `audio/swap_voice.py` | line finder · stems & mix · one-command swap |
 | `docs/claims-ledger.md` · `docs/script.md` | every claim and its status · the script with its ElevenLabs tags |

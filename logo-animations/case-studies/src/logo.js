@@ -9,6 +9,10 @@
 function buildCaseStudiesLogo(parent, o = {}) {
   const SW = o.stageW || 1080, SH = o.stageH || 1920, W = o.width || 900, CY = o.cy ?? 860;
   const CREAM = '#efe9dc', LIME = '#c6ff1f', DUR = 7.2;
+  /* theme: 'green' (default dark green) or 'orange' (deep-orange background, warm light & smoke) */
+  const TH = o.theme === 'orange'
+    ? { bg: ['#ff7a24', '#d9480f', '#5e1604'], ray: '255,226,160', sm: ['f4c49a', 'ffd9b5', 'e3a275'], sl: ['fff1c4', 'ffe08a'], ember: ['#fff1c4', '#ffd25a'], vig: 'rgba(60,10,0,.55)' }
+    : { bg: ['#16210d', '#0a0f06', '#030402'], ray: '198,255,31', sm: ['8f9c86', 'a7b39b', '7d8a76'], sl: ['c6ff1f', 'd9ff6a'], ember: ['#c6ff1f', '#efe9dc'], vig: 'rgba(0,0,0,.6)' };
   const R = i => { const x = Math.sin(i * 91.7 + 17.3) * 43758.5453; return x - Math.floor(x); };
   const mk = (p, tag, css, html) => { const e = document.createElement(tag); e.style.cssText = css; if (html != null) e.innerHTML = html; p.appendChild(e); return e; };
 
@@ -72,7 +76,7 @@ function buildCaseStudiesLogo(parent, o = {}) {
     }
     x.putImageData(im, 0, 0); return c;
   }
-  const SM = [sprite(3, '8f9c86'), sprite(11, 'a7b39b'), sprite(23, '7d8a76')], SL = [sprite(5, 'c6ff1f'), sprite(17, 'd9ff6a')];
+  const SM = [sprite(3, TH.sm[0]), sprite(11, TH.sm[1]), sprite(23, TH.sm[2])], SL = [sprite(5, TH.sl[0]), sprite(17, TH.sl[1])];
 
   /* ── animation ── */
   const tl = gsap.timeline(), cues = [], cue = (t, name, x) => cues.push(Object.assign({ t: +t.toFixed(3), name }, x || {}));
@@ -158,7 +162,7 @@ function buildCaseStudiesLogo(parent, o = {}) {
   function draw(t) {
     t = Math.max(0, t);
     const gr = bg.createRadialGradient(SW / 2, CY, 0, SW / 2, CY, SH * 0.75);
-    gr.addColorStop(0, '#16210d'); gr.addColorStop(0.5, '#0a0f06'); gr.addColorStop(1, '#030402');
+    gr.addColorStop(0, TH.bg[0]); gr.addColorStop(0.5, TH.bg[1]); gr.addColorStop(1, TH.bg[2]);
     bg.globalAlpha = 1; bg.fillStyle = gr; bg.fillRect(0, 0, SW, SH);
     // volumetric rays from the mark
     if (V.ray > 0) {
@@ -166,12 +170,12 @@ function buildCaseStudiesLogo(parent, o = {}) {
       for (let i = 0; i < 16; i++) {
         const a = i / 16 * 6.283 + t * 0.12 + R(i) * 0.3, len = 1500 + R(i + 2) * 600, w = 0.05 + R(i + 5) * 0.08;
         const lg = bg.createLinearGradient(0, 0, Math.cos(a) * len, Math.sin(a) * len);
-        lg.addColorStop(0, `rgba(198,255,31,${(0.035 + 0.09 * V.glow + 0.05 * Math.max(0, 1 - (t - 1.3) / 2)) * V.ray * (0.5 + R(i + 9) * 0.5) * (0.75 + 0.25 * Math.sin(t * 1.3 + i))})`); lg.addColorStop(1, 'rgba(198,255,31,0)');
+        lg.addColorStop(0, `rgba(${TH.ray},${(0.035 + 0.09 * V.glow + 0.05 * Math.max(0, 1 - (t - 1.3) / 2)) * V.ray * (0.5 + R(i + 9) * 0.5) * (0.75 + 0.25 * Math.sin(t * 1.3 + i))})`); lg.addColorStop(1, `rgba(${TH.ray},0)`);
         bg.fillStyle = lg; bg.beginPath(); bg.moveTo(0, 0); bg.arc(0, 0, len, a - w, a + w); bg.closePath(); bg.fill();
       }
       bg.restore();
     }
-    if (V.glow > 0) { const g2 = bg.createRadialGradient(V.rayX, V.rayY, 0, V.rayX, V.rayY, 900); g2.addColorStop(0, `rgba(198,255,31,${0.55 * V.glow})`); g2.addColorStop(1, 'rgba(198,255,31,0)'); bg.globalCompositeOperation = 'lighter'; bg.fillStyle = g2; bg.fillRect(0, 0, SW, SH); bg.globalCompositeOperation = 'source-over'; }
+    if (V.glow > 0) { const g2 = bg.createRadialGradient(V.rayX, V.rayY, 0, V.rayX, V.rayY, 900); g2.addColorStop(0, `rgba(${TH.ray},${0.55 * V.glow})`); g2.addColorStop(1, `rgba(${TH.ray},0)`); bg.globalCompositeOperation = 'lighter'; bg.fillStyle = g2; bg.fillRect(0, 0, SW, SH); bg.globalCompositeOperation = 'source-over'; }
     // drifting fog banks (back), with fly-through zoom during the flight
     const zoom = 1 + V.fly * 1.6;
     for (const f of FOG) {
@@ -184,7 +188,7 @@ function buildCaseStudiesLogo(parent, o = {}) {
     bg.globalCompositeOperation = 'lighter';
     for (let i = 0; i < 40; i++) {
       const life = (t * (0.18 + R(i) * 0.2) + R(i + 1)) % 1, x = R(i + 2) * SW + Math.sin(t * 1.5 + i) * 30, y = SH * (1.05 - life * 1.1);
-      bg.globalAlpha = Math.sin(life * Math.PI) * (0.35 + R(i + 3) * 0.5) * Math.min(1, t / 1.2); bg.fillStyle = i % 4 ? '#c6ff1f' : '#efe9dc';
+      bg.globalAlpha = Math.sin(life * Math.PI) * (0.35 + R(i + 3) * 0.5) * Math.min(1, t / 1.2); bg.fillStyle = i % 4 ? TH.ember[0] : TH.ember[1];
       bg.beginPath(); bg.arc(x, y, 1.5 + R(i + 4) * 3, 0, 6.283); bg.fill();
     }
     bg.globalCompositeOperation = 'source-over'; bg.globalAlpha = 1;
@@ -196,7 +200,7 @@ function buildCaseStudiesLogo(parent, o = {}) {
       fg.globalAlpha = V.fogF * (0.6 + f.z * 0.4); fg.drawImage(SM[f.k], x - s / 2, y - s / 2, s, s * 0.55);
     }
     puffs(fg, t, true);
-    const vg = fg.createRadialGradient(SW / 2, CY, SH * 0.25, SW / 2, CY, SH * 0.7); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.6)');
+    const vg = fg.createRadialGradient(SW / 2, CY, SH * 0.25, SW / 2, CY, SH * 0.7); vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, TH.vig);
     fg.globalAlpha = 1; fg.fillStyle = vg; fg.fillRect(0, 0, SW, SH);
   }
   draw(0);

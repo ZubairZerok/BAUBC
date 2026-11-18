@@ -4,10 +4,14 @@
  *   W(i,'w')  video time when word 'w' of line i is spoken (estimated from its character position)
  *   F(i, f)   a fraction f (0..1) through line i */
 const VO_OFF = 0.35;                                   // the voice starts this long after frame 0
-const VL = VO_TIMING.lines, S = i => VL[i][0] + VO_OFF, Z = i => VL[i][1] + VO_OFF, F = (i, f) => S(i) + (Z(i) - S(i)) * f;
+const VL = VO_TIMING.lines, VS = [];
+// video clock: each line keeps its natural pause from the recording, plus its `hold` from lines.js
+VL.forEach(([a], i) => { VS[i] = i ? VS[i - 1] + (VL[i - 1][1] - VL[i - 1][0]) + Math.max(.3, a - VL[i - 1][1]) + (LINES[i - 1].hold || 0) : VO_OFF; });
+const S = i => VS[i], Z = i => VS[i] + VL[i][1] - VL[i][0], F = (i, f) => S(i) + (Z(i) - S(i)) * f;
+VL.forEach(([a, b], i) => sfx(S(i), 'vo', { i, a, b }));   // build_audio.py places each voice line here
 const W = (i, w, after = 0) => { const s = LINES[i].say, k = s.indexOf(w); if (k < 0) { console.error('word not in line', i, w); return S(i); }
   const clean = x => x.replace(/[\s.,!?—…‘’'\-।:;]/g, '').length; return F(i, clean(s.slice(0, k + (after ? w.length : 0))) / clean(s)); };
-const LOGO_AT = Z(LINES.length - 1) + .5;
+const LOGO_AT = Z(LINES.length - 1) + 2.2;
 const T = { c0: 0, c1: S(2) - .3, c2: S(5) - .3, c3: S(7) - .3, c4: S(11) - .3, c5: S(14) - .3, c6: LOGO_AT, end: LOGO_AT + 7.2 };
 const CHAPS = [['০১', 'প্রবাদ'], ['০২', 'নতুন অন্ন'], ['০৩', 'অটো মিল'], ['০৪', 'সাদা চাল'], ['০৫', 'ল্যাবের সত্যি'], ['০৬', 'আসল দিন']];
 const BOUNDS = [T.c0, T.c1, T.c2, T.c3, T.c4, T.c5, T.c6];
@@ -20,7 +24,7 @@ const bg = $('#bg'), g = bg.getContext('2d'), fx = $('#fx').getContext('2d');
 const MOTE = Array.from({ length: 50 }, (_, i) => ({ x: rnd(i) * 1080, y: 200 + rnd(i + 99) * 1500, z: .35 + rnd(i + 7) * .65, ph: rnd(i + 3) * 6.28, c: i % 3 }));
 const MC = ['184,245,60', '255,201,60', '255,170,90'];
 function drawBg(t) {
-  const q0 = g.createLinearGradient(0, 0, 0, 1920); q0.addColorStop(0, P.n0); q0.addColorStop(1, P.n2); g.fillStyle = q0; g.fillRect(0, 0, 1080, 1920);
+  const q0 = g.createLinearGradient(0, 0, 0, 1920); q0.addColorStop(0, '#fbe9cc'); q0.addColorStop(1, '#e8b47a'); g.fillStyle = q0; g.fillRect(0, 0, 1080, 1920);   // warm daylight base
   const f = fx; f.clearRect(0, 0, 1080, 1920);
   if (mood.red > 0) { const q = f.createRadialGradient(540, 900, 200, 540, 900, 1300); q.addColorStop(0, `rgba(255,60,40,${.05 * mood.red})`); q.addColorStop(1, `rgba(190,25,35,${.45 * mood.red})`); f.fillStyle = q; f.fillRect(0, 0, 1080, 1920); }
   for (const p of MOTE) {   // lime / gold light motes drifting in front of every scene (Kurzgesagt "dust")
@@ -31,12 +35,7 @@ function drawBg(t) {
 (() => { const c = document.createElement('canvas'); c.width = c.height = 256; const x = c.getContext('2d'), d = x.createImageData(256, 256);
   for (let i = 0; i < d.data.length; i += 4) { const v = rnd(i * .37) * 255; d.data[i] = d.data[i + 1] = d.data[i + 2] = v; d.data[i + 3] = 255; }
   x.putImageData(d, 0, 0); $('#grain').style.backgroundImage = `url(${c.toDataURL()})`; })();
-$('#hudL b').innerHTML = baubcMarkSVG(30, '#0a0c06');
-const segEls = CHAPS.map(() => E($('#segs'), '', '<i></i>').firstChild);
-function drawHud(t) {
-  let ci = 0; for (let i = 0; i < CHAPS.length; i++) if (t >= BOUNDS[i]) ci = i;
-  segEls.forEach((s, i) => { s.style.transform = `scaleX(${Math.max(0, Math.min(1, (t - BOUNDS[i]) / (BOUNDS[i + 1] - BOUNDS[i])))})`; });
-  $('#chapNo').textContent = CHAPS[ci][0]; $('#chapName').textContent = CHAPS[ci][1];
+function drawHud(t) {   // no on-screen header (owner rule: no progress bar, logo, chapter name)
   $('#grain').style.backgroundPosition = `${Math.floor(rnd(Math.floor(t * 30)) * 256)}px ${Math.floor(rnd(Math.floor(t * 30) + 5) * 256)}px`;
 }
 /** multiplane world: W.plane(parallax); tween W.cam {x,y,z}; W.aim(X,Y,zoom,sx,sy) puts world point X,Y at screen sx,sy */

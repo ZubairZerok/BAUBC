@@ -36,7 +36,7 @@ html,body{margin:0;background:#000;overflow:hidden}
 .cap .k{color:var(--lime)}
 .cap .bar{position:absolute;left:50%;top:-30px;width:90px;height:6px;margin-left:-45px;border-radius:6px;background:var(--lime)}
 
-#vig{background:radial-gradient(ellipse 85% 70% at 50% 46%,transparent 55%,rgba(0,0,0,.72) 100%);pointer-events:none}
+#vig{background:radial-gradient(ellipse 85% 70% at 50% 46%,transparent 60%,rgba(40,20,0,.42) 100%);pointer-events:none}
 #grain{opacity:.07;mix-blend-mode:overlay;pointer-events:none}
 .wipe{visibility:hidden}
 #wipeA{background:var(--lime)} #wipeB{background:#0e1a44}

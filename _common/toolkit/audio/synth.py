@@ -175,6 +175,21 @@ def _make(name, p, d, soft):
         dd = d or 4; t = tt(dd); y = bp(noise(dd), 300, 2500) * (.55 + .45 * np.sin(2 * np.pi * .8 * t) ** 2)
         for i in range(int(dd * 4)): f = 500 + rng.random() * 700; k = np.sin(sweep(f, f * 1.3, .3, 1)) * env(.3, .03, .1, 2) * .15; o = int(rng.random() * (dd - .4) * SR); y[o:o + len(k)] += k
         return reverb(y * np.minimum(1, t / .5) * np.minimum(1, (dd - t) / .8) * .35, .4)
+    if name == 'fire':      # wood fire: low roar + random crackles
+        dd = d or 3.0; t = tt(dd); y = lp(noise(dd), 500) * .35 * (1 + .3 * np.sin(2 * np.pi * 1.3 * t))
+        for k in range(int(dd * 14)):
+            o = int(rng.uniform(0, dd - .05) * SR); c = hp(noise(.02), 2500) * env(.02, .0005, .005, 12) * rng.uniform(.2, .8); y[o:o + len(c)] += c
+        return y * np.minimum(1, t / .3) * np.minimum(1, (dd - t) / .3) * .7
+    if name == 'pour':      # liquid pour: gurgling band-passed noise
+        dd = d or 2.0; t = tt(dd); f = 600 + 400 * np.abs(np.sin(2 * np.pi * 5 * t)); y = svf_bp(noise(dd), f, 4) * .9 + lp(noise(dd), 900) * .25
+        return y * np.minimum(1, t / .15) * np.minimum(1, (dd - t) / .2) * .6
+    if name == 'drip':      # single drop: falling sine blip
+        dd = .2; f0 = 900 + 200 * (p % 3); return np.sin(sweep(f0, f0 * 2.4, dd, .3)) * env(dd, .001, .05, 9) * .6
+    if name == 'sizzle':    # oil on heat
+        dd = d or 1.5; t = tt(dd); y = hp(noise(dd), 4000) * (.6 + .4 * np.abs(np.sin(2 * np.pi * 9 * t))) * .35
+        return y * np.minimum(1, t / .1) * np.minimum(1, (dd - t) / .3)
+    if name == 'rub':       # eraser rubbing
+        dd = .9; t = tt(dd); y = bp(noise(dd), 600, 3000) * (np.sin(2 * np.pi * 6 * t) > 0) * .6; return y * np.minimum(1, (dd - t) / .1)
     if name == 'shutter':   # camera shutter: two clicks + a short mechanical whirr
         a = hp(noise(.025), 2500) * env(.025, .0005, .005, 25); y = np.zeros(int(.16 * SR)); y[:len(a)] += a; y[int(.07 * SR):int(.07 * SR) + len(a)] += a * .8
         w = bp(noise(.06), 900, 3000) * env(.06, .002, .02, 6) * .25; y[int(.02 * SR):int(.02 * SR) + len(w)] += w; return y * .9
