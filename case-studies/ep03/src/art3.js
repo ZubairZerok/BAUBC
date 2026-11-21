@@ -44,6 +44,7 @@ function isoCyl(X, Y, r, h, o) {
 /* ───── daylight sky ───── */
 function skyDay(Wd, o = {}) {
   const sky = Wd.plane(.04, { left: -260, top: -260, width: 1600, height: 2440, background: `linear-gradient(${o.top || '#3f9be0'},${o.mid || '#9fd6ff'} 45%,${o.low || '#fff0cc'} 75%)` });
+  if (o.sun !== false) godrays(Wd.plane(.05), (o.sx ?? 760) + 110, (o.sy ?? 260) + 110, 1500, 16);
   if (o.sun !== false) E(Wd.plane(.06), 'a', `<div style="width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#fffbe8,#fff1b0 45%,rgba(255,220,120,0) 70%);box-shadow:0 0 160px 80px rgba(255,236,170,.55)"></div>`, { left: o.sx ?? 760, top: o.sy ?? 260 });
   const cl = Wd.plane(.1), CL = Array.from({ length: o.clouds ?? 6 }, (_, i) => E(cl, 'a', svg(260 + rnd(i + 3) * 220, '0 0 200 90', `<path d="M30 80 C0 80 0 46 30 46 C30 14 76 6 92 30 C104 8 150 10 152 44 C186 40 196 80 166 80Z" fill="#fff" opacity=".92"/><path d="M30 80 H166 C186 80 190 64 178 58 Q120 78 30 70Z" fill="#cfe4f7" opacity=".9"/>`), { left: 0, top: 150 + rnd(i + 9) * (o.cy ?? 600) }));
   binds.push(t => CL.forEach((c, i) => { c.style.transform = `translateX(${((rnd(i) * 1500 + t * (8 + rnd(i + 5) * 14)) % 1700) - 400}px)`; }));

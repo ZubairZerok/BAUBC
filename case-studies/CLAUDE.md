@@ -31,10 +31,11 @@ Story spine: **hook → the puzzle → the number(s) → the real reason → the
 | 19 | **NO on-screen header in any reel** (no progress bar, no chapter number/name, no BAUBC badge, no "কেস স্টাডি" label). Only the picture + subtitles. (Owner, EP03 v2 review — applies to ALL future reels.) |
 | 20 | **Hold rule:** a scene never cuts while its last beat is still animating. Insert real silence after scene-ending lines (`hold` in `lines.js`, ~1–1.6 s) so the final animation finishes and reads before the cut. |
 | 21 | **No whoosh-type transition SFX** (whoosh, swish, sweep, zoom, iris). Sound effects only for real on-screen events. |
-| 22 | **Daylight by default.** Backgrounds are mostly day (sky, sun, clouds); night only when the story needs it. |
-| 23 | **Premium detail:** machines, buildings and food are 2.5D / isometric with real texture (plaster, brushed metal, corrugated tin, rust, wood grain). Dishes are shown top-view or isometric. Fire is a glowing, blooming, particle fire that sits exactly in its hearth. |
+| 22 | **Daylight by default.** Backgrounds are mostly day (sky, sun, clouds), and every sun has **godrays**. Industry / factory / mill-owner scenes are **night or dark** (owner, EP03 v4). |
+| 23 | **ALL 2D — no 3D, no isometric, nothing 3D** (owner, EP03 v4). Kurzgesagt-style flat shapes: colourful, soft gradients, rim light, glow. Machines are shown as animated **cutaways** (you see the product moving through them). Dishes are **top view** (or flat side view). Fire is a glowing, blooming particle fire that sits exactly in its hearth. Rice dishes may use the owner's rice photo (`ep03/assets/rice_bowl.png`) with vector garnish around it. |
 | 24 | **Show today's Bangladesh honestly:** no cringe clichés (e.g. "everyone wears a saree for Nabanna"). Use what really happens now (city পিঠা মেলা, Facebook posts, মিনিকেট packets, supermarkets). No human-silhouette heads for "mind" metaphors: show the brain itself. |
-| 25 | **End-logo background follows the episode's palette** (`buildCaseStudiesLogo(c, { theme: 'orange' })` for EP03); the default dark-green one is not mandatory. |
+| 25 | **End-logo background follows the episode's palette** (`buildCaseStudiesLogo(c, { theme: 'orange' })` for EP03: deep orange, pure-white letters with a glowing outline). The default dark-green one is not mandatory. |
+| 26 | **Brains are drawn as real 2D brains** (side view, folds, cerebellum, stem) — never a blob, never a human head. Newspapers / press coverage = a wall of fictional newspapers popping in fast. |
 | 13 | Never invent statistics. Illustrative numbers (example prices etc.) are fine only if labelled as such in `docs/`. Facts come from the brief. |
 
 ## 3. Episode folder layout

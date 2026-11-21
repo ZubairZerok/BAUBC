@@ -8,10 +8,10 @@
  * v1 (typographic Λ, flat) is kept in logo-v1.js for EP01. */
 function buildCaseStudiesLogo(parent, o = {}) {
   const SW = o.stageW || 1080, SH = o.stageH || 1920, W = o.width || 900, CY = o.cy ?? 860;
-  const CREAM = '#efe9dc', LIME = '#c6ff1f', DUR = 7.2;
+  const CREAM = o.theme === 'orange' ? '#ffffff' : '#efe9dc', LIME = '#c6ff1f', DUR = 7.2;
   /* theme: 'green' (default dark green) or 'orange' (deep-orange background, warm light & smoke) */
   const TH = o.theme === 'orange'
-    ? { bg: ['#ff7a24', '#d9480f', '#5e1604'], ray: '255,226,160', sm: ['f4c49a', 'ffd9b5', 'e3a275'], sl: ['fff1c4', 'ffe08a'], ember: ['#fff1c4', '#ffd25a'], vig: 'rgba(60,10,0,.55)' }
+    ? { glow: 'text-shadow:0 0 3px #fff,0 0 14px rgba(255,255,255,.8),0 0 34px rgba(255,200,130,.6);', glowSvg: 'filter:drop-shadow(0 0 10px #fff) drop-shadow(0 0 26px rgba(255,230,170,.9));', bg: ['#e2501a', '#8a2206', '#240602'], ray: '255,226,160', sm: ['f4c49a', 'ffd9b5', 'e3a275'], sl: ['fff1c4', 'ffe08a'], ember: ['#fff1c4', '#ffd25a'], vig: 'rgba(60,10,0,.55)' }
     : { bg: ['#16210d', '#0a0f06', '#030402'], ray: '198,255,31', sm: ['8f9c86', 'a7b39b', '7d8a76'], sl: ['c6ff1f', 'd9ff6a'], ember: ['#c6ff1f', '#efe9dc'], vig: 'rgba(0,0,0,.6)' };
   const R = i => { const x = Math.sin(i * 91.7 + 17.3) * 43758.5453; return x - Math.floor(x); };
   const mk = (p, tag, css, html) => { const e = document.createElement(tag); e.style.cssText = css; if (html != null) e.innerHTML = html; p.appendChild(e); return e; };
@@ -41,7 +41,7 @@ function buildCaseStudiesLogo(parent, o = {}) {
     let x = 0; const mm = m('E', px), asc = mm.fontBoundingBoxAscent, desc = mm.fontBoundingBoxDescent;
     cs.forEach((c, i) => {
       if (c === 'M') { x += px * 0.035; L.mark = { x, y: top, w: ch * MW, h: ch }; x += ch * MW + px * 0.035 + TR * px; return; }
-      const e = L[pre + i + c] = mk(logo, 'span', `position:absolute;left:${x}px;top:${top + ch - asc}px;font:${font(px)};line-height:${asc + desc}px;color:${CREAM};white-space:pre;`, c);
+      const e = L[pre + i + c] = mk(logo, 'span', `position:absolute;left:${x}px;top:${top + ch - asc}px;font:${font(px)};line-height:${asc + desc}px;color:${CREAM};white-space:pre;${TH.glow || ''}`, c);
       e.dataset.w = m(c, px).width; x += m(c, px).width + TR * px;
     });
   }
@@ -56,7 +56,7 @@ function buildCaseStudiesLogo(parent, o = {}) {
   // the mark: six pieces, each its own 3D layer
   const M = L.mark, mcx = M.x + M.w / 2, mcy = M.y + M.h / 2;
   const pieces = BAUBC_MARK.pieces.map(p => mk(logo, 'div', `position:absolute;left:${M.x}px;top:${M.y + (M.h - M.w * BAUBC_MARK.h / BAUBC_MARK.w) / 2}px;width:${M.w}px;transform-style:preserve-3d;`,
-    `<svg width="${M.w}" height="${M.w * BAUBC_MARK.h / BAUBC_MARK.w}" viewBox="${BAUBC_MARK.viewBox}" style="display:block;overflow:visible"><polygon points="${p}" fill="${LIME}" stroke="${LIME}" stroke-width="6" stroke-linejoin="round"/></svg>`));
+    `<svg width="${M.w}" height="${M.w * BAUBC_MARK.h / BAUBC_MARK.w}" viewBox="${BAUBC_MARK.viewBox}" style="display:block;overflow:visible;${TH.glowSvg || ''}"><polygon points="${p}" fill="${LIME}" stroke="${LIME}" stroke-width="6" stroke-linejoin="round"/></svg>`));
   const ring = mk(logo, 'div', `position:absolute;left:${mcx - M.w}px;top:${mcy - M.w}px;width:${M.w * 2}px;height:${M.w * 2}px;border-radius:50%;border:${M.w * 0.05}px solid ${LIME};opacity:0;`);
   const streak = (y, h, len) => mk(logo, 'div', `position:absolute;left:0;top:${y}px;height:${h}px;width:${len}px;border-radius:${h}px;background:linear-gradient(90deg,transparent,${LIME});transform-origin:100% 50%;opacity:0;`);
   const dX = parseFloat(D.style.left), dTop = c1 + GAP;

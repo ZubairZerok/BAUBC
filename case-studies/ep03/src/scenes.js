@@ -62,59 +62,56 @@ let A, B, C, D, E1, F1;
     .to(bub, { opacity: 0, y: -120, scale: .9, duration: .5, ease: 'power2.in' }, W(0, 'ইতিহাসের') - .2);
 }
 
-/* ═════════ B · isometric brain-wash station: a real brain is soaked, scrubbed and bleached ═════════ */
+/* ═════════ B · the 2D brain-wash factory: a real brain is soaked, scrubbed and bleached — memories float away ═════════ */
 {
   const tB = W(0, 'বিজনেস') - .45, tC = W(1, 'হাজার') - .35, c = B = scene('B', tB, tC, { pre: .15, post: .2, push: 1.03 }), Wd = world(c);
   zoomThru(tB, A, B, 540, 900, .55);
-  const ST2 = brainStation(c, Wd, tB, tC), { bw, bH, bWs, bx, by, BW } = ST2;
-  const P0 = tB + .3, P1 = S(1) + 1.6, BWt = W(0, 'ব্রেইনওয়াশ') - .05;   // pour window
-  // the bottle (DOM so the Bangla label renders), tipping and pouring
+  const F = brainFactory(c, Wd), { bw, bH, bWs, bx, by, BW, ndl } = F;
+  const P0 = tB + .3, P1 = S(1) + 1.6, BWt = W(0, 'ব্রেইনওয়াশ') - .05;
   const bot = E(Wd.plane(.75), 'a', svg(240, '0 0 240 400', `<defs><linearGradient id="btl" x1="0" x2="1"><stop offset="0" stop-color="#1a7ad0"/><stop offset=".35" stop-color="#4fd0ff"/><stop offset=".5" stop-color="#bff0ff"/><stop offset=".65" stop-color="#3fb8f0"/><stop offset="1" stop-color="#145aa0"/></linearGradient></defs>
     <rect x="92" y="0" width="56" height="40" rx="8" fill="#ef4b3f"/><path d="M84 40 H156 L176 100 Q220 120 220 170 V360 Q220 396 184 396 H56 Q20 396 20 360 V170 Q20 120 64 100Z" fill="url(#btl)"/><rect x="34" y="190" width="172" height="130" rx="16" fill="#fff4dc"/>
-    <text x="120" y="248" text-anchor="middle" font-family="Anek Bangla" font-weight="800" font-size="36" fill="#c4233b">ব্রেইন</text><text x="120" y="292" text-anchor="middle" font-family="Anek Bangla" font-weight="800" font-size="36" fill="#c4233b">ওয়াশ</text><path d="M44 140 Q50 300 60 380" stroke="#fff" stroke-opacity=".45" stroke-width="12" fill="none" stroke-linecap="round"/>`), { left: 381, top: 240, width: 240, height: 400, transformOrigin: '120px 200px', opacity: 0 });
+    <text x="120" y="248" text-anchor="middle" font-family="Anek Bangla" font-weight="800" font-size="36" fill="#c4233b">ব্রেইন</text><text x="120" y="292" text-anchor="middle" font-family="Anek Bangla" font-weight="800" font-size="36" fill="#c4233b">ওয়াশ</text><path d="M44 140 Q50 300 60 380" stroke="#fff" stroke-opacity=".45" stroke-width="12" fill="none" stroke-linecap="round"/>`), { left: 420, top: 60, width: 240, height: 400, transformOrigin: '120px 200px', opacity: 0 });
   tl.fromTo(bot, { opacity: 0, y: -500, rotation: 20 }, { opacity: 1, y: 0, rotation: 140, duration: .7, ease: 'back.out(1.3)', immediateRender: false }, P0 - .55);
   tl.to(bot, { rotation: 150, duration: .3, yoyo: true, repeat: Math.max(1, Math.round((P1 - P0) / .3)) - 1, ease: 'sine.inOut' }, P0 + .2).to(bot, { y: -600, rotation: 60, opacity: 0, duration: .5, ease: 'power2.in' }, P1);
-  // the stream (recomputed every frame: wobble + glug pulses + flowing highlights)
-  const sv = E(Wd.plane(.72), 'a', `<svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;left:0;top:0;overflow:visible"><defs><linearGradient id="strm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bff0ff"/><stop offset=".5" stop-color="#3fb8f0"/><stop offset="1" stop-color="#1a7ad0"/></linearGradient></defs><path class="s1" fill="none" stroke="url(#strm)" stroke-linecap="round"/><path class="s2" fill="none" stroke="#fff" stroke-opacity=".7" stroke-linecap="round" stroke-dasharray="30 70"/></svg>`, { left: 0, top: 0 });
-  const s1 = $('.s1', sv), s2 = $('.s2', sv), MX = 381 + 120 + 109, MY = 240 + 200 + 130, TX = bx + 30, TY = by - 250;
+  const sv = E(Wd.plane(.73), 'a', `<svg width="1080" height="1920" viewBox="0 0 1080 1920" style="position:absolute;left:0;top:0;overflow:visible"><defs><linearGradient id="strm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bff0ff"/><stop offset=".5" stop-color="#3fb8f0"/><stop offset="1" stop-color="#1a7ad0"/></linearGradient></defs><path class="s1" fill="none" stroke="url(#strm)" stroke-linecap="round"/><path class="s2" fill="none" stroke="#fff" stroke-opacity=".7" stroke-linecap="round" stroke-dasharray="30 70"/></svg>`, { left: 0, top: 0 });
+  const s1 = $('.s1', sv), s2 = $('.s2', sv), MX = 420 + 120 + 109, MY = 60 + 200 + 130, TX = 575, TY = 600;
   binds.push(t => { const on = t > P0 && t < P1 + .25, k = Math.min(1, (t - P0) / .3), e = Math.min(1, (P1 + .25 - t) / .25);
     if (!on) { s1.setAttribute('d', ''); s2.setAttribute('d', ''); return; }
-    const ty = MY + (TY - MY) * k, w = (22 + 8 * Math.sin(t * 9)) * Math.min(1, e), wob = Math.sin(t * 6) * 14, d = `M${MX} ${MY} C${MX - 10 + wob} ${MY + 90} ${TX + 30 - wob} ${ty - 140} ${TX} ${ty}`;
+    const ty = MY + (TY - MY) * k, w = (24 + 8 * Math.sin(t * 9)) * Math.min(1, e), wob = Math.sin(t * 6) * 14, d = `M${MX} ${MY} C${MX - 10 + wob} ${MY + 90} ${TX + 30 - wob} ${ty - 100} ${TX} ${ty}`;
     s1.setAttribute('d', d); s1.setAttribute('stroke-width', w); s2.setAttribute('d', d); s2.setAttribute('stroke-width', w * .22); s2.style.strokeDashoffset = -t * 400; });
   sfx(P0, 'pour', { d: P1 - P0 + .2 });
-  // splash droplets at the impact point
-  for (let i = 0; i < 16; i++) { const dr = E(Wd.plane(.72), 'a', `<div style="width:${10 + i % 3 * 5}px;height:${10 + i % 3 * 5}px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#4fd0ff 50%,#1a7ad0)"></div>`, { left: TX, top: TY, opacity: 0 });
-    binds.push(t => { if (t < P0 + .3 || t > P1 + .4) { dr.style.opacity = 0; return; } const per = .55 + rnd(i) * .3, k = ((t - P0 - .3) / per + rnd(i + 3)) % 1, vx = (rnd(i + 5) - .5) * 360, vy = -260 - rnd(i + 6) * 200;
+  for (let i = 0; i < 18; i++) { const dr = E(Wd.plane(.73), 'a', `<div style="width:${10 + i % 3 * 6}px;height:${10 + i % 3 * 6}px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#4fd0ff 50%,#1a7ad0)"></div>`, { left: TX, top: TY, opacity: 0 });
+    binds.push(t => { if (t < P0 + .3 || t > P1 + .4) { dr.style.opacity = 0; return; } const per = .55 + rnd(i) * .3, k = ((t - P0 - .3) / per + rnd(i + 3)) % 1, vx = (rnd(i + 5) - .5) * 420, vy = -240 - rnd(i + 6) * 220;
       dr.style.opacity = 1 - k; dr.style.transform = `translate(${vx * k}px,${vy * k + 900 * k * k}px)`; }); }
-  // the liquid coating, foam, dying neural sparks, scrubbers
-  const coat = E(bw, 'a', '', { left: BW * .12, top: BW * .1, width: BW * .76, height: BW * .5, borderRadius: '50%', background: 'radial-gradient(ellipse at 40% 35%,rgba(220,250,255,.75),rgba(79,208,255,.35) 45%,rgba(26,122,208,0) 70%)', mixBlendMode: 'screen', opacity: 0 });
-  tl.fromTo(coat, { opacity: 0, scale: .2 }, { opacity: 1, scale: 1, duration: P1 - P0, ease: 'power1.out', immediateRender: false }, P0 + .3);
   const wash = { k: 0 }; tl.to(wash, { k: 1, duration: P1 - P0 + .4, ease: 'power1.inOut' }, P0 + .2);
-  const NS = Array.from({ length: 18 }, (_, i) => E(bw, 'a', `<div style="width:14px;height:14px;border-radius:50%;background:#fffbd0;box-shadow:0 0 16px 6px rgba(255,230,120,.8)"></div>`, { left: BW * (.2 + rnd(i + 700) * .6), top: BW * (.12 + rnd(i + 701) * .36) }));
-  const FM = Array.from({ length: 34 }, (_, i) => E(bw, 'a', bubble(24 + rnd(i + 800) * 46), { left: BW * (.1 + rnd(i + 801) * .74), top: BW * (.05 + rnd(i + 802) * .42), opacity: 0 }));
-  binds.push(t => { const k = wash.k; bWs.style.opacity = k; bH.style.opacity = 1;
-    const j = k > .05 && k < 1 ? 3 + 4 * Math.sin(k * Math.PI) : 0; bw.style.transform = `translate(${Math.sin(t * 53) * j}px,${Math.cos(t * 47) * j * .6}px) scale(${1 - .1 * k})`;
+  const coat = E(bw, 'a', '', { left: BW * .14, top: BW * .06, width: BW * .76, height: BW * .46, borderRadius: '50%', background: 'radial-gradient(ellipse at 40% 35%,rgba(220,250,255,.7),rgba(79,208,255,.32) 45%,rgba(26,122,208,0) 70%)', mixBlendMode: 'screen', opacity: 0 });
+  const NS = Array.from({ length: 18 }, (_, i) => E(bw, 'a', `<div style="width:14px;height:14px;border-radius:50%;background:#fffbd0;box-shadow:0 0 18px 7px rgba(255,230,120,.85)"></div>`, { left: BW * (.2 + rnd(i + 700) * .6), top: BW * (.12 + rnd(i + 701) * .36) }));
+  const FM = Array.from({ length: 40 }, (_, i) => E(bw, 'a', bubble(22 + rnd(i + 800) * 50), { left: BW * (.1 + rnd(i + 801) * .74), top: BW * (.03 + rnd(i + 802) * .4), opacity: 0 }));
+  // memories (paddy, a lit bulb, a pitha, a heart) drift out of the brain and dissolve
+  const MEM = [G.sprig(46), svg(60, '0 0 60 80', '<path d="M30 4 A24 24 0 0 1 44 48 V58 H16 V48 A24 24 0 0 1 30 4Z" fill="#ffe27a"/><rect x="18" y="60" width="24" height="12" rx="4" fill="#9aa8c0"/>'), svg(70, '0 0 70 50', '<ellipse cx="35" cy="28" rx="32" ry="20" fill="#fbf4e2"/><path d="M15 22 Q35 8 55 22 Q45 30 35 30 Q25 30 15 22Z" fill="#8a4a1e"/>'), svg(60, '0 0 60 54', '<path d="M30 52 C-10 26 6 -6 30 14 C54 -6 70 26 30 52Z" fill="#ff6a8a"/>')].map((h, i) => E(Wd.plane(.74), 'a', h, { left: bx - 160 + i * 100, top: by - 380, opacity: 0 }));
+  MEM.forEach((m, i) => { const t0 = P0 + .6 + i * .45; tl.fromTo(m, { opacity: 1, y: 60, scale: .4, rotation: 0 }, { opacity: 0, y: -360, scale: 1.2, rotation: (i % 2 ? 1 : -1) * 40, filter: 'blur(6px) grayscale(1)', duration: 1.6, ease: 'power1.out', immediateRender: false }, t0); sfx(t0 + .3, 'bubble'); });
+  binds.push(t => { const k = wash.k; bWs.style.opacity = k; coat.style.opacity = Math.min(1, k * 1.5);
+    const j = k > .05 && k < 1 ? 3 + 5 * Math.sin(k * Math.PI) : 0; bw.style.transform = `translate(${Math.sin(t * 53) * j}px,${Math.cos(t * 47) * j * .6}px) scale(${1 - .12 * k},${1 - .16 * k})`;
     NS.forEach((n, i) => { n.style.opacity = Math.max(0, (1 - k * 1.4)) * (.4 + .6 * Math.abs(Math.sin(t * 3 + i))); });
-    FM.forEach((f, i) => { const on = Math.max(0, Math.min(1, (k - i / 40) * 5)); f.style.opacity = on; f.style.transform = `scale(${on * (1 + .08 * Math.sin(t * 4 + i))})`; }); });
-  [[-1, 120], [1, 960]].forEach(([sd, x]) => { const arm = E(Wd.plane(.66), 'a', `<div style="position:relative;width:200px;height:120px"><div style="position:absolute;left:${sd < 0 ? 0 : 60}px;top:40px;width:140px;height:22px;border-radius:11px;background:linear-gradient(#e8ecf2,#7a828e)"></div><div class="br" style="position:absolute;left:${sd < 0 ? 120 : -10}px;top:-10px;width:110px;height:110px;border-radius:50%;background:repeating-conic-gradient(#ffc93c 0 10deg,#c48a10 10deg 20deg);border:8px solid #3a3f4a;transform:scaleY(.55)"></div></div>`, { left: x - 100, top: by - 230, opacity: 0 });
-    tl.fromTo(arm, { opacity: 0, x: sd * -200 }, { opacity: 1, x: 0, duration: .5, ease: 'back.out(1.6)', immediateRender: false }, P0 + .6);
-    tl.to(arm, { x: sd * -30, duration: .35, yoyo: true, repeat: Math.max(1, Math.round((P1 - P0) / .35)) - 1, ease: 'sine.inOut' }, P0 + 1.1);
-    const br = $('.br', arm); binds.push(t => { br.style.transform = `scaleY(.55) rotate(${t * 900}deg)`; }); });
+    FM.forEach((f, i) => { const on = Math.max(0, Math.min(1, (k - i / 50) * 5)); f.style.opacity = on; f.style.transform = `scale(${on * (1 + .08 * Math.sin(t * 4 + i))})`; });
+    ndl.style.transform = `rotate(${180 + 155 * k + Math.sin(t * 13) * 3 * k}deg)`; });
+  [[-1, 40], [1, 1040]].forEach(([sd, x]) => { const arm = E(Wd.plane(.71), 'a', `<div style="position:relative;width:300px;height:160px"><div style="position:absolute;left:${sd < 0 ? 0 : 60}px;top:60px;width:240px;height:30px;border-radius:15px;background:linear-gradient(#ffd27a,#e0901a)"></div><div style="position:absolute;left:${sd < 0 ? 0 : 270}px;top:50px;width:30px;height:50px;border-radius:8px;background:#3a4070"></div><div class="br" style="position:absolute;left:${sd < 0 ? 210 : -40}px;top:-10px;width:140px;height:140px;border-radius:50%;background:repeating-conic-gradient(#ff5fa0 0 10deg,#ffa8cc 10deg 20deg);border:10px solid #3a4070"></div></div>`, { left: x - 150 + sd * 30, top: by - 380, opacity: 0 });
+    tl.fromTo(arm, { opacity: 0, x: sd * 260 }, { opacity: 1, x: 0, duration: .5, ease: 'back.out(1.6)', immediateRender: false }, P0 + .6);
+    tl.to(arm, { x: sd * 40, duration: .35, yoyo: true, repeat: Math.max(1, Math.round((P1 - P0) / .35)) - 1, ease: 'sine.inOut' }, P0 + 1.1);
+    const br = $('.br', arm); binds.push(t => { br.style.transform = `rotate(${t * 900}deg)`; }); });
   sfx(P0 + .6, 'machine', { d: P1 - P0 });
-  // zaps — the brain is being affected
-  [0, 1, 2, 3].forEach(i => { const z = E(Wd.plane(.7), 'a', svg(90, '0 0 60 100', `<path d="M34 0 L8 54 H28 L18 100 L54 38 H32Z" fill="#fff36a" stroke="#ffb020" stroke-width="3"/>`), { left: bx - 300 + i * 170, top: by - 380 + (i % 2) * 70, opacity: 0 });
+  [0, 1, 2, 3].forEach(i => { const z = E(Wd.plane(.74), 'a', svg(90, '0 0 60 100', `<path d="M34 0 L8 54 H28 L18 100 L54 38 H32Z" fill="#fff36a" stroke="#ffb020" stroke-width="3"/>`), { left: bx - 330 + i * 190, top: by - 470 + (i % 2) * 80, opacity: 0 });
     const t0 = P0 + .9 + i * .55; tl.fromTo(z, { opacity: 1, scale: .4 }, { opacity: 0, scale: 1.2, duration: .25, immediateRender: false }, t0); sfx(t0, 'zap'); });
-  // the proverb gets imprinted on the bleached cortex
-  const imp = E(bw, 'a', `<div style="font:800 46px/1.1 var(--font-bn-display);color:#4a5a6a;white-space:nowrap;transform:rotate(-14deg) skewX(-20deg) scaleY(.7)">পুরান চাল ভাতে বাড়ে</div>`, { left: BW * .12, top: BW * .22, opacity: 0, mixBlendMode: 'multiply' });
-  tl.to(imp, { opacity: .85, duration: .8 }, P1 - .4);
+  const imp = E(bw, 'a', `<div style="font:800 52px/1.1 var(--font-bn-display);color:#4a5a6a;white-space:nowrap;transform:rotate(-8deg)">পুরান চাল ভাতে বাড়ে</div>`, { left: BW * .16, top: BW * .2, opacity: 0, mixBlendMode: 'multiply' });
+  tl.to(imp, { opacity: .8, duration: .8 }, P1 - .4);
   const stmp = plaqueK(c, 'ব্রেইনওয়াশ!', { left: 560, top: 1150, transform: 'rotate(-8deg)' }, P.red, P.cream, 76);
   tl.fromTo(stmp, { scale: 3, opacity: 0 }, { scale: 1, opacity: 1, duration: .22, ease: 'power4.in', immediateRender: false }, BWt); stmp.style.opacity = 0;
   shake(BWt + .22, 14, .35); sfx(BWt + .2, 'stamp'); out(stmp, S(1) + .3);
   const one = chipK(c, 'এক প্রবাদ', { left: 0, width: 1080, top: 1220, textAlign: 'center' }, P.cream, 54); popK(one, W(1, 'প্রবাদের') - .1); out(one, tC - .4);
-  tl.fromTo(Wd.cam, Wd.aim(540, 980, 1.02), Object.assign(Wd.aim(bx, by - 220, 1.3, 540, 880), { duration: tC - tB, ease: 'sine.inOut' }), tB);
+  tl.fromTo(Wd.cam, Wd.aim(540, 960, 1.02), Object.assign(Wd.aim(bx, by - 220, 1.22, 540, 900), { duration: tC - tB, ease: 'sine.inOut' }), tB);
 }
 
-/* ═════════ C · a thousand-year harvest festival → today: a pitha-fair photo for Facebook → locked in a polaroid ═════════ */
+/* ═════════ C · a thousand-year harvest festival → today it lives only in seasonal photoshoots: a wall of newspapers ═════════ */
 {
   const tC = W(1, 'হাজার') - .35, tD = S(2) - .2, tA = W(1, 'আজ') - .15, tJ = W(1, 'বন্দি') - .1;
   const c = C = scene('C', tC, tD, { pre: .15, post: .45, push: 1 });
@@ -128,7 +125,7 @@ let A, B, C, D, E1, F1;
   const crowd = Wd.plane(.7);
   [['#ef4b3f', 1], ['#ffc93c', 0], ['#5a78c4', 1], ['#b8f53c', 0], ['#ff8a3d', 1], ['#fbf1dc', 0], ['#ef4b3f', 1]].forEach(([c1, f], i) => {
     const a = actor(crowd, 150, f ? { top: 'saree', low: 'saree', c1, head: 'veil', sareeG: i % 2, skin: '#a8673e', pose: 'up', expr: 'happy' } : { top: 'genji', c1, low: 'lungi', lungi: 'BGP'[i % 3], head: 'gamcha', skin: '#7a4a2a', pose: i === 3 ? 'head' : 'up', expr: 'happy', must: 1 }, { left: -260 + i * 230, top: 1330 - 285 });
-    const n = Math.round((tA - tC) / .5); tl.to(a, { y: -34, duration: .25, yoyo: true, repeat: n * 2 - 1, ease: 'power1.out', delay: rnd(i) * .2 }, tC); });
+    const n = Math.round((tD - tC) / .5); tl.to(a, { y: -34, duration: .25, yoyo: true, repeat: n * 2 - 1, ease: 'power1.out', delay: rnd(i) * .2 }, tC); });
   E(crowd, 'a', dhol(230), { left: 520, top: 1180 });
   floorK(crowd, 1320, '#b8743f', '#6a3a18'); fgStrip(Wd, 'paddy', 5, GR, GRIM);
   const bun = E(Wd.plane(1.1), 'a', bunting(1500, 18, [P.red, P.gold, P.cream, P.lime, P.orange]), { left: -210, top: 240 });
@@ -139,34 +136,31 @@ let A, B, C, D, E1, F1;
   const yr = chipK(c, '<span class="n">০</span> বছরের নবান্ন', { left: 0, width: 1080, top: 330, textAlign: 'center' }, P.n1, 52);
   $('span', yr).style.background = P.cream;
   popK(yr, tC + .2); counter($('.n', yr), 0, 1000, tC + .2, 1.4); sfx(tC + .2, 'count', { d: 1.4 }); out(yr, tA - .1);
-  // "আজ…" — today: a city পিঠা মেলা, shot top-down on a phone for a post
-  const today = E(shot, 'a', '', { left: 0, top: 0, width: 1080, height: 1920, opacity: 0 });
-  E(today, 'a', woodTable(1080, 1920, '#9a5a2a'), { left: 0, top: 0 });
-  E(today, 'a', '', { left: 0, top: 0, width: 1080, height: 1920, background: 'repeating-linear-gradient(45deg,rgba(196,35,59,.55) 0 60px,rgba(255,244,220,.55) 60px 120px)', clipPath: 'polygon(0 0,100% 0,100% 18%,0 28%)' });
-  E(today, 'a', pithaTop(640), { left: 220, top: 560 });
-  E(today, 'a', payeshTop(300), { left: 760, top: 1060 });
-  E(today, 'a', `<div style="padding:12px 30px 6px;background:#c4233b;color:#fff4dc;border-radius:12px;font:800 52px/1.2 var(--font-bn-display);transform:rotate(-6deg);box-shadow:0 10px 30px rgba(0,0,0,.4)">পিঠা উৎসব ২০২৬</div>`, { left: 200, top: 330 });
-  tl.to(today, { opacity: 1, duration: .25 }, tA);
-  const ph = E(c, 'a', phoneFrame(860, 1240), { left: 110, top: 250 });
-  tl.fromTo(ph, { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: .35, ease: 'back.out(1.4)', immediateRender: false }, tA).fromTo(shot, { clipPath: 'inset(0px 0px 0px 0px round 0px)' }, { clipPath: 'inset(272px 132px 452px 132px round 50px)', duration: .35, ease: 'power2.out', immediateRender: false }, tA);
-  ph.style.opacity = 0;
-  const fl = E(c, 'a', '', { left: 132, top: 272, width: 816, height: 1196, borderRadius: 50, background: '#fff', opacity: 0 });
-  [W(1, 'সিজনাল'), W(1, 'ফটোশুটে')].forEach(t => { tl.fromTo(fl, { opacity: .95 }, { opacity: 0, duration: .35, immediateRender: false }, t); sfx(t, 'shutter'); });
-  // likes float up (the post goes live)
-  for (let i = 0; i < 10; i++) { const hrt = E(c, 'a', `<div style="font:900 ${40 + (i % 3) * 14}px/1 sans-serif;color:${i % 2 ? '#ef4b3f' : '#4f8cff'}">${i % 2 ? '❤' : '👍'}</div>`, { left: 700 + (rnd(i) - .5) * 200, top: 1300, opacity: 0 });
-    const t0 = W(1, 'ফটোশুটে') + .2 + i * .1; tl.fromTo(hrt, { opacity: 1, y: 0, x: 0 }, { opacity: 0, y: -520 - rnd(i + 1) * 300, x: (rnd(i + 2) - .5) * 160, duration: 1.4, ease: 'power1.out', immediateRender: false }, t0); }
-  const tag = chipK(c, '#নবান্ন', { left: 180, top: 1290 }, '#4f8cff', 44); popK(tag, W(1, 'ফটোশুটে') + .1, 'pop');
-  binds.push(t => { const r = $('.rec i', ph); if (r) r.style.opacity = Math.floor(t * 2) % 2 ? .25 : 1; });
-  // "বন্দি" — the post shrinks into a polaroid and gets locked behind bars
-  const pf = E(c, 'a', '', { left: 160, top: 350, width: 760, height: 920, borderRadius: 12, background: '#fbf8ef', boxShadow: '0 30px 80px rgba(0,0,0,.6)', opacity: 0 });
-  c.insertBefore(pf, shot);
-  tl.to([ph, tag], { opacity: 0, scale: 1.1, duration: .3 }, tJ).to(shot, { clipPath: 'inset(380px 190px 840px 190px round 6px)', duration: .45, ease: 'power3.inOut' }, tJ)
-    .fromTo(pf, { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: .45, ease: 'power3.out', immediateRender: false }, tJ);
-  const cap2 = E(c, 'a', `<div style="font:800 46px/1 var(--font-bn-display);color:${P.n2};text-align:center;width:760px">#নবান্ন_ফটোশুট</div>`, { left: 160, top: 1140, opacity: 0 }); tl.to(cap2, { opacity: 1, duration: .3 }, tJ + .3);
-  const br = E(c, 'a', bars(700, 700), { left: 190, top: 380, opacity: 0 });
-  tl.fromTo(br, { y: -1100, opacity: 1 }, { y: 0, duration: .4, ease: 'bounce.out', immediateRender: false }, tJ + .35); sfx(tJ + .45, 'impact');
-  const lk = E(c, 'a', padlock(150), { left: 465, top: 1010, transformOrigin: '50% 0' }); popK(lk, tJ + .75, 'lock');
-  tl.to([shot, pf, br, lk, cap2], { rotation: -3, duration: .6, ease: 'back.out(2)' }, tJ + .6);
+  // "আজ…" — newspapers slap down everywhere; the festival shrinks into one photo on the front page
+  const wall = E(c, 'a', '', { left: 0, top: 0, width: 1080, height: 1920 });
+  E(wall, 'a', '', { left: 0, top: 0, width: 1080, height: 1920, background: 'linear-gradient(#5a4a3a,#3a2e24)', opacity: 0 }).classList.add('wbg');
+  tl.to($('.wbg', wall), { opacity: 1, duration: .2 }, tA);
+  const NP = 36;
+  for (let i = 0; i < NP; i++) { const w = 300 + rnd(i + 900) * 140, x = (i % 4) * 290 - 80 + (rnd(i + 901) - .5) * 120, y = Math.floor(i / 4) * 210 - 140 + (rnd(i + 902) - .5) * 100;
+    const p = E(wall, 'a', newspaper(Math.round(w), i), { left: x, top: y, transform: `rotate(${(rnd(i + 903) - .5) * 36}deg)`, opacity: 0 }), t0 = tA + .05 + rnd(i + 904) * 1.25;
+    tl.fromTo(p, { opacity: 0, scale: 1.7 }, { opacity: 1, scale: 1, duration: .16, ease: 'power3.in', immediateRender: false }, t0);
+    if (i % 3 === 0) sfx(t0 + .14, 'paper', { p: i % 3 }); }
+  const fp = E(c, 'a', `<div style="position:relative;width:840px;height:1040px;background:linear-gradient(160deg,#fffaf0,#f1e8d4);box-shadow:0 40px 90px rgba(0,0,0,.6)">
+      <div style="position:absolute;left:0;right:0;top:22px;text-align:center;font:800 76px/1 var(--font-bn-display);color:#151515">দৈনিক নবান্ন বার্তা</div>
+      <div style="position:absolute;left:36px;right:36px;top:112px;height:6px;background:#151515"></div><div style="position:absolute;left:36px;right:36px;top:124px;height:2px;background:#151515"></div>
+      <div style="position:absolute;left:36px;right:36px;top:146px;font:800 66px/1.1 var(--font-bn-display);color:#b01e2e">নবান্ন এখন শুধু ফটোশুট!</div>
+      <div style="position:absolute;left:40px;top:250px;width:760px;height:470px;background:#222"></div>
+      ${[0, 1, 2].map(k => `<div style="position:absolute;left:${40 + k * 262}px;top:744px;width:236px">${Array.from({ length: 11 }, (_, j) => `<div style="height:9px;margin:0 0 14px;background:#9a9488;width:${70 + rnd(k * 20 + j) * 30}%"></div>`).join('')}</div>`).join('')}</div>`, { left: 120, top: 280, opacity: 0 });
+  c.appendChild(shot);
+  tl.fromTo(fp, { opacity: 0, scale: 1.5, rotation: -6 }, { opacity: 1, scale: 1, rotation: -2, duration: .3, ease: 'power3.in', immediateRender: false }, tA + .25); sfx(tA + .5, 'impact'); shake(tA + .55, 10, .25);
+  tl.fromTo(shot, { clipPath: 'inset(0px 0px 0px 0px)' }, { clipPath: 'inset(530px 160px 920px 160px)', duration: .45, ease: 'power3.inOut', immediateRender: false }, tA + .1);
+  tl.to(shot, { rotation: -2, transformOrigin: '540px 760px', duration: .3 }, tA + .25).to(Wd.cam, Object.assign(Wd.aim(540, 1150, .95, 540, 790), { duration: .45, ease: 'power3.inOut' }), tA + .1);
+  [W(1, 'সিজনাল'), W(1, 'ফটোশুটে'), W(1, 'ফটোশুটে') + .35].forEach((t, i) => { for (let k = 0; k < 4; k++) { const f = E(c, 'a', sparkle(150, '#fff'), { left: rnd(i * 9 + k) * 900, top: 200 + rnd(i * 9 + k + 1) * 1300, opacity: 0 }); tl.fromTo(f, { opacity: 1, scale: .2 }, { opacity: 0, scale: 1.4, duration: .3, immediateRender: false }, t + k * .06); } sfx(t, 'shutter'); });
+  // "বন্দি" — bars slam over the photo, a padlock clicks
+  const br = E(c, 'a', bars(760, 470), { left: 160, top: 530, opacity: 0, transform: 'rotate(-2deg)' });
+  tl.fromTo(br, { y: -1100, opacity: 1 }, { y: 0, duration: .4, ease: 'bounce.out', immediateRender: false }, tJ); sfx(tJ + .1, 'impact');
+  const lk = E(c, 'a', padlock(150), { left: 465, top: 930, transformOrigin: '50% 0' }); popK(lk, tJ + .4, 'lock');
+  tl.to(mood, { dim: .15, duration: .3 }, tJ).to(mood, { dim: 0, duration: .3 }, tD);
 }
 
 /* ═════════ D · rewind → "নবান্ন" = নব (নতুন) + অন্ন (ভাত) → top view: a plate of new aman rice ═════════ */
@@ -175,12 +169,14 @@ let A, B, C, D, E1, F1;
   tl.to(root(C), { rotation: -540, scale: 0, opacity: 0, duration: .8, ease: 'power3.in', transformOrigin: '540px 860px' }, tD - .4);
   tl.fromTo(c, { opacity: 0 }, { opacity: 1, duration: .4 }, tD - .2);
   const sky = skyDay(Wd, { top: '#4f9de0', mid: '#ffcf8a', low: '#ff9a5a', sun: false, cy: 300 });
-  const sunP = Wd.plane(.1), sn = E(sunP, 'a', sunK(300), { left: 390, top: 820, opacity: 0 });
+  const sunP = Wd.plane(.1), gdw = E(sunP, 'a', '', { left: 0, top: 0, width: 1080, height: 1920, opacity: 0 }); godrays(gdw, 540, 970, 1500, 18, '255,236,180', .26);
+  const sn = E(sunP, 'a', sunK(300), { left: 390, top: 820, opacity: 0 });
   const clk = E(sunP, 'a', `<div style="position:relative;width:420px;height:420px;border-radius:50%;background:${P.cream};box-shadow:0 0 0 18px ${P.gold},0 30px 60px rgba(0,0,0,.4)">${svg(420, '-210 -210 420 420', Array.from({ length: 12 }, (_, i) => `<rect x="-6" y="-190" width="12" height="${i % 3 ? 24 : 44}" rx="6" fill="${P.n2}" transform="rotate(${i * 30})"/>`).join('') + `<g class="hh"><rect x="-9" y="-110" width="18" height="120" rx="9" fill="${P.n1}"/></g><g class="mh"><rect x="-6" y="-170" width="12" height="180" rx="6" fill="${P.red}"/></g><circle r="16" fill="${P.n1}"/>`)}</div>`, { left: 330, top: 340 });
   binds.push(t => { const k = Math.max(0, Math.min(1.3, t - tD + .3)), a = -k * 1300; $('.mh', clk).setAttribute('transform', `rotate(${a})`); $('.hh', clk).setAttribute('transform', `rotate(${a / 12})`); });
   const rw = chipK(c, '◀◀ পেছনে', { left: 70, top: 260 }, P.cream, 40); rw.style.opacity = 0; tl.fromTo(rw, { opacity: 0 }, { opacity: 1, duration: .1, yoyo: true, repeat: 5, immediateRender: false }, tD - .2).set(rw, { opacity: 0 }, tD + 1);
   const scan = E(c, 'a', '', { left: 0, top: 0, width: 1080, height: 1920, background: 'repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 3px,transparent 3px 9px)', opacity: 0 });
   tl.fromTo(scan, { opacity: 1 }, { opacity: 0, duration: .3, immediateRender: false }, tD + 1); sfx(tD - .3, 'rewind');
+  tl.fromTo(gdw, { opacity: 0, y: 200 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out', immediateRender: false }, tD + 1.1);
   tl.to(clk, { scale: .7, y: 480, opacity: 0, duration: .7, ease: 'power2.inOut' }, tD + 1).fromTo(sn, { opacity: 0, y: 200 }, { opacity: 1, y: 0, duration: 1.4, ease: 'power2.out', immediateRender: false }, tD + 1.1);
   tl.fromTo(sky, { filter: 'brightness(.6) sepia(.4)' }, { filter: 'brightness(1) sepia(0)', duration: 2, immediateRender: false }, tD + 1);
   const far = Wd.plane(.22); E(far, 'a', hillBand(1700, 500, '#5f8f3a', 21, 6, 80, 'rgba(255,230,160,.6)'), { left: -300, top: 960 });
@@ -202,7 +198,7 @@ let A, B, C, D, E1, F1;
   tl.fromTo(Wd.cam, Wd.aim(540, 960, 1), Object.assign(Wd.aim(540, 1010, 1.05), { duration: AM - tD, ease: 'sine.inOut' }), tD);
   // "নতুন আমন ধানের ভাত" — top view: steaming new rice on a banana leaf
   const tv = E(c, 'a', '', { left: 0, top: 0, width: 1080, height: 1920, opacity: 0 });
-  E(tv, 'a', woodTable(1080, 1920), { left: 0, top: 0 }); E(tv, 'a', plateTop(820, 'new'), { left: 130, top: 480 }); steamTop(tv, 540, 890, 300, 8);
+  E(tv, 'a', woodTable(1080, 1920), { left: 0, top: 0 }); riceSpread(tv, 200, 560, 680, { gk: 1.7 }); steamTop(tv, 540, 880, 300, 8);
   tl.fromTo(tv, { opacity: 0, clipPath: 'circle(0px at 540px 890px)' }, { opacity: 1, clipPath: 'circle(1400px at 540px 890px)', duration: .7, ease: 'power3.inOut', immediateRender: false }, AM);
   tl.fromTo(tv, { scale: 1.12 }, { scale: 1, duration: tE - AM + .3, ease: 'sine.out', immediateRender: false }, AM);
   const am = chipK(c, 'নতুন আমন ধানের ভাত', { left: 0, width: 1080, top: 300, textAlign: 'center' }, P.gold, 50); popK(am, AM + .4, 'ding');

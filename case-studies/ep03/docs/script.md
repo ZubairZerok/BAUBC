@@ -2,7 +2,7 @@
 
 **For a re-record, paste these 16 lines in this order with these tags.** Lines 8–10 are one paragraph in the original script; they are split at its natural pauses.
 
-Change from the original script: line 16 no longer says "শাড়ি পরে" (owner: nobody wears a saree for Nabanna today, so the cliché was removed). The current voice file has those two words cut out of the recording.
+Change from the original script: line 16 is now only "তাই নবান্ন হলো মার্কেটিংয়ের ধোঁকা ভেঙে…" (no "শাড়ি পরে", no "শুধু ঘোরার দিন নয়") (owner: nobody wears a saree for Nabanna today, so the cliché was removed). The current voice file has those two words cut out of the recording.
 
 | # | tag | line |
 |---|---|---|
@@ -21,6 +21,6 @@ Change from the original script: line 16 no longer says "শাড়ি পর�
 | 13 | [proud] | নতুন চালে যে প্রাকৃতিক মিষ্টি ঘ্রাণ থাকে, আমাদের নবান্নের দেশি কালোজিরা আর গোবিন্দভোগ চালের সেই সুগন্ধ বিদেশি বাসমতির চেয়েও বেশি! |
 | 14 | [warm] | আর নতুন চালের ওই প্রাকৃতিক আঠালো ভাবটার কারণেই নবান্নের পায়েস আর পিঠা এত ক্রিমি হয়—যা পুরান চালে জীবনেও আসবে না! |
 | 15 | [reflective] | ভাবুন তো—একটা ইন্ডাস্ট্রি শুধু তাদের ব্যবসার জন্য আমাদের প্লেটের সেরা খাবারটাকে ভুলিয়ে দিল! |
-| 16 | [intense] | তাই নবান্ন শুধু ঘোরার দিন নয়... নবান্ন হলো মার্কেটিংয়ের ধোঁকা ভেঙে আমাদের আসল স্বাদ আর পুষ্টি ফিরিয়ে আনার দিন! |
+| 16 | [intense] | তাই নবান্ন হলো মার্কেটিংয়ের ধোঁকা ভেঙে আমাদের আসল স্বাদ আর পুষ্টি ফিরিয়ে আনার দিন! |
 
 Pauses (`hold` in `src/lines.js`) are inserted automatically after scene-ending lines, so a re-record does not need long pauses.

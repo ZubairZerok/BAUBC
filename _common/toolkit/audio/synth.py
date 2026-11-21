@@ -175,6 +175,9 @@ def _make(name, p, d, soft):
         dd = d or 4; t = tt(dd); y = bp(noise(dd), 300, 2500) * (.55 + .45 * np.sin(2 * np.pi * .8 * t) ** 2)
         for i in range(int(dd * 4)): f = 500 + rng.random() * 700; k = np.sin(sweep(f, f * 1.3, .3, 1)) * env(.3, .03, .1, 2) * .15; o = int(rng.random() * (dd - .4) * SR); y[o:o + len(k)] += k
         return reverb(y * np.minimum(1, t / .5) * np.minimum(1, (dd - t) / .8) * .35, .4)
+    if name == 'paper':     # a newspaper slapped down: soft thump + papery rustle
+        dd = .28; t = tt(dd); y = lp(noise(dd), 400) * env(dd, .002, .05, 14) * .9 + bp(noise(dd), 1800 + 400 * (p % 3), 7000) * env(dd, .003, .06, 9) * .5
+        return y * .8
     if name == 'fire':      # wood fire: low roar + random crackles
         dd = d or 3.0; t = tt(dd); y = lp(noise(dd), 500) * .35 * (1 + .3 * np.sin(2 * np.pi * 1.3 * t))
         for k in range(int(dd * 14)):

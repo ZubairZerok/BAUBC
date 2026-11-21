@@ -1,25 +1,25 @@
 /* EP03 v3 — chapters 05–06 + logo: ল্যাবের সত্যি · আসল দিন */
 let L1, M1, N1, O1, P1, Q1;
 
-/* ═════════ L · "ব্যস" — back in the brain-wash station: the proverb is funnelled straight into the brain ═════════ */
+/* ═════════ L · "ব্যস" — back in the brain-wash factory: the proverb is funnelled straight into the washed brain ═════════ */
 {
   const tL = S(10) - .2, tM = S(11) - .2, c = L1 = scene('L', tL, tM, { pre: .3, post: .25, push: 1.04 }), Wd = world(c);
   iris(tL, L1, 540, 900, .55);
-  const ST2 = brainStation(c, Wd, tL, tM), { bw, bH, bWs, bx, by } = ST2;
-  bH.style.opacity = 0; bWs.style.opacity = 1;
-  const fn = E(Wd.plane(.7), 'a', funnel(300), { left: bx - 150, top: by - 760 }); popK(fn, tL + .05, 'thud');
+  const F = brainFactory(c, Wd), { bw, bH, bWs, bx, by, BW, ndl } = F;
+  bH.style.opacity = 0; bWs.style.opacity = 1; ndl.style.transform = 'rotate(335deg)';
+  binds.push(t => { bw.style.transform = `scale(.94,.9) rotate(${Math.sin(t * 2.2) * 1.5}deg)`; });
+  const imp = E(bw, 'a', `<div style="font:800 40px/1.1 var(--font-bn-display);color:#4a5a6a;white-space:nowrap;transform:rotate(-8deg)">পুরান চাল ভাতে বাড়ে</div>`, { left: BW * .22, top: BW * .24, opacity: .18, mixBlendMode: 'multiply' });
+  const fn = E(Wd.plane(.74), 'a', funnel(300), { left: bx - 150, top: by - 700 }); popK(fn, tL + .05, 'thud');
   const W1 = ['পুরান', 'চাল', 'ভাতে', 'বাড়ে'];
   for (let i = 0; i < 10; i++) { const ch = E(c, 'a', wordChip(W1[i % 4], i % 2 ? P.gold : P.cream, P.n1, 38), { left: bx - 90 + (rnd(i) - .5) * 120, top: -120, opacity: 0 }), t0 = tL + .25 + i * .26;
-    tl.fromTo(ch, { opacity: 1, y: 0, rotation: (rnd(i + 3) - .5) * 60, scale: 1 }, { y: by - 560, rotation: 0, scale: .35, duration: .55, ease: 'power2.in', immediateRender: false }, t0).set(ch, { opacity: 0 }, t0 + .55);
-    tl.to(bw, { scaleY: .94, scaleX: 1.04, duration: .07, yoyo: true, repeat: 1 }, t0 + .6); sfx(t0 + .5, 'plop', { p: i % 3 }); }
-  const tv = E(Wd.plane(.65), 'a', tvBox(260, 'পুরান চাল<br>ভাতে বাড়ে!'), { left: 760, top: 520, transformOrigin: '50% 100%' }); popK(tv, tL + .4, 'switch');
-  binds.push(t => { tv.style.filter = `brightness(${1 + .25 * Math.sin(t * 20)})`; });
-  const mg = E(Wd.plane(.7), 'a', megaphone(230), { left: 40, top: 1080, transform: 'rotate(-25deg)' }); popK(mg, tL + .6, 'horn');
+    tl.fromTo(ch, { opacity: 1, y: 0, rotation: (rnd(i + 3) - .5) * 60, scale: 1 }, { y: by - 520, rotation: 0, scale: .35, duration: .55, ease: 'power2.in', immediateRender: false }, t0).set(ch, { opacity: 0 }, t0 + .55);
+    tl.to(imp, { opacity: '+=.03', duration: .1 }, t0 + .6); sfx(t0 + .5, 'plop', { p: i % 3 }); }
+  const mg = E(Wd.plane(.75), 'a', megaphone(230), { left: 20, top: 1080, transform: 'rotate(-25deg)' }); popK(mg, tL + .6, 'horn');
   const ST = W(10, 'পুরান') - .05, pl = plaqueK(c, '‘পুরান চাল ভাতে বাড়ে’', { left: 60, top: 1180, transform: 'rotate(-6deg)' }, P.cream, P.red, 60);
   tl.fromTo(pl, { scale: 3, opacity: 0 }, { scale: 1, opacity: 1, duration: .25, ease: 'power4.in', immediateRender: false }, ST); pl.style.opacity = 0;
-  tl.to(mood, { red: .5, duration: .3 }, ST + .2).to(mood, { red: 0, duration: .5 }, tM - .4);
+  tl.to(imp, { opacity: .6, duration: .2 }, ST + .2).to(mood, { red: .5, duration: .3 }, ST + .2).to(mood, { red: 0, duration: .5 }, tM - .4);
   shake(ST + .25, 16, .35); sfx(ST + .22, 'stamp');
-  tl.fromTo(Wd.cam, Wd.aim(540, 960, 1.05), Object.assign(Wd.aim(bx, by - 220, 1.25, 540, 880), { duration: tM - tL, ease: 'sine.inOut' }), tL);
+  tl.fromTo(Wd.cam, Wd.aim(540, 960, 1.05), Object.assign(Wd.aim(bx, by - 240, 1.2, 540, 900), { duration: tM - tL, ease: 'sine.inOut' }), tL);
 }
 
 /* ═════════ M · but the lab says otherwise ═════════ */
@@ -47,29 +47,34 @@ let L1, M1, N1, O1, P1, Q1;
   tl.fromTo(Wd.cam, Wd.aim(540, 960, 1.06), Object.assign(Wd.aim(420, 900, 1.15), { duration: tN - tM, ease: 'sine.inOut' }), tM);
 }
 
-/* ═════════ N · isometric table: Kalijira & Gobindobhog out-smell foreign Basmati (qualitative — no scale) ═════════ */
+/* ═════════ N · on a শীতল পাটি (top view): Kalijira & Gobindobhog out-smell foreign Basmati (qualitative — no scale) ═════════ */
 {
   const tN = S(12) - .2, tO = S(13) - .2, PB = W(12, 'আমাদের') - .2, c = N1 = scene('N', tN, tO, { pre: .3, post: .25, push: 1 }), Wd = world(c);
   zoomThru(tN, M1, N1, 700, 1000, .5);
-  E(Wd.plane(.1), 'a', '', { left: -200, top: -200, width: 1480, height: 2320, background: 'radial-gradient(circle at 50% 35%,#fff3d6,#f2cf90 50%,#c98a4a)' });
-  const tbl = Wd.plane(.6), RB = riceBowlsIso(1080);
-  E(tbl, 'a', RB.html, { left: 0, top: 560 });
-  const BP = RB.pos.map(([x, y]) => [x, y + 560]);
-  const B3 = [['কালোজিরা', '#ffc93c', 640, 'দেশি'], ['গোবিন্দভোগ', P.lime, 640, 'দেশি'], ['বাসমতি', '#c9d2e0', 330, 'বিদেশি']];
-  const pls = B3.map(([nm, pc, ph], i) => { const pw = E(tbl, 'a', '', { left: BP[i][0] - 130, top: BP[i][1] - 40 - ph, width: 260, height: ph, transformOrigin: '50% 100%' }); E(pw, 'a', plume(260, ph, pc), { left: 0, top: 0 });
-    const ps = [...pw.querySelectorAll('.pl')]; ps.forEach(p => { p.style.strokeDasharray = '140 380'; }); binds.push(t => ps.forEach((p, j) => { p.style.strokeDashoffset = (t * 220 + j * 170) % 520; })); return pw; });
-  const lbs = B3.map(([nm, , , tag], i) => E(tbl, 'a', `<div style="padding:8px 22px 4px;border-radius:20px;background:${i === 2 ? '#6a7a8c' : P.n1};text-align:center;font:800 ${i === 2 ? 36 : 40}px/1.15 var(--font-bn-display);color:${P.cream};white-space:nowrap;box-shadow:0 8px 18px rgba(0,0,0,.3)">${nm}<div style="font-size:26px;color:${i === 2 ? '#dfe6f0' : P.lime}">${tag}</div></div>`, { left: BP[i][0] - 120, top: BP[i][1] + 80, opacity: 0 }));
+  E(Wd.plane(.1, { left: -100, top: -100, width: 1280, height: 2120 }), 'a', woodTable(1280, 2120, '#8a4f24'), { left: 0, top: 0 });
+  const mat = Wd.plane(.4); E(mat, 'a', shitalPati(1040, 1060), { left: 20, top: 420 });
+  const deco = Wd.plane(.42);
+  [['sprig', 120, 70, 470, -30], ['sprig', 110, 930, 450, 35], ['bay', 150, 860, 1240, 20], ['bay', 130, 70, 1250, -40], ['card', 60, 480, 1180, 10], ['card', 54, 560, 1220, -30], ['card', 60, 620, 1170, 60],
+   ['cinna', 180, 420, 470, 8], ['lemon', 110, 900, 640, 0], ['chili', 160, 60, 620, 30], ['salt', 100, 470, 1270, 0], ['onion', 100, 610, 1300, 0]].forEach(([k, s, x, y, r]) => E(deco, 'a', G[k](s), { left: x, top: y, transform: `rotate(${r}deg)` }));
+  const BW3 = 300, BC = [[210, 930], [540, 790], [870, 930]];
+  const bowlsP = Wd.plane(.45);
+  BC.forEach(([x, y]) => E(bowlsP, 'a', riceImg(BW3), { left: x - BW3 / 2, top: y - BW3 / 2 }));
+  const B3 = [['কালোজিরা', '#ffc93c', 620, 'দেশি', 'kali'], ['গোবিন্দভোগ', P.lime, 560, 'দেশি', 'gobi'], ['বাসমতি', '#dfe6f0', 300, 'বিদেশি', 'bas']];
+  const pls = B3.map(([nm, pc, ph], i) => { const pw = E(bowlsP, 'a', '', { left: BC[i][0] - 130, top: BC[i][1] - 60 - ph, width: 260, height: ph, transformOrigin: '50% 100%' }); E(pw, 'a', plume(260, ph, pc), { left: 0, top: 0 });
+    const ps = [...pw.querySelectorAll('.pl')]; ps.forEach(p => { p.style.strokeDasharray = '140 380'; p.style.filter = `drop-shadow(0 0 8px ${pc})`; }); binds.push(t => ps.forEach((p, j) => { p.style.strokeDashoffset = (t * 220 + j * 170) % 520; })); return pw; });
+  const gIcon = k => svg(90, '0 0 90 30', k === 'kali' ? Array.from({ length: 5 }, (_, j) => `<ellipse cx="${10 + j * 17}" cy="15" rx="5" ry="4" fill="#fffaf0"/>`).join('') : k === 'gobi' ? Array.from({ length: 4 }, (_, j) => `<ellipse cx="${12 + j * 21}" cy="15" rx="8" ry="5" fill="#fffaf0"/>`).join('') : `<ellipse cx="45" cy="15" rx="40" ry="5" fill="#fffaf0"/>`);
+  const lbs = B3.map(([nm, , , tag, k], i) => E(bowlsP, 'a', `<div style="padding:8px 22px 6px;border-radius:20px;background:${i === 2 ? '#5a6a7c' : '#7a1f2a'};text-align:center;font:800 ${i === 2 ? 36 : 40}px/1.15 var(--font-bn-display);color:#fff4dc;white-space:nowrap;box-shadow:0 8px 18px rgba(0,0,0,.35)">${nm}<div style="font-size:26px;color:${i === 2 ? '#dfe6f0' : '#ffe08a'}">${tag}</div><div style="display:flex;justify-content:center">${gIcon(k)}</div></div>`, { left: BC[i][0] - 120, top: BC[i][1] + 150, opacity: 0 }));
   tl.fromTo(pls[1], { scaleY: .2 }, { scaleY: 1, duration: 1.4, ease: 'power2.out' }, tN); tl.set([pls[0], pls[2]], { scaleY: 0 }, tN);
-  const sw = chipK(c, 'মিষ্টি ঘ্রাণ', { left: 0, width: 1080, top: 280, textAlign: 'center' }, P.goldD, 56); popK(sw, W(12, 'মিষ্টি') - .1, 'shine'); out(sw, PB);
+  const sw = chipK(c, 'মিষ্টি ঘ্রাণ', { left: 0, width: 1080, top: 260, textAlign: 'center' }, P.gold, 56); popK(sw, W(12, 'মিষ্টি') - .1, 'shine'); out(sw, PB);
   sparkles(c, 7, 340, 420, 400, 400, tN + .5, PB, 33);
-  tl.fromTo(Wd.cam, Wd.aim(BP[1][0], BP[1][1] - 200, 2.1, 540, 1000), Object.assign(Wd.aim(BP[1][0], BP[1][1] - 220, 2.2, 540, 1000), { duration: PB - tN, ease: 'sine.inOut' }), tN)
-    .to(Wd.cam, Object.assign(Wd.aim(540, 980, 1), { duration: 1.1, ease: 'power3.inOut' }), PB);
+  tl.fromTo(Wd.cam, Wd.aim(540, 760, 1.9, 540, 1000), Object.assign(Wd.aim(540, 740, 2.0, 540, 1000), { duration: PB - tN, ease: 'sine.inOut' }), tN)
+    .to(Wd.cam, Object.assign(Wd.aim(540, 960, 1), { duration: 1.1, ease: 'power3.inOut' }), PB);
   lbs.forEach((l, i) => popK(l, [W(12, 'কালোজিরা'), W(12, 'গোবিন্দভোগ'), W(12, 'বাসমতির')][i] - .15, 'pop'));
   [0, 1, 2].forEach(i => tl.fromTo(pls[i], { scaleY: i === 1 ? 1 : 0 }, { scaleY: 1, duration: 1.2, ease: 'power2.out', immediateRender: false }, [W(12, 'কালোজিরা'), W(12, 'সেই'), W(12, 'বাসমতির')][i] - .1));
   const MD = W(12, 'বেশি') - .15;
-  [0, 1].forEach(i => { const m = E(tbl, 'a', medal(110), { left: BP[i][0] + 70, top: BP[i][1] - 150, transformOrigin: '50% 100%' }); land(m, MD + i * .15, -700, i ? null : 'ding'); });
-  tl.to(pls[2], { opacity: .45, duration: .5 }, MD);
-  const bt = plaqueK(c, 'দেশি সুগন্ধ বেশি!', { left: 0, top: 300 }, P.lime, P.n1, 58); tl.set(bt, { left: '50%', xPercent: -50 }, tN); popK(bt, MD + .25, 'success');
+  [0, 1].forEach(i => { const m = E(bowlsP, 'a', medal(110), { left: BC[i][0] + 60, top: BC[i][1] - 200, transformOrigin: '50% 100%' }); land(m, MD + i * .15, -700, i ? null : 'ding'); });
+  tl.to(pls[2], { opacity: .4, duration: .5 }, MD);
+  const bt = plaqueK(c, 'দেশি সুগন্ধ বেশি!', { left: 0, top: 260 }, P.lime, P.n1, 58); tl.set(bt, { left: '50%', xPercent: -50 }, tN); popK(bt, MD + .25, 'success');
 }
 
 /* ═════════ O · stickiness → top view: creamy payesh & a plate of pitha (old rice can't) ═════════ */
@@ -125,6 +130,7 @@ let L1, M1, N1, O1, P1, Q1;
   const tbP = Wd.plane(.3); E(tbP, 'a', woodTable(1200, 2100, '#9a5a2a'), { left: -60, top: -90 });
   const food = E(Wd.plane(.5), 'a', '', { left: 0, top: 0, width: 1080, height: 1920 });
   E(food, 'a', thaliTop(900), { left: 90, top: 470 });
+  E(food, 'a', riceImg(390), { left: 294, top: 776 });
   steamTop(food, 480, 990, 300, 7);
   const blank = E(Wd.plane(.5), 'a', bake(bsvg(900, 900, `<circle cx="450" cy="462" r="423" fill="#000" opacity=".3" filter="url(#fBlur6)"/><circle cx="450" cy="450" r="423" fill="url(#k)"/><circle cx="450" cy="450" r="380" fill="url(#k2)"/><circle cx="450" cy="450" r="423" fill="#fff" filter="url(#tBrush)" opacity=".3"/>`, '<radialGradient id="k" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#fff0c0"/><stop offset=".6" stop-color="#c99a3a"/><stop offset="1" stop-color="#6a4a10"/></radialGradient><radialGradient id="k2" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#f7dc90"/><stop offset="1" stop-color="#b98a2a"/></radialGradient>'), 900, 900), { left: 90, top: 470, opacity: 0 });
   // the mill's shadow creeps over the table (top view)
@@ -144,7 +150,7 @@ let L1, M1, N1, O1, P1, Q1;
 
 /* ═════════ Q · not just a day out at the pitha fair — break the marketing trick, bring back real taste & nutrition ═════════ */
 {
-  const tQ = S(15) - .2, tE = LOGO_AT, tN = W(15, 'নবান্ন হলো') - .25, SH = W(15, 'ধোঁকা') + .05;
+  const tQ = S(15) - .2, tE = LOGO_AT, tN = S(15) + .2, SH = W(15, 'ধোঁকা') + .05;
   const c = Q1 = scene('Q', tQ, tE, { pre: .25, post: .55, push: 1.03 });
   whip(tQ, P1, Q1, 'left', .5);
   // the reveal world (behind): sunrise over the paddy, a village family, the crowned new-rice grain
@@ -184,8 +190,6 @@ let L1, M1, N1, O1, P1, Q1;
     const a = actor(crowd, 190, { top: 'kurta', c1: col, low: 'pants', c2: i % 2 ? '#2a3a5a' : '#3a3f4a', hair: hr, skin: ['#a8673e', '#9a6040', '#b07048'][i % 3], pose: [[8, 4], [150, 40]], holdR: '<g transform="translate(-14 -36)"><rect x="0" y="0" width="28" height="46" rx="6" fill="#0a1230"/><rect x="3" y="4" width="22" height="36" rx="2" fill="#5a78c4"/></g>', expr: 'happy' }, { left: x - 40, top: 1930 - 361 });
     a.blink(tQ + .5 + i * .2, tQ + 2.5); });
   [tQ + .7, tQ + 1.3, tQ + 2.1].forEach((t, i) => { const f = E(c, 'a', sparkle(150, '#fff'), { left: 120 + i * 330, top: 1080, opacity: 0 }); tl.fromTo(f, { opacity: 1, scale: .2 }, { opacity: 0, scale: 1.4, duration: .3, immediateRender: false }, t); sfx(t, 'shutter'); });
-  const NY = W(15, 'নয়') - .2, xs = E(Wf.plane(.9), 'a', `<div style="padding:12px 30px 6px;border-radius:20px;background:${P.red};color:${P.cream};font:800 50px/1.2 var(--font-bn-display);white-space:nowrap;box-shadow:0 14px 30px rgba(0,0,0,.5)">✕ শুধু ঘোরার দিন নয়</div>`, { left: 230, top: 250, transform: 'rotate(-4deg)' });
-  popK(xs, NY, 'deny');
   tl.fromTo(Wf.cam, Wf.aim(540, 1150, 1.2), Object.assign(Wf.aim(540, 960, 1), { duration: tN - tQ, ease: 'sine.inOut' }), tQ);
   sfx(tN, 'riser'); shake(SH - .5, 6, .5);
   // SHATTER — the trick breaks; every shard flies right off the screen
@@ -211,11 +215,11 @@ window.__afterFonts = () => {
   tl.add(L.timeline, t); binds.push(T2 => L.draw(T2 - t));
   L.cues.forEach(q => sfx(t + q.t, 'logo_' + q.name, q.p != null ? { p: q.p } : q.d ? { d: q.d } : undefined));
   const bnf = 'var(--font-bn-display)';
-  L.sub.innerHTML = `<div class="ep" style="position:absolute;left:0;right:0;top:${L.top - 200}px;text-align:center"><span class="chip" style="font-size:36px;background:rgba(60,10,0,.35);color:#fff4dc;border-color:#fff4dc">এপিসোড ০৩ · পুরান চাল ভাতে বাড়ে?</span></div>
-    <div class="rl" style="position:absolute;left:340px;top:${L.bottom + 70}px;width:400px;height:4px;background:#fff4dc;border-radius:4px"></div>
-    <div class="by" style="position:absolute;left:0;right:0;top:${L.bottom + 96}px;text-align:center;font:800 44px/1.2 ${bnf};color:#fff4dc">বাকৃবি বিজনেস ক্লাবের আয়োজন</div>
-    <div class="fu" style="position:absolute;left:0;right:0;top:${L.bottom + 166}px;text-align:center;font:600 28px/1.2 ${bnf};color:#ffe2c0">বাংলাদেশ কৃষি বিশ্ববিদ্যালয় বিজনেস ক্লাব</div>
-    <div class="fo" style="position:absolute;left:0;right:0;top:${L.bottom + 262}px;text-align:center;font:700 40px/1 ${bnf};color:#fff4dc">এই নবান্নে নতুন চালের ভাত খেয়েছেন? কমেন্টে বলুন</div>`;
+  L.sub.innerHTML = `<div class="ep" style="position:absolute;left:0;right:0;top:${L.top - 200}px;text-align:center"><span class="chip" style="font-size:36px;background:rgba(60,10,0,.35);color:#ffffff;border-color:#ffffff;text-shadow:0 0 14px rgba(255,255,255,.8);box-shadow:0 0 24px rgba(255,255,255,.5)">এপিসোড ০৩ · পুরান চাল ভাতে বাড়ে?</span></div>
+    <div class="rl" style="position:absolute;left:340px;top:${L.bottom + 70}px;width:400px;height:4px;background:#ffffff;border-radius:4px;box-shadow:0 0 16px #fff"></div>
+    <div class="by" style="position:absolute;left:0;right:0;top:${L.bottom + 96}px;text-align:center;font:800 44px/1.2 ${bnf};color:#ffffff;text-shadow:0 0 14px rgba(255,255,255,.85),0 0 32px rgba(255,214,150,.6)">বাকৃবি বিজনেস ক্লাবের আয়োজন</div>
+    <div class="fu" style="position:absolute;left:0;right:0;top:${L.bottom + 166}px;text-align:center;font:600 28px/1.2 ${bnf};color:#ffffff;text-shadow:0 0 14px rgba(255,255,255,.85),0 0 32px rgba(255,214,150,.6)">বাংলাদেশ কৃষি বিশ্ববিদ্যালয় বিজনেস ক্লাব</div>
+    <div class="fo" style="position:absolute;left:0;right:0;top:${L.bottom + 262}px;text-align:center;font:700 40px/1 ${bnf};color:#ffffff;text-shadow:0 0 14px rgba(255,255,255,.85),0 0 32px rgba(255,214,150,.6)">এই নবান্নে নতুন চালের ভাত খেয়েছেন? কমেন্টে বলুন</div>`;
   const q = s => L.sub.querySelector(s);
   tl.fromTo(q('.rl'), { scaleX: 0 }, { scaleX: 1, duration: .6, ease: 'expo.out' }, t + 3.3)
     .fromTo(q('.by'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6, ease: 'back.out(1.6)' }, t + 3.4)

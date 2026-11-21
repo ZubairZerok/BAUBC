@@ -54,7 +54,7 @@ dip(MK[NL] - .15, MK[NL] + .1, 0.0, .05, .1)
 music *= g
 GAIN = dict(whoosh=.5, swish=.4, sweep=.55, click=.8, pop=.55, plop=.6, tick=.5, clock=.6, ding=.5, star=.55, impact=1.0, boom=.6, thud=.75, stamp=.85, deny=.5, alarm=.45, glitch=.6,
             bubble=.6, riser=.5, count=.5, success=.55, shine=.45, lock=.85, ticks=.6, zoom=.5, iris=.6, sub=.9, sad=.6, creak=.6, smoke=.8, fall=.55, rumble=.7, windup=.5, coin=.55,
-            birds=.6, dhol=.75, crowd=.55, scratch=.5, quill=.7, machine=.6, thump=.7, boil=.6, switch=.8, shutter=.8, rewind=.55, snap=.7, shatter=.8, squish=.6, wobble=.5, zap=.5, mystery=.5, drain=.5, flip=.5, horn=.4, fire=.55, pour=.6, drip=.6, sizzle=.4, rub=.6)
+            birds=.6, dhol=.75, crowd=.55, scratch=.5, quill=.7, machine=.6, thump=.7, boil=.6, switch=.8, shutter=.8, rewind=.55, snap=.7, shatter=.8, squish=.6, wobble=.5, zap=.5, mystery=.5, drain=.5, flip=.5, horn=.4, fire=.55, pour=.6, drip=.6, sizzle=.4, rub=.6, paper=.6)
 fx = place_cues(cues, GAIN, DUR)
 raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', os.path.join(HERE, 'vo', 'voice.mp3'), '-ac', '2', '-ar', str(SR), '-f', 'f32le', '-'], capture_output=True).stdout
 v = np.frombuffer(raw, np.float32).reshape(-1, 2).T; vo = np.zeros_like(music)

@@ -5,9 +5,9 @@
 | | |
 |---|---|
 | Deliverable | [`renders/BAUBC_CaseStudies_EP03_Nabanna_1080x1920_60fps.mp4`](renders/) |
-| Format | 1080×1920 · 60 fps · ~129 s · H.264 + AAC |
-| Style | Kurzgesagt-inspired 2D/2.5D motion design in daylight: baked textures (mud plaster, brushed steel, corrugated tin, rust, wood grain), particle fire, an isometric brain-wash station with a procedurally drawn brain, a 2.5D mill complex and polisher, oil-drop physics, top-view and isometric dishes. No header/HUD. Deep-orange end logo |
-| Voice | ElevenLabs "Jessica – Playful, Bright, Warm" (`audio/vo/original_jessica.mp3`). The active voice is always `audio/vo/voice.mp3` |
+| Format | 1080×1920 · 60 fps · ~126 s · H.264 + AAC |
+| Style | ALL 2D Kurzgesagt-style (no 3D, no isometric): daylight scenes with godrays, a night-time cutaway auto rice mill with grains flowing through every machine, a cutaway whitener, a 2D brain-wash factory with a real brain, a wall of newspapers, top-view dishes using the owner's rice photo with vector garnish, a শীতল পাটি mat. No header/HUD. Deep-orange end logo with glowing white letters |
+| Voice | owner-supplied recording (`audio/vo/original_v4.aac`); line 16 spliced to "তাই নবান্ন হলো মার্কেটিংয়ের ধোঁকা ভেঙে…". The active voice is always `audio/vo/voice.mp3` |
 | Subtitles | automatic: every line in `src/lines.js` is split into chunks of up to 34 characters and timed by character share |
 | v1 | the first EP03 ("নবান্নের হিসাব", Maya voice, 18 lines) is kept in [`archive-v1-maya/`](archive-v1-maya/) |
 
@@ -21,6 +21,13 @@
 | ০৪ সাদা চাল | the polisher strips the red bran (vitamin B, fibre, minerals and oil fly off); a white, sad grain comes out · godown, 1–4 months tick by · the oil drops leave the grain · the pot: fluffy separate grains and a mound that only *looks* bigger · the proverb is funnelled into the head again (bookend) |
 | ০৫ ল্যাবের সত্যি | the scientist's surprise · aroma plumes: Kalijira and Gobindobhog rise higher than Basmati, with medals (qualitative, no scale) · two new grains joined by a sticky strand → creamy payesh and pitha · old grains try, the strand snaps ✕ |
 | ০৬ আসল দিন | an eraser wipes the best food off the plate as the mill looms · the saree photoshoot again ("✕ শুধু শাড়ির দিন নয়"), then the proverb billboard **shatters** into a sunrise paddy field, a family, and the crowned new-rice grain → CASE STUDIES logo |
+
+## v4 changes (owner review, 21 Nov)
+- New voice-over (owner's recording); line 16 now reads only "তাই নবান্ন হলো মার্কেটিংয়ের ধোঁকা ভেঙে আমাদের আসল স্বাদ আর পুষ্টি ফিরিয়ে আনার দিন!" (the "শুধু ঘোরার দিন নয়" part is cut from text and audio).
+- Everything 2D: brain-wash factory with a real 2D brain (bleaches, shrinks, memories float away), night cutaway mill (paddy → cleaner → husker + boiler → polisher + bran cyclone → colour sorter → sacks), cutaway whitener, শীতল পাটি mat for the three bowls.
+- Newspapers wall for "সিজনাল ফটোশুট"; godrays on every sun; dark-green নকশি কাঁথা background for ঢেঁকি vs মিল; dark mill-owner scene.
+- Rice dishes use the owner's rice photo (`assets/rice_bowl.png`, cut out to PNG) with vector garnish.
+- Logo: deeper orange, pure-white letters with a glowing outline.
 
 ## v3 changes (owner review)
 - No header (progress bar, logo badge, chapter name) — a rule for every future reel.
@@ -69,7 +76,7 @@ The script prints a table of where it found each line. If a line is off, edit it
 | `src/lines.js` | the script (single source of truth) |
 | `src/vo_timing.js` | generated: where each line sits in the voice file |
 | `src/core.js` | voice clock (`S(i)`, `Z(i)`, `W(i,'word')`), navy palette, HUD, auto-subtitles |
-| `src/art.js` · `src/art2.js` · `src/art3.js` | characters (Dadi, farmers, the saree girl, the mill owner, the scientist) plus the Kurzgesagt-style kit: head profile, washing drum, phone, polaroid, crown, seesaw, polisher, godown, handi, aroma plumes, payesh, pitha, billboard shards, foreground strips |
+| `src/art.js` · `src/art2.js` · `src/art3.js` · `src/art4.js` | characters (Dadi, farmers, the saree girl, the mill owner, the scientist) plus the Kurzgesagt-style kit: head profile, washing drum, phone, polaroid, crown, seesaw, polisher, godown, handi, aroma plumes, payesh, pitha, billboard shards, foreground strips |
 | `src/scenes*.js` | 17 shots + logo |
 | `audio/voice_sync.py` · `audio/build_audio.py` · `audio/swap_voice.py` | line finder · stems & mix · one-command swap |
 | `docs/claims-ledger.md` · `docs/script.md` | every claim and its status · the script with its ElevenLabs tags |
