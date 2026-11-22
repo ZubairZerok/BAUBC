@@ -3,6 +3,8 @@
 /* ───── the rice photo (preloaded before render starts) ───── */
 const RICE_SRC = '../assets/rice_bowl.png';
 BAKES.push(new Promise(res => { const im = new Image(); im.onload = () => res(); im.onerror = () => { console.error('rice image missing'); res(); }; im.src = RICE_SRC; }));
+['gobindobhog','kalojira','basmati','payesh','pitha'].forEach(n => BAKES.push(new Promise(res => { const im = new Image(); im.onload = im.onerror = () => res(); im.src = `../assets/${n}.png`; })));
+const photo = (n, w) => `<img src="../assets/${n}.png" style="display:block;width:${w}px;height:${w}px;filter:drop-shadow(0 ${w * .05}px ${w * .05}px rgba(40,15,0,.45))">`;
 const riceImg = (w, shadow = true) => `<img src="${RICE_SRC}" style="display:block;width:${w}px;height:${w}px;${shadow ? `filter:drop-shadow(0 ${w * .05}px ${w * .05}px rgba(40,15,0,.45))` : ''}">`;
 /* ───── small vector garnish (top view) ───── */
 const G = {
